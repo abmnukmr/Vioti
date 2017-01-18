@@ -1,0 +1,50 @@
+page-transition {
+
+}
+
+
+    #map_canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+#map_canvas2 {
+  width: 100%;
+  height: 100px;
+}
+
+
+#map_canvas3 {
+  width: 100%;
+  height: 100px;
+}
+
+
+.map-wraper{
+  width: 100%;
+  height: 100%;
+}
+#markerLayer img{
+  border-radius: 50% 50% 50% 50% ;
+  border-style: solid;
+  border-color: #cb1b58;
+  rotation: -45;
+  animation: pulsate 2400ms ease-out infinite;
+}
+
+
+
+
+@keyframes pulsate {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
