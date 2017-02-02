@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, ViewController} from 'ionic-angular';
 
 /*
   Generated class for the Additem page.
@@ -13,10 +13,18 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class AdditemPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,public victrl:ViewController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdditemPage');
   }
+
+
+  Dismiss4(){
+    this.victrl.dismiss();
+
+  }
+
+
 
 }

@@ -104,6 +104,7 @@ export class WalletPage {
    let modal = this.modalCtrl.create(TitleitemPage);
    modal.present();
  }
+
   additem(){
 
     let modal = this.modalCtrl.create(AdditemPage);
