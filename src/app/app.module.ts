@@ -21,6 +21,13 @@ import {CommonModule} from "@angular/common";
 import {LocationTracker} from "../providers/location-tracker";
 import {ChooslocPage} from "../pages/choosloc/choosloc";
 import {AuthPage} from "../pages/auth/auth";
+import {SignupPage} from "../pages/signup/signup";
+import {ForgotPage} from "../pages/forgot/forgot";
+import {LocPage} from "../pages/loc/loc";
+import {TitlecontactPage} from "../pages/titlecontact/titlecontact";
+import {TitleeditorPage} from "../pages/titleeditor/titleeditor";
+import {TitlediscriptionPage} from "../pages/titlediscription/titlediscription";
+import {TitleitemPage} from "../pages/titleitem/titleitem";
 
 @NgModule({
   declarations: [
@@ -36,8 +43,17 @@ import {AuthPage} from "../pages/auth/auth";
     WendorPage,
     FiterPage,
     AuthPage,
-    ChooslocPage
-     ],
+    ChooslocPage,
+    SignupPage,
+    ForgotPage,
+    LocPage,
+    TitlecontactPage,
+    TitleeditorPage,
+    TitlediscriptionPage,
+    TitleitemPage
+
+
+  ],
   imports: [
     IonAlphaScrollModule,
     DynamicComponentModule,
@@ -51,18 +67,23 @@ import {AuthPage} from "../pages/auth/auth";
         android: {
           tabsPlacement: 'bottom',
           tabsHideOnSubPages: true,
-          iconMode:"ios"
-
+          iconMode:"ios",
+          pageTransitionDelay:'16',
+          activator:"highlight"
         },
         ios: {
           tabsPlacement: 'bottom',
           tabsHideOnSubPages: true,
-          showCancelButton:true
+          showCancelButton:true,
+          pageTransitionDelay:'16',
+          activator:"highlight"
         },
         windows:
         {
           tabsPlacement: 'bottom',
-          tabsHideOnSubPages: true
+          tabsHideOnSubPages: true,
+          pageTransitionDelay:'16',
+          activator:"highlight"
         }
       }
     }
@@ -81,14 +102,19 @@ import {AuthPage} from "../pages/auth/auth";
     HomePage,
     TabsPage,
     TransitionPage,
-     ProfilePage,
+    ProfilePage,
     SearchPage,
     WendorPage,
     FiterPage,
     AuthPage,
-
-    ChooslocPage
-
+    SignupPage,
+    ChooslocPage,
+    ForgotPage,
+    LocPage,
+    TitlecontactPage,
+    TitleeditorPage,
+    TitlediscriptionPage,
+    TitleitemPage
 
   ],
   providers:[Abmnu,ConnectivityService,LocationTracker],

@@ -13,6 +13,372 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content style="padding: 0px; ">
+
+
+    <img src="http://www.studentliving.ul.ie/media/CV-Shop1.jpg" style="z-index: -1; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))"/>
+
+  <ion-buttons end>
+
+      <button ion-button icon-left clear small  >
+        <ion-icon name="ios-camera-outline"  color="action"></ion-icon>
+      </button>
+  </ion-buttons>
+
+<ion-card style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;opacity: 1;margin-top: 70px;margin-bottom: 1px !important;">
+  <ion-card-content>
+
+    <ion-fab right >
+      <button ion-button icon-right clear small  (click)="openeditor()">
+        <ion-icon name="md-create"  color="primary"></ion-icon>
+
+      </button>
+    </ion-fab>
+
+
+    <p class="card-title">Abhimanyu Vioti Group and IOT Enterperises </p>
+    <p class="card-subtitle">117 Brekley, California,USA</p>
+
+
+
+
+
+  </ion-card-content>
+
+
+
+</ion-card>
+
+  <!--- contacts card -->
+
+
+  <ion-card >
+
+
+
+    <ion-card-content>
+
+
+      <ion-fab right>
+        <button ion-button icon-right clear small (click)="opencontact()">
+          <ion-icon name="md-create"  color="primary"></ion-icon>
+
+        </button>
+      </ion-fab>
+
+      <ion-row style="padding-top: 0px;padding-bottom: 0px;">
+
+          <button ion-button icon-left clear small>
+            <ion-icon name="ios-mail-outline"></ion-icon>
+            <p>abmnukmr@gmail.com</p>
+          </button>
+      </ion-row>
+        <ion-row style="padding-top: 0px;padding-bottom: 0px;">
+          <button ion-button icon-left clear small>
+            <ion-icon name="ios-call-outline"></ion-icon>
+            <div>+91 9625255416</div>
+          </button>
+        </ion-row>
+        <ion-row style="padding-top: 0px;padding-bottom: 0px;">
+          <button ion-button icon-left clear small>
+            <ion-icon name="logo-whatsapp"></ion-icon>
+            <div>+91 9625255416</div>
+          </button>
+        </ion-row>
+
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- ion card contacts end -->
+
+
+  <ion-card  style="padding-top: 0px">
+
+   <ion-card-header style="padding-top: 0px">
+     <ion-row>
+     <ion-col width-50>
+     <h2 style="color:#cb1b58;">Discription</h2>
+     </ion-col>
+       <ion-col width-50>
+    <ion-fab right>
+      <button ion-button icon-right clear small (click)="opendiscription()">
+        <ion-icon name="md-create"  color="primary"></ion-icon>
+      </button>
+    </ion-fab>
+       </ion-col>
+     </ion-row>
+   </ion-card-header>
+
+    <div style="width: 100%;height: 1px;background:#cb1b58; "></div>
+
+    <ion-card-content>
+
+    <p style="text-align:justify;padding-top: 10px;">
+      eletronics, IOT conntrole , Zigbee, Relay switches, CSS3 Gradients - W3Schools
+      www.w3schools.com/css/css3_gradients.aspCached
+      CSS3 gradients let you display smooth transitions between two or more specified colors. Earlier, you had to use images for these effects. However, by using CSS3 ...
+      CSS Gradients | CSS-Tricks
+      css-tricks.com/css3-gradientsCached
+      CSS-Tricks uses and recommends ... background-image: -webkit-gradient(linear ... I’ve been working on adding noise to a CSS gradient and didn’t find much help ...
+      Use css gradient over background image - Stack Overflow </p>
+    </ion-card-content>
+
+  </ion-card>
+
+
+
+
+<!--- item -->
+
+  <ion-card style="padding-top: 0px">
+
+    <ion-card-header style="padding-top: 0px">
+      <ion-row>
+        <ion-col width-50>
+          <h2 style="color:#cb1b58;">#item 1</h2>
+        </ion-col>
+        <ion-col width-50>
+          <ion-fab right>
+            <button ion-button icon-right clear small (click)="openMenu()">
+              <ion-icon name="md-more"  color="primary"></ion-icon>
+            </button>
+          </ion-fab>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+
+    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
+
+    <ion-slides  style="width: 100%;height: 160px;">
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg"   />
+        <h1>Slide 1</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg"  />
+        <h1>Slide 2</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg" />
+        <h1>Slide 3</h1>
+      </ion-slide>
+    </ion-slides>
+
+    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53);margin-top: 5px; "></div>
+
+
+
+
+    <ion-card-content>
+
+      <p >Loura jigbeee(Range 4-km ip correct)</p>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small  (click)="openMenu()">
+            <ion-icon name="ios-pricetag-outline"></ion-icon>
+            <div>4000/-(30%Off)</div>
+
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+  </ion-card>
+
+<!-- item -->
+
+
+
+
+
+  <!--- item -->
+
+  <ion-card style="padding-top: 0px">
+
+    <ion-card-header style="padding-top: 0px">
+      <ion-row>
+        <ion-col width-50>
+          <h2 style="color:#cb1b58;">#item 1</h2>
+        </ion-col>
+        <ion-col width-50>
+          <ion-fab right>
+            <button ion-button icon-right clear small (click)="openMenu()">
+              <ion-icon name="md-more"  color="primary"></ion-icon>
+            </button>
+          </ion-fab>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+
+    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
+
+    <ion-slides  style="width: 100%;height: 160px;">
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg"   />
+        <h1>Slide 1</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg"  />
+        <h1>Slide 2</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg" />
+        <h1>Slide 3</h1>
+      </ion-slide>
+    </ion-slides>
+
+    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53);margin-top: 5px; "></div>
+
+
+
+
+    <ion-card-content>
+
+      <p >Loura jigbeee(Range 4-km ip correct)</p>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small  >
+            <ion-icon name="ios-pricetag-outline"></ion-icon>
+            <div>4000/-(30%Off)</div>
+
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- item -->
+
+  <!--- item -->
+
+  <ion-card style="padding-top: 0px">
+
+    <ion-card-header style="padding-top: 0px">
+      <ion-row>
+        <ion-col width-50>
+          <h2 style="color:#cb1b58;">#item 1</h2>
+        </ion-col>
+        <ion-col width-50>
+          <ion-fab right>
+            <button ion-button icon-right clear small (click)="openMenu()">
+              <ion-icon name="md-more"  color="primary"></ion-icon>
+            </button>
+          </ion-fab>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+
+    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
+
+    <ion-slides  style="width: 100%;height: 160px;">
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg"   />
+        <h1>Slide 1</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg"  />
+        <h1>Slide 2</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg" />
+        <h1>Slide 3</h1>
+      </ion-slide>
+    </ion-slides>
+
+    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53);margin-top: 5px; "></div>
+
+
+
+
+    <ion-card-content>
+
+      <p >Loura jigbeee(Range 4-km ip correct)</p>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small (click)="openMenu()" >
+            <ion-icon name="ios-pricetag-outline"></ion-icon>
+            <div>4000/-(30%Off)</div>
+
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- item -->
+
+  <!--- item -->
+
+  <ion-card style="padding-top: 0px">
+
+    <ion-card-header style="padding-top: 0px">
+      <ion-row>
+        <ion-col width-50>
+          <h2 style="color:#cb1b58;">#item 1</h2>
+        </ion-col>
+        <ion-col width-50>
+          <ion-fab right>
+            <button ion-button icon-right clear small (click)="openMenu()">
+              <ion-icon name="md-more"  color="primary"></ion-icon>
+            </button>
+          </ion-fab>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+
+    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
+
+    <ion-slides  style="width: 100%;height: 160px;">
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg"   />
+        <h1>Slide 1</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg"  />
+        <h1>Slide 2</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="assets/img/abmnu.jpg" />
+        <h1>Slide 3</h1>
+      </ion-slide>
+    </ion-slides>
+
+    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53);margin-top: 5px; "></div>
+
+
+
+
+    <ion-card-content>
+
+      <p >Loura jigbeee(Range 4-km ip correct)</p>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small  >
+            <ion-icon name="ios-pricetag-outline"></ion-icon>
+            <div>4000/-(30%Off)</div>
+
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- item -->
+
+
+
 
 </ion-content>

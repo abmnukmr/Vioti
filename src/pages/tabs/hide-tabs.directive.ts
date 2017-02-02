@@ -1,5 +1,5 @@
-import { Directive } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import {Directive, ViewChild} from '@angular/core';
+import {ViewController, Nav} from 'ionic-angular';
 
 
 @Directive({
@@ -29,4 +29,6 @@ export class HideTabsDirective {
       } // end if
     });
   }
+
+
 }

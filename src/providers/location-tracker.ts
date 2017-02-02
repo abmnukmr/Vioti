@@ -23,6 +23,8 @@ export class LocationTracker {
     // Background Tracking
 
     let config = {
+
+      frequency: 500,
       desiredAccuracy: 20,
       stationaryRadius: 20,
       distanceFilter: 10,
@@ -53,7 +55,7 @@ export class LocationTracker {
     // Foreground Tracking
 
     let options = {
-      frequency: 3000,
+      frequency: 500,
       enableHighAccuracy: true
     };
 
@@ -70,6 +72,7 @@ export class LocationTracker {
     });
 
   }
+
   stopTracking() {
     console.log('stopTracking');
 

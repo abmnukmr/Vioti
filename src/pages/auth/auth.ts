@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {NavController, App, Slides} from 'ionic-angular';
 import {TabsPage} from "../tabs/tabs";
 import md5 from 'crypto-md5';
+import {SignupPage} from "../signup/signup";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {ForgotPage} from "../forgot/forgot";
+import {LocationTracker} from "../../providers/location-tracker";
 
 /*
   Generated class for the Auth page.
@@ -12,26 +16,20 @@ import md5 from 'crypto-md5';
 @Component({
   selector: 'page-auth',
   templateUrl: 'auth.html'
+
 })
 export class AuthPage {
+  @ViewChild(Slides) slides: Slides;
   tabpage=TabsPage;
-  masks: any;
+  signup=SignupPage;
+  forgot=ForgotPage;
   pet:string="login";
   email: any;
   password: any;
   profilePicture: any = "http://www.photato.in/images/user-photo.jpg"
 
-  phoneNumber: any = "";
-  cardNumber: any = "";
-  cardExpiry: any = "";
-  orderCode: any = "";
-  constructor(public navCtrl: NavController) {
-    this.masks = {
-      phoneNumber: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
-      cardNumber: [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
-      cardExpiry: [/[0-1]/, /\d/, '/', /[1-2]/, /\d/],
-      orderCode: [/[a-zA-z]/, ':', /\d/, /\d/, /\d/, /\d/]
-    };
+  constructor(public navCtrl: NavController,private app: App,public formBuilder: FormBuilder,public location:LocationTracker) {
+    this.location.startTracking();
   }
 
   emailChanged(){
@@ -41,7 +39,10 @@ export class AuthPage {
   }
 
 
+
   ionViewDidLoad() {
     console.log('Hello AuthPage Page');
+    this.location.startTracking();
   }
-}
+
+ }

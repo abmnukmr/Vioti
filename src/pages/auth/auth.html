@@ -4,54 +4,70 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<ion-nav #myNav [root]="rootPage" xmlns:width="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml"
+         xmlns:width="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml"
+         xmlns:width="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml"
+         xmlns:width="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml"
+         xmlns:padding-right="http://www.w3.org/1999/xhtml" xmlns:padding-right="http://www.w3.org/1999/xhtml"
+         xmlns:padding-right="http://www.w3.org/1999/xhtml" xmlns:padding-right="http://www.w3.org/1999/xhtml"
+         xmlns:width="http://www.w3.org/1999/xhtml" xmlns:padding-right="http://www.w3.org/1999/xhtml"></ion-nav>
+
+<ion-content  style="min-height: 100%;min-width: 100%;padding: 0px;padding-top: 0px;" class="slide-zoom" >
 
 
-<ion-content  no padding>
-<ion-item no-lines>
-    <ion-avatar >
-      <img [src]="profilePicture">
-    </ion-avatar>
-</ion-item>
+     <ion-item no-lines>
+      <ion-avatar >
+        <img [src]="profilePicture">
+      </ion-avatar>
+    </ion-item>
 
-<div style="background: rgba(212,29,93,0.11);">
-        <ion-item>
-          <ion-label>
+      <ion-item style="padding-right: 15px;">
+        <ion-label>
           <ion-icon class="cio" name="person"></ion-icon>
-          </ion-label>
-          <ion-input  [(ngModel)]="email" (change)="emailChanged()" type="email">  </ion-input>
-        </ion-item>
+        </ion-label>
+        <ion-input  [(ngModel)]="email"  (change)="emailChanged()" type="email" placeholder="Email">  </ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label>
-            <ion-icon   class="cio" name="lock"></ion-icon>
-          </ion-label>
+      <ion-item style="padding-right: 15px;">
+        <ion-label>
+          <ion-icon   class="cio" name="lock"></ion-icon>
+        </ion-label>
 
-          <ion-input [(ngModel)]="password" type="password">
-           </ion-input>
+        <ion-input [(ngModel)]="password" placeholder="Password" type="password">
+        </ion-input>
+      </ion-item>
+
+      <div style="padding-left: 20px;padding-right: 20px;padding-top: 10px">
+        <button  [navPush]="tabpage" ion-button icon-right outline  block  >Log In </button>
+      </div>
 
 
-        </ion-item>
+    <ion-row style="margin-left:9px;color: #a82151" >
+      <ion-col><p [navPush]="forgot" style="font-size: 15px;">  Forgot Password?</p></ion-col>
+      <ion-col width-10><p style="font-size: 15px;">|</p></ion-col>
+      <ion-col><p  [navPush]="signup" style="font-size:15px;margin-right: 40px;">SignUp</p></ion-col>
 
-</div>
-<div style="padding: 20px;">
-  <button   ion-button icon-right outline  block  [navPush]="tabpage">Log In </button>
-</div>
+    </ion-row>
 
-<ion-footer style="padding-bottom: 20px;">
+    <div style="padding-top:20px;margin-top: 60px;">
+      <p center text-center>Or SignIn With</p>
+      <ion-row>
+        <ion-col>
+          <ion-buttons left>
+            <ion-button ion-button icon-right color="facebook"  style="width:140px; padding-right:60px;"> <ion-icon style="width: 20px;height: 20px; color:#fff;  background:rgba(251,244,251,0);margin-left: 15px;" name="logo-facebook"></ion-icon><p  style="margin-left: 20px;">Facebook</p></ion-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col>
+          <ion-buttons right  style="padding-right: 20px;">
+            <ion-button  ion-button icon-right color="google"  style="width:135px;padding-right:70px;"><ion-icon  style="width: 20px;height: 20px; color:#fff;  background:rgba(251,244,251,0);margin-left: 15px;" name="logo-google"> </ion-icon><p style="margin-left: 20px;"> Google</p></ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </div>
 
-  <p center text-center>Or SignIn With</p>
-  <ion-row>
-  <ion-col>
-    <ion-buttons left>
-      <button  ion-button icon-right color="facebook"  style="width:140px;padding-right:60px;"  [navPush]="tabpage"> <ion-icon style="width: 20px;height: 20px; color:#fff;  background:rgba(251,244,251,0);margin-left: 15px;" name="logo-facebook"></ion-icon><p  style="margin-left: 20px;">Facebook</p></button>
-    </ion-buttons>
-  </ion-col>
-  <ion-col>
-    <ion-buttons right>
-      <ion-button  ion-button icon-right color="google"  style="width:140px; padding-right:70px; "  [navPush]="tabpage"><ion-icon  style="width: 20px;height: 20px; color:#fff;  background:rgba(251,244,251,0);margin-left: 15px;" name="logo-google"> </ion-icon><p style="margin-left: 20px;"> Google</p></ion-button>
-    </ion-buttons>
-  </ion-col>
 
-</ion-row>
-</ion-footer>
+
+
+
+
 </ion-content>

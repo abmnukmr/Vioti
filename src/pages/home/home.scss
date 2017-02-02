@@ -1,6 +1,15 @@
 page-home {
 
 }
+
+.item3{
+  height: 100px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: rgba(168,33,81,0.99);
+
+}
 .titlebartext{
   color: #eeebe8;
 }
@@ -48,14 +57,6 @@ ion-navbar{
 }
 
 
-.slider-pager-page
-{
-  color: #ffffff;
-}
-.slider-pager-page.active
-{
-  color: #cb1b58;
-}
 
 
 
@@ -65,7 +66,11 @@ ion-navbar{
 .cardo{
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+    }
 
-}
+
+
+
+
+
+

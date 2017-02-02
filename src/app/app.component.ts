@@ -4,13 +4,15 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import {AuthPage} from "../pages/auth/auth";
+import {SignupPage} from "../pages/signup/signup";
+import {ForgotPage} from "../pages/forgot/forgot";
 
 
 @Component({
-  template: `<ion-nav [root]="rootPage"></ion-nav>`
+  templateUrl:'app.html'
 })
 export class MyApp {
-  rootPage = AuthPage;
+  rootPage:any = AuthPage;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
@@ -20,4 +22,6 @@ export class MyApp {
       Splashscreen.hide();
     });
   }
+
+
 }

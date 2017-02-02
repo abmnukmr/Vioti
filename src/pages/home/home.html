@@ -6,8 +6,18 @@
  Vaioti
 
   </ion-title>
+
     <ion-buttons end>
-      <button ion-button icon-only [navPush]=" choosloc">
+      <button ion-button icon-only  (click)="showAddressModal()">
+
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+
+
+      <button ion-button icon-only  [navPush]="choosloc">
 
         <ion-icon name="ios-pin-outline" padding-right="8px"></ion-icon>
       </button>
@@ -23,11 +33,8 @@
         </ion-buttons>
 
 
-
   </ion-toolbar>
-  <ion-searchbar (ionFocus)="showAddressModal()">
 
-  </ion-searchbar>
 
 </ion-header>
 
@@ -35,27 +42,26 @@
 
 
   <ion-content no-padding="true" >
-    <ion-fab left top>
-      <button ion-fab mini class="trans" icon-only>
-        <ion-icon name="pin" class="abmnu"></ion-icon>
-      </button>
-    </ion-fab>
 
-    <ion-slides [options]="mySlideOptions" >
-      <ion-slide-pager>
+    <p  style="color: #007aff;margin-left:20px;width: 100%;text-align: center;">{{address}}</p>
 
 
-          <img src="../../assets/img/abmnu.jpg"  height="180px" [navPush]="wendor"/>
-        <h1>Slide 1</h1>
-      </ion-slide-pager>
+
+
+    <ion-slides   >
       <ion-slide>
-          <img src="../../assets/img/abmnu.jpg" height="180px" [navPush]="wendor"/>
+        <img src="assets/img/abmnu.jpg"   [navPush]="wendor"/>
+        <h1>Slide 1</h1>
+      </ion-slide>
+
+      <ion-slide>
+          <img src="assets/img/abmnu.jpg"  [navPush]="wendor"/>
         <h1>Slide 2</h1>
       </ion-slide>
-      <ion-slide>
-          <img src="../../assets/img/abmnu.jpg" height="180px" [navPush]="wendor"/>
 
-        <h1>Slide 3</h1>
+      <ion-slide>
+          <img src="assets/img/abmnu.jpg" [navPush]="wendor"/>
+           <h1>Slide 3</h1>
       </ion-slide>
     </ion-slides>
 
@@ -66,82 +72,12 @@
 
 
 
-    <ion-list  *ngIf="show2" id="flot" >
-      <ion-item>
-        <ion-avatar item-left [navPush]="wendor">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-        <h2>Ishan genral store</h2>
-        <p>{{title}}</p>
 
-       </ion-item>
-       <ion-item>
 
-        <ion-avatar item-left  [navPush]="wendor">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-        <h2>Ishan genral store</h2>
-        <p>{{title}}</p>
-       </ion-item>
 
-      <ion-item>
 
-        <ion-avatar item-left [navPush]="wendor">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-        <h2>Ishan genral store</h2>
-        <p>{{title}}</p>
-      </ion-item>
-      <ion-item>
 
-        <ion-avatar item-left [navPush]="wendor">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-        <h2>Ishan genral store</h2>
-        <p>{{title}}</p>
-      </ion-item>
-      <ion-item>
 
-        <ion-avatar item-left [navPush]="wendor">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-        <h2>Ishan genral store</h2>
-        <p>{{title}}</p>
-      </ion-item>
-      <ion-item>
-
-        <ion-avatar item-left [navPush]="wendor">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-        <h2>Ishan genral store</h2>
-        <p>{{title}}</p>
-      </ion-item>
-      <ion-item>
-
-        <ion-avatar item-left [navPush]="wendor">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-        <h2>Ishan genral store</h2>
-        <p>{{title}}</p>
-      </ion-item>
-      <ion-item>
-
-        <ion-avatar item-left [navPush]="wendor">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-        <h2>Ishan genral store</h2>
-        <p>{{title}}</p>
-      </ion-item>
-      <ion-item>
-
-        <ion-avatar item-left [navPush]="wendor">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-        <h2>Ishan genral store</h2>
-        <p>{{title}}</p>
-      </ion-item>
-    </ion-list>
-  <ion-list>
 
 
   <ion-card class="cardo">
@@ -159,7 +95,7 @@
     <ion-row>
 
         <ion-col>
-          <button ion-button icon-left clear small  id="button" [navPush]="transitionpage" [navParams]="{lat:31.710909, lng:76.526932}">
+          <button ion-button icon-left clear small  id="button" [navPush]="choosloc" [navParams]="{lat:31.710909, lng:76.526932}">
             <ion-icon name="pin"></ion-icon>
             <div>0.004Km</div>
 
@@ -180,9 +116,6 @@
     </ion-row>
   </ion-card>
 
-  </ion-list>
-
-  <div ></div>
 
 
 
