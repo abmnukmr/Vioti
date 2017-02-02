@@ -19,6 +19,12 @@ export class TitlecontactPage {
 //    console.log('ionViewDidLoad TitleeditorPage');
   }
 
+  phone:string=this.navParams.get("shopcontactphone");
+
+  email:string=this.navParams.get("shopcontactemail");
+
+   whatsapp:string=this.navParams.get("shopcontactwhatsapp");
+
 
   Dismiss(){
     this.victrl.dismiss();

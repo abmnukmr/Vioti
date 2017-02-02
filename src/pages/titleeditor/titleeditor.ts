@@ -19,6 +19,8 @@ export class TitleeditorPage {
     console.log('ionViewDidLoad TitleeditorPage');
   }
 
+  shopname:string=this.navParams.get("shopname");
+  shoplocation:string=this.navParams.get("shoplocation");
 
   Dismiss(){
     this.victrl.dismiss();

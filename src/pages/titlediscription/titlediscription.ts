@@ -20,6 +20,9 @@ export class TitlediscriptionPage {
   }
 
 
+  discription:string=this.navParams.get("shopdiscription");
+
+
   Dismiss(){
     this.victrl.dismiss();
 

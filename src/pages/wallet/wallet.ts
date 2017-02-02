@@ -4,6 +4,7 @@ import {TitleeditorPage} from "../titleeditor/titleeditor";
 import {TitlecontactPage} from "../titlecontact/titlecontact";
 import {TitlediscriptionPage} from "../titlediscription/titlediscription";
 import {TitleitemPage} from "../titleitem/titleitem";
+import {AdditemPage} from "../additem/additem";
 
 /*
   Generated class for the Wallet page.
@@ -23,6 +24,14 @@ export class WalletPage {
     console.log('Hello WalletPage Page');
   }
 
+  shop_name:string="Abhimanyu IOT Enterprises";
+
+  shop_location:string="Braeley California";
+
+  shop_contactemail:string="abmnukmr@gmail.com";
+  shop_contactphone:string="+91 9625255416";
+  shop_contactwhatsapp:string=" +92 9625255416";
+   shop_discription:string="Lora networks xbee, onion Omega, Raspberry Pi, Intel Edison, Arduino uno, Waio link, Intel galilio, Xbeee pro, Blynk CD";
 
 
 
@@ -72,20 +81,20 @@ export class WalletPage {
 
   openeditor(){
 
-    let modal = this.modalCtrl.create(TitleeditorPage);
+    let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.shop_name,shoplocation:this. shop_location});
     modal.present();
 
   }
 
   opencontact(){
-    let modal = this.modalCtrl.create(TitlecontactPage);
+    let modal = this.modalCtrl.create(TitlecontactPage,{shopcontactemail:this.shop_contactemail,shopcontactphone:this.shop_contactphone,shopcontactwhatsapp:this.shop_contactwhatsapp });
     modal.present();
 
   }
 
   opendiscription(){
 
-    let modal = this.modalCtrl.create(TitlediscriptionPage);
+    let modal = this.modalCtrl.create(TitlediscriptionPage,{shopdiscription:this.shop_discription});
     modal.present();
 
 
@@ -95,6 +104,13 @@ export class WalletPage {
    let modal = this.modalCtrl.create(TitleitemPage);
    modal.present();
  }
+  additem(){
+
+    let modal = this.modalCtrl.create(AdditemPage);
+    modal.present();
+
+
+  }
 
 
 

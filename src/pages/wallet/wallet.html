@@ -36,8 +36,8 @@
     </ion-fab>
 
 
-    <p class="card-title">Abhimanyu Vioti Group and IOT Enterperises </p>
-    <p class="card-subtitle">117 Brekley, California,USA</p>
+    <p class="card-title">{{shop_name}}</p>
+    <p class="card-subtitle">{{shop_location}}</p>
 
 
 
@@ -70,19 +70,19 @@
 
           <button ion-button icon-left clear small>
             <ion-icon name="ios-mail-outline"></ion-icon>
-            <p>abmnukmr@gmail.com</p>
+            <p>{{shop_contactemail}}</p>
           </button>
       </ion-row>
         <ion-row style="padding-top: 0px;padding-bottom: 0px;">
           <button ion-button icon-left clear small>
             <ion-icon name="ios-call-outline"></ion-icon>
-            <div>+91 9625255416</div>
+            <div>{{shop_contactphone}}</div>
           </button>
         </ion-row>
         <ion-row style="padding-top: 0px;padding-bottom: 0px;">
           <button ion-button icon-left clear small>
             <ion-icon name="logo-whatsapp"></ion-icon>
-            <div>+91 9625255416</div>
+            <div>{{shop_contactwhatsapp}}</div>
           </button>
         </ion-row>
 
@@ -115,14 +115,7 @@
 
     <ion-card-content>
 
-    <p style="text-align:justify;padding-top: 10px;">
-      eletronics, IOT conntrole , Zigbee, Relay switches, CSS3 Gradients - W3Schools
-      www.w3schools.com/css/css3_gradients.aspCached
-      CSS3 gradients let you display smooth transitions between two or more specified colors. Earlier, you had to use images for these effects. However, by using CSS3 ...
-      CSS Gradients | CSS-Tricks
-      css-tricks.com/css3-gradientsCached
-      CSS-Tricks uses and recommends ... background-image: -webkit-gradient(linear ... I’ve been working on adding noise to a CSS gradient and didn’t find much help ...
-      Use css gradient over background image - Stack Overflow </p>
+    <p style="text-align:justify;padding-top: 10px;">{{shop_discription}} </p>
     </ion-card-content>
 
   </ion-card>
@@ -379,6 +372,16 @@
   <!-- item -->
 
 
+
+
+
+  <ion-fab bottom right>
+
+
+    <button ion-fab mini (click)="additem()">
+      <ion-icon name="add"  color="action"></ion-icon>
+    </button>
+  </ion-fab>
 
 
 </ion-content>
