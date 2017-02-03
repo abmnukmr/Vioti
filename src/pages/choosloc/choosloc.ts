@@ -113,7 +113,6 @@ export class ChooslocPage {
 
     this.map5 = new GoogleMap('map2', {
       'backgroundColor': 'white',
-      'paddding':( 150,0,0,0 ),
 
       'controls': {
         'myLocationButton': true,
@@ -134,7 +133,7 @@ export class ChooslocPage {
         'bearing': 50
       }
     });
-   this.map5.setPadding( 110,0,0,0 );
+   this.map5.setPadding( 150,0,0,0 );
 
      this.map5.setMyLocationEnabled(true);
      this.map5.setCompassEnabled(true);
