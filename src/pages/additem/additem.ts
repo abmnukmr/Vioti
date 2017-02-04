@@ -80,12 +80,12 @@ export class AdditemPage {
     //  destinationType: Camera.DestinationType.FILE_URI,
      // sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 
-      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: Camera.DestinationType.DATA_URL,
       allowEdit:true,
-      quality:100,
-      targetHeight:900,
-      targetWidth:900
+      quality:80,
+      targetHeight:1500,
+      targetWidth:1500
     }).then((imageData) => {
         this.base64Image = 'data:image/jpeg;base64,' + imageData;
         this.images.unshift({url: this.base64Image});
@@ -101,9 +101,9 @@ export class AdditemPage {
       sourceType: Camera.PictureSourceType.CAMERA,
       destinationType: Camera.DestinationType.DATA_URL,
       allowEdit:true,
-      quality:100,
-      targetHeight:900,
-      targetWidth:900
+      quality:80,
+      targetHeight:1500,
+      targetWidth:1500
     }).then((imageData) => {
         this.base64Image = 'data:image/jpeg;base64,' + imageData;
         this.images.unshift({url: this.base64Image});

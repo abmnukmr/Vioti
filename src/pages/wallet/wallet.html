@@ -7,7 +7,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>wallet</ion-title>
+
+    <ion-title>My Shop</ion-title>
+
+    <ion-buttons end>
+    <ion-toggle color="primary" color="energized" right></ion-toggle>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -143,21 +148,20 @@
     </ion-card-header>
 
     <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
-
-    <ion-slides  style="width: 100%;height: 160px;">
+    <ion-slides  style="width: 100%;height: 100%">
       <ion-slide>
         <img src="assets/img/abmnu.jpg"   />
-        <h1>Slide 1</h1>
+
       </ion-slide>
 
       <ion-slide>
         <img src="assets/img/abmnu.jpg"  />
-        <h1>Slide 2</h1>
+
       </ion-slide>
 
       <ion-slide>
         <img src="assets/img/abmnu.jpg" />
-        <h1>Slide 3</h1>
+
       </ion-slide>
     </ion-slides>
 
@@ -182,13 +186,6 @@
 
   </ion-card>
 
-<!-- item -->
-
-
-
-
-
-  <!--- item -->
 
   <ion-card style="padding-top: 0px">
 
@@ -208,21 +205,20 @@
     </ion-card-header>
 
     <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
-
-    <ion-slides  style="width: 100%;height: 160px;">
+    <ion-slides  style="width: 100%;height: 100%">
       <ion-slide>
         <img src="assets/img/abmnu.jpg"   />
-        <h1>Slide 1</h1>
+
       </ion-slide>
 
       <ion-slide>
         <img src="assets/img/abmnu.jpg"  />
-        <h1>Slide 2</h1>
+
       </ion-slide>
 
       <ion-slide>
         <img src="assets/img/abmnu.jpg" />
-        <h1>Slide 3</h1>
+
       </ion-slide>
     </ion-slides>
 
@@ -236,7 +232,7 @@
       <p >Loura jigbeee(Range 4-km ip correct)</p>
       <ion-row>
         <ion-col>
-          <button ion-button icon-left clear small  >
+          <button ion-button icon-left clear small  (click)="openMenu()">
             <ion-icon name="ios-pricetag-outline"></ion-icon>
             <div>4000/-(30%Off)</div>
 
@@ -246,10 +242,6 @@
     </ion-card-content>
 
   </ion-card>
-
-  <!-- item -->
-
-  <!--- item -->
 
   <ion-card style="padding-top: 0px">
 
@@ -269,21 +261,20 @@
     </ion-card-header>
 
     <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
-
-    <ion-slides  style="width: 100%;height: 160px;">
+    <ion-slides  style="width: 100%;height: 100%">
       <ion-slide>
         <img src="assets/img/abmnu.jpg"   />
-        <h1>Slide 1</h1>
+
       </ion-slide>
 
       <ion-slide>
         <img src="assets/img/abmnu.jpg"  />
-        <h1>Slide 2</h1>
+
       </ion-slide>
 
       <ion-slide>
         <img src="assets/img/abmnu.jpg" />
-        <h1>Slide 3</h1>
+
       </ion-slide>
     </ion-slides>
 
@@ -297,7 +288,7 @@
       <p >Loura jigbeee(Range 4-km ip correct)</p>
       <ion-row>
         <ion-col>
-          <button ion-button icon-left clear small (click)="openMenu()" >
+          <button ion-button icon-left clear small  (click)="openMenu()">
             <ion-icon name="ios-pricetag-outline"></ion-icon>
             <div>4000/-(30%Off)</div>
 
@@ -307,10 +298,6 @@
     </ion-card-content>
 
   </ion-card>
-
-  <!-- item -->
-
-  <!--- item -->
 
   <ion-card style="padding-top: 0px">
 
@@ -330,21 +317,20 @@
     </ion-card-header>
 
     <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
-
-    <ion-slides  style="width: 100%;height: 160px;">
+    <ion-slides  style="width: 100%;height: 100%">
       <ion-slide>
         <img src="assets/img/abmnu.jpg"   />
-        <h1>Slide 1</h1>
+
       </ion-slide>
 
       <ion-slide>
         <img src="assets/img/abmnu.jpg"  />
-        <h1>Slide 2</h1>
+
       </ion-slide>
 
       <ion-slide>
         <img src="assets/img/abmnu.jpg" />
-        <h1>Slide 3</h1>
+
       </ion-slide>
     </ion-slides>
 
@@ -358,7 +344,7 @@
       <p >Loura jigbeee(Range 4-km ip correct)</p>
       <ion-row>
         <ion-col>
-          <button ion-button icon-left clear small  >
+          <button ion-button icon-left clear small  (click)="openMenu()">
             <ion-icon name="ios-pricetag-outline"></ion-icon>
             <div>4000/-(30%Off)</div>
 
@@ -368,20 +354,5 @@
     </ion-card-content>
 
   </ion-card>
-
-  <!-- item -->
-
-
-
-
-
-  <ion-fab bottom right>
-
-
-    <button ion-fab  (click)="additem()">
-      <ion-icon name="add"  color="action"></ion-icon>
-    </button>
-  </ion-fab>
-
 
 </ion-content>

@@ -46,7 +46,12 @@ $searchbar-ios-input-search-icon-color: #cb1b58;
 $searchbar-md-input-box-shadow: rgba(255, 255, 255, 0.01);
 $toolbar-ios-background: #fff;
 $toolbar-ios-title-text-color:#cb1b58;
+$toggle-ios-handle-background-color: #f8ee16;
+$toggle-ios-handle-background-color:#fff;
 
+$toggle-ios-background-color-off:#cb1b58;
+$toggle-ios-border-color-off:#cb1b58;
+$toggle-ios-background-color-off:#fff;
 
   // App Material Design Variables
 // --------------------------------------------------
@@ -63,6 +68,10 @@ $toolbar-md-background:  #cb1b58;
 $tabs-md-background: #fff;
 $segment-button-md-border-color-activated:#fff;
 $segment-button-md-text-color-activated:#fff;
+$toggle-md-handle-background-color-on:   #cb1b58;
+$toggle-md-handle-background-color-off: #fbf4fb;
+$toggle-md-active-color:#fff;
+
 
 
 
@@ -81,6 +90,12 @@ $toolbar-wp-background:  #cb1b58;
 $tabs-wp-background: #fff;
 
 $segment-button-wp-text-color-activated:#fff;
+$toggle-wp-handle-background-color-off: #fff;
+$toggle-wp-handle-background-color-on: #cb1b58;
+$toggle-wp-track-border-color-off:#fff;
+$toggle-wp-track-border-color-on:#fff;
+$toggle-wp-active-color:#fff;
+$toggle-wp-inactive-color:#fff;
 // App Theme
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can

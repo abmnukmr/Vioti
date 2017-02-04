@@ -15,6 +15,21 @@ import {TransitionPage} from "../transition/transition";
 export class ProfilePage {
   transionpage=TransitionPage;
 
+  shop_name:string="Abhimanyu IOT Enterprises";
+
+  shop_location:string="Braeley California";
+
+  shop_contactemail:string="abmnukmr@gmail.com";
+  shop_contactphone:string="+91 9625255416";
+  shop_contactwhatsapp:string=" +92 9625255416";
+  shop_discription:string="Lora networks xbee, onion Omega, Raspberry Pi, Intel Edison, Arduino uno, Waio link, Intel galilio, Xbeee pro, Blynk CD";
+
+
+
+
+
+
+
   constructor(public navCtrl: NavController) {
   }
 }
