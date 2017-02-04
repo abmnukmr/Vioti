@@ -1,6 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {NavController, NavParams, ViewController, Platform, ActionSheetController} from 'ionic-angular';
-import {Camera} from "ionic-native";
+import {Camera, Crop} from "ionic-native";
+import * as cropperjs from "cropperjs";
 //import * as cropperjs from "cropperjs";
 /*
   Generated class for the Additem page.
@@ -15,19 +16,22 @@ import {Camera} from "ionic-native";
 export class AdditemPage {
 
   base64Image;
-  images=[];
+  images = [];
   imgin;
-  private cropper;
+//  private cropper:cropperjs.Cropper;
 
   @ViewChild('imageSrc') input: ElementRef;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public victrl:ViewController,public platform:Platform, public actionsheetCtrl: ActionSheetController) {}
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public victrl: ViewController, public platform: Platform, public actionsheetCtrl: ActionSheetController) {
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdditemPage');
   }
 
 
-  Dismiss4(){
+  Dismiss4() {
     this.victrl.dismiss();
 
   }
@@ -52,6 +56,7 @@ export class AdditemPage {
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'md-camera' : null,
           handler: () => {
+           this.accesscam();
             console.log('Delete clicked');
           }
         },
@@ -69,18 +74,44 @@ export class AdditemPage {
   }
 
 
-  accessGallery(){
+  accessGallery() {
     Camera.getPicture({
+
+    //  destinationType: Camera.DestinationType.FILE_URI,
+     // sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+
       sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
-      destinationType: Camera.DestinationType.DATA_URL
+      destinationType: Camera.DestinationType.DATA_URL,
+      allowEdit:true,
+      quality:100,
+      targetHeight:900,
+      targetWidth:900
     }).then((imageData) => {
-      this.base64Image = 'data:image/jpeg;base64,'+imageData;
-      this.images.unshift({url:this.base64Image});
-      this.imgin=true;
-    },
+        this.base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.images.unshift({url: this.base64Image});
+        this.imgin = true;
+      },
       (err) => {
-      console.log(err);
-    });
+        console.log(err);
+      });
+  }
+
+  accesscam() {
+    Camera.getPicture({
+      sourceType: Camera.PictureSourceType.CAMERA,
+      destinationType: Camera.DestinationType.DATA_URL,
+      allowEdit:true,
+      quality:100,
+      targetHeight:900,
+      targetWidth:900
+    }).then((imageData) => {
+        this.base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.images.unshift({url: this.base64Image});
+        this.imgin = true;
+      },
+      (err) => {
+        console.log(err);
+      });
   }
 
   deletes(i) {
@@ -88,4 +119,29 @@ export class AdditemPage {
 
   }
 
+  /*
+   imageLoaded() {
+   this.cropper = new Cropper(this.input.nativeElement, {
+   aspectRatio: 1 / 1,
+   dragMode: 'move',
+   modal: true,
+   guides: true,
+   highlight: false,
+   background: true,
+   autoCrop: true,
+   autoCropArea: 0.9,
+   responsive: true,
+   crop: (e:cropperjs.CropperCustomEvent) => {
+
+   }
+   });
+   }
+   */
+  crop() {
+    Crop.crop('path/to/image.jpg', {quality: 75})
+      .then(
+        newImage => console.log("new image path is: " + newImage),
+        error => console.error("Error cropping image", error)
+      );
+  }
 }

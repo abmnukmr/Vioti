@@ -52,9 +52,14 @@
   </button>
 
   <div   *ngFor="let img of images;let i=index">
-
-    <button  ion-button icon-only  top right  (click)="deletes(i)"><ion-icon name="cross" color="primary" ></ion-icon></button>
-
+<!--
+    <button  ion-button  clear icon-only  (click)="deletes(i)"><ion-icon name="cross"  [color]="primary" ></ion-icon></button>
+    -->
+    <ion-buttons end style="position: absolute;">
+    <button ion-button  color="primary" clear icon-only (click)="deletes(i)" >
+      <ion-icon name='md-close-circle' is-active="false"></ion-icon>
+    </button>
+    </ion-buttons>
     <img [src]="img.url"  (load)="imageLoaded()" #imageSrc/>
 
   </div>

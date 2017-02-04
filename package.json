@@ -23,6 +23,7 @@
     "@types/googlemaps": "^3.26.1",
     "angular2-google-maps": "^0.16.0",
     "angular2-text-mask": "^2.1.0",
+    "cropperjs": "^0.7.2",
     "crypto-md5": "^1.0.0",
     "ionic-angular": "^2.0.0-rc.5-201701232249",
     "ionic-native": "2.2.3",
