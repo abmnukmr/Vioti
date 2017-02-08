@@ -71,21 +71,24 @@ import {AdditemPage} from "../pages/additem/additem";
           tabsHideOnSubPages: true,
           iconMode:"ios",
           pageTransitionDelay:'16',
-          activator:"highlight"
+          activator:"highlight",
+          pageTransition:"ios-transition"
         },
         ios: {
           tabsPlacement: 'bottom',
           tabsHideOnSubPages: true,
           showCancelButton:true,
           pageTransitionDelay:'16',
-          activator:"highlight"
+          activator:"highlight",
+          pageTransition:"ios-transition"
         },
         windows:
         {
           tabsPlacement: 'bottom',
           tabsHideOnSubPages: true,
           pageTransitionDelay:'16',
-          activator:"highlight"
+          activator:"highlight",
+          pageTransition:"ios-transition"
         }
       }
     }
