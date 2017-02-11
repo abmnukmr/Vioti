@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
-import {NavController, ActionSheetController, Platform, ToolbarItem, ModalController} from 'ionic-angular';
+import {
+  NavController, ActionSheetController, Platform, ToolbarItem, ModalController, Loading,
+  LoadingController
+} from 'ionic-angular';
 import {TitleeditorPage} from "../titleeditor/titleeditor";
 import {TitlecontactPage} from "../titlecontact/titlecontact";
 import {TitlediscriptionPage} from "../titlediscription/titlediscription";
 import {TitleitemPage} from "../titleitem/titleitem";
 import {AdditemPage} from "../additem/additem";
+import {Abmnu} from "../../providers/abmnu";
 
 /*
   Generated class for the Wallet page.
@@ -17,23 +21,33 @@ import {AdditemPage} from "../additem/additem";
   templateUrl: 'wallet.html'
 })
 export class WalletPage {
+  email:any;
+  wendor:any;
+  showThis:boolean=false;
+  loading:Loading;
+  constructor(public loadingCtrl:LoadingController,public navCtrl: NavController,public abmnu:Abmnu,public actionsheetCtrl: ActionSheetController,public platform:Platform,public modalCtrl:ModalController) {
+    this.loading = this.loadingCtrl.create({
+      content:"wait..."
+    });
+    this.loading.present();
 
-  constructor(public navCtrl: NavController,public actionsheetCtrl: ActionSheetController,public platform:Platform,public modalCtrl:ModalController) {}
-
-  ionViewDidLoad() {
-    console.log('Hello WalletPage Page');
+    this.load();
   }
+  load()
+  {
+    this.email="abmnukmr@gmail.com";
 
-  shop_name:string="Abhimanyu IOT Enterprises";
+    this.abmnu.getReviews(this.email).then((data) => {
+      console.log(data);
+      this.wendor =data;
+      this.showThis=true;
+        this.loading.dismissAll();
+      console.log("goingggggggggg");
+    });
 
-  shop_location:string="Braeley California";
 
-  shop_contactemail:string="abmnukmr@gmail.com";
-  shop_contactphone:string="+91 9625255416";
-  shop_contactwhatsapp:string=" +92 9625255416";
-   shop_discription:string="Lora networks xbee, onion Omega, Raspberry Pi, Intel Edison, Arduino uno, Waio link, Intel galilio, Xbeee pro, Blynk CD";
-
-
+    console.log("goooooooooooo");
+  }
 
   openMenu() {
     let actionSheet = this.actionsheetCtrl.create({
@@ -81,20 +95,20 @@ export class WalletPage {
 
   openeditor(){
 
-    let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.shop_name,shoplocation:this. shop_location});
+    let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.wendor.name,shoplocation:this.wendor.location});
     modal.present();
 
   }
 
   opencontact(){
-    let modal = this.modalCtrl.create(TitlecontactPage,{shopcontactemail:this.shop_contactemail,shopcontactphone:this.shop_contactphone,shopcontactwhatsapp:this.shop_contactwhatsapp });
+    let modal = this.modalCtrl.create(TitlecontactPage,{shopcontactemail:this.wendor.email,shopcontactphone:this.wendor.phone,shopcontactwhatsapp:this.wendor.whatsapp});
     modal.present();
 
   }
 
   opendiscription(){
 
-    let modal = this.modalCtrl.create(TitlediscriptionPage,{shopdiscription:this.shop_discription});
+    let modal = this.modalCtrl.create(TitlediscriptionPage,{shopdiscription:this.wendor.discription});
     modal.present();
 
 

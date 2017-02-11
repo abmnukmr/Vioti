@@ -28,7 +28,7 @@ export class TransitionPage {
   mapInitialised: boolean = false;
   apiKey: 'AIzaSyDS1s-CmlAqqWpEpS8D7hm8-TchEtq_Dyc';
   constructor(public navCtrl: NavController,public connectivityService: ConnectivityService,private navParams:NavParams) {
-    this.loadGoogleMaps();
+   // this.loadGoogleMaps();
 
   }
 /*
@@ -41,7 +41,7 @@ export class TransitionPage {
 
     }
   }*/
-
+/*
   loadGoogleMaps(){
 
 
@@ -328,7 +328,7 @@ export class TransitionPage {
 
   }
 
-
+*/
 
 
 

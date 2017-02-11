@@ -26,7 +26,7 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light: rgba(183, 239, 244, 0.02),
-  dark:       #222,
+  dark: #7d7d7d,
   action:#fff,
   facebook:#03016e,
   google:#ba0a12
@@ -52,25 +52,28 @@ $toggle-ios-handle-background-color:#fff;
 $toggle-ios-background-color-off:#cb1b58;
 $toggle-ios-border-color-off:#cb1b58;
 $toggle-ios-background-color-off:#fff;
+$refresher-icon-color:#cb1b58;
 
   // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-$toolbar-md-button-color:                 #fff;
-$toolbar-md-title-text-color:   #fff;
+$toolbar-md-button-color:#cb1b58;
+$toolbar-md-title-text-color:#cb1b58 ;
 $searchbar-md-input-search-icon-color: #cb1b58;
 $searchbar-md-input-box-shadow: #b5b5b5;
 $segment-button-md-text-color-activated:#fff;
-$toolbar-md-title-text-color: #f4f4f4;
-$toolbar-md-button-color: #f4f4f4;
-$toolbar-md-background:  #cb1b58;
+
+$toolbar-md-background: #fff;
 $tabs-md-background: #fff;
 $segment-button-md-border-color-activated:#fff;
 $segment-button-md-text-color-activated:#fff;
-$toggle-md-handle-background-color-on:   #cb1b58;
-$toggle-md-handle-background-color-off: #fbf4fb;
-$toggle-md-active-color:#fff;
+$toggle-md-handle-background-color-on:   #fff;
+$toggle-md-handle-background-color-off: #cb1b58;
+$toggle-md-active-color:#cb1b58;
+$toggle-md-disabled-opacity:1;
+
+
 
 
 
@@ -80,22 +83,20 @@ $toggle-md-active-color:#fff;
 // --------------------------------------------------
 // Windows only Sass variables can go here
 
-$toolbar-wp-button-color:                 #fff;
-$toolbar-wp-title-text-color:   #fff;
+$toolbar-wp-button-color: #cb1b58;;
+$toolbar-wp-title-text-color:  #cb1b58;;
 $searchbar-wp-input-search-icon-color: #cb1b58;
 
-$toolbar-wp-title-text-color: #f4f4f4;
-$toolbar-wp-button-color: #f4f4f4;
-$toolbar-wp-background:  #cb1b58;
+$toolbar-wp-background: #fff;;
 $tabs-wp-background: #fff;
 
 $segment-button-wp-text-color-activated:#fff;
-$toggle-wp-handle-background-color-off: #fff;
-$toggle-wp-handle-background-color-on: #cb1b58;
-$toggle-wp-track-border-color-off:#fff;
-$toggle-wp-track-border-color-on:#fff;
-$toggle-wp-active-color:#fff;
-$toggle-wp-inactive-color:#fff;
+$toggle-wp-handle-background-color-off: #a82158;
+$toggle-wp-handle-background-color-on: #fff;
+$toggle-wp-track-border-color-off: #a82158;
+$toggle-wp-track-border-color-on: #a82158;
+$toggle-wp-active-color: #a82158;
+$toggle-wp-inactive-color: #a82158;
 // App Theme
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, LoadingController, Loading} from 'ionic-angular';
 import {Abmnu} from "../../providers/abmnu";
 
 /*
@@ -15,28 +15,55 @@ import {Abmnu} from "../../providers/abmnu";
 export class WendorPage {
   showThis:boolean=false;
   wendor:any;
+  loading: Loading;
   email:string;
-  constructor(public navCtrl: NavController, public abmnu:Abmnu) {
+  col:boolean=false;
+  col1:boolean=false;
+  constructor(public navCtrl: NavController, public abmnu:Abmnu,public loadingCtrl:LoadingController ) {
+
+
+
+    this.loading = this.loadingCtrl.create({
+      content:"wait..."
+    });
+    this.loading.present();
+    this.load();
 
   }
 
 
-  ionViewDidLoad() {
-    this.email="abmnukmr@gmail.com";
 
-    this.abmnu.getReviews(this.email);
+  load()
+  {
+    this.email="abmnukmr@gmail.com";
 
     this.abmnu.getReviews(this.email).then((data) => {
         console.log(data);
-        this.showThis=true;
         this.wendor =data;
+         this.showThis=true;
+       this.loading.dismissAll();
+      console.log("get");
+      if(this.wendor.status=="true"){
+         this.col=true;
+        console.log("gettttttt");
+      }
+     else {
+         this.col1 =true;
+      }
       });
 
-
-      console.log("goooooooooooo");
+      console.log("error");
   }
 
+  doRefresh(refresher) {
+    this.load();
+    console.log('Begin async operation', refresher);
 
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
 
 /*
 

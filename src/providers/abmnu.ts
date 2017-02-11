@@ -11,9 +11,10 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Abmnu {
   data: any;
+
   constructor(public http: Http,public zone: NgZone) {
 
-      this.getReviews();
+  //   this.getReviews(id);
     console.log('Hello Abmnu Provider');
 
   }
@@ -24,24 +25,49 @@ export class Abmnu {
 
 
     if (this.data) {
-      return Promise.resolve(this.data);
+      console.log("g");
+     // return Promise.resolve(this.data);
+      return new Promise(resolve => {
+
+
+        this.http.get('https://vioti.herokuapp.com/profile/' + id)
+          .map(res => res.json())
+          .subscribe(data => {
+              this.data = data;
+              resolve(this.data);
+              //console.log(data);
+              console.log("reloded");
+
+            },
+            err => {
+              console.log("Oops!");
+            }
+          );
+
+
+      });
+
+
     }
 
     return new Promise(resolve => {
 
 
-      this.http.get('https://vioti.herokuapp.com/profile/'+id)
-        .map(res => res.json())
-        .subscribe(data => {
-          this.data = data;
-          resolve(this.data);
-          console.log(data);
-            console.log("ghdgggg");
-         },
-          err => {
-            console.log("Oops!");
-          }
-        );
+        this.http.get('https://vioti.herokuapp.com/profile/' + id)
+          .map(res => res.json())
+          .subscribe(data => {
+              this.data = data;
+              resolve(this.data);
+              //console.log(data);
+              console.log("ghdgggg");
+
+            },
+            err => {
+              console.log("Oops!");
+            }
+          );
+
+
     });
   }
 

@@ -119,29 +119,8 @@ export class AdditemPage {
 
   }
 
-  /*
-   imageLoaded() {
-   this.cropper = new Cropper(this.input.nativeElement, {
-   aspectRatio: 1 / 1,
-   dragMode: 'move',
-   modal: true,
-   guides: true,
-   highlight: false,
-   background: true,
-   autoCrop: true,
-   autoCropArea: 0.9,
-   responsive: true,
-   crop: (e:cropperjs.CropperCustomEvent) => {
 
-   }
-   });
-   }
-   */
-  crop() {
-    Crop.crop('path/to/image.jpg', {quality: 75})
-      .then(
-        newImage => console.log("new image path is: " + newImage),
-        error => console.error("Error cropping image", error)
-      );
-  }
+
+
+
 }
