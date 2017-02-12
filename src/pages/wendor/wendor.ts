@@ -24,9 +24,9 @@ export class WendorPage {
 
 
     this.loading = this.loadingCtrl.create({
-      content:"wait..."
+      content:"Loading..."
     });
-    this.loading.present();
+
     this.load();
 
   }
@@ -35,6 +35,7 @@ export class WendorPage {
 
   load()
   {
+    this.loading.present();
     this.email="abmnukmr@gmail.com";
 
     this.abmnu.getReviews(this.email).then((data) => {
