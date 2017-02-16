@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {NavController, LoadingController, Loading} from 'ionic-angular';
+import {NavController, LoadingController, Loading, AlertController} from 'ionic-angular';
 import {Abmnu} from "../../providers/abmnu";
+import {ConnectivityService} from "../../providers/connectivity-service";
 
 /*
   Generated class for the Wendor page.
@@ -19,7 +20,7 @@ export class WendorPage {
   email:string;
   col:boolean=false;
   col1:boolean=false;
-  constructor(public navCtrl: NavController, public abmnu:Abmnu,public loadingCtrl:LoadingController ) {
+  constructor(public navCtrl: NavController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
 
 
 
@@ -33,9 +34,14 @@ export class WendorPage {
 
 
 
+
+
+
   load()
   {
-    this.loading.present();
+    if(this.connectivityService.isOnline())
+    {
+      this.loading.present();
     this.email="abmnukmr@gmail.com";
 
     this.abmnu.getReviews(this.email).then((data) => {
@@ -54,6 +60,27 @@ export class WendorPage {
       });
 
       console.log("error");
+    }
+    else {
+      this.loading.dismissAll();
+
+      let alert = this.alertCtrl.create({
+        title: 'Oops',
+        subTitle: 'No Internet Connectivity :(',
+        buttons: [
+          {
+            text:'Try Again',
+            handler:()=>{
+              this.load();
+            }
+          }
+        ]
+
+
+      });
+      alert.present();
+
+    }
   }
 
   doRefresh(refresher) {

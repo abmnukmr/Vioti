@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-
 import { TabsPage } from '../pages/tabs/tabs';
 import {AuthPage} from "../pages/auth/auth";
 import {SignupPage} from "../pages/signup/signup";
 import {ForgotPage} from "../pages/forgot/forgot";
-
 
 @Component({
   templateUrl:'app.html'

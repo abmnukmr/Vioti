@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
   NavController, ActionSheetController, Platform, ToolbarItem, ModalController, Loading,
-  LoadingController
+  LoadingController, Alert, AlertController
 } from 'ionic-angular';
 import {TitleeditorPage} from "../titleeditor/titleeditor";
 import {TitlecontactPage} from "../titlecontact/titlecontact";
@@ -9,6 +9,9 @@ import {TitlediscriptionPage} from "../titlediscription/titlediscription";
 import {TitleitemPage} from "../titleitem/titleitem";
 import {AdditemPage} from "../additem/additem";
 import {Abmnu} from "../../providers/abmnu";
+import {ShopopenPage} from "../shopopen/shopopen";
+import {Http} from "@angular/http";
+import {ConnectivityService} from "../../providers/connectivity-service";
 
 /*
   Generated class for the Wallet page.
@@ -21,33 +24,145 @@ import {Abmnu} from "../../providers/abmnu";
   templateUrl: 'wallet.html'
 })
 export class WalletPage {
-  email:any;
+
+  data: any;
+  email1:any;
   wendor:any;
   showThis:boolean=false;
   loading:Loading;
-  constructor(public loadingCtrl:LoadingController,public navCtrl: NavController,public abmnu:Abmnu,public actionsheetCtrl: ActionSheetController,public platform:Platform,public modalCtrl:ModalController) {
+  open=false;
+  shopopen=ShopopenPage;
+  constructor(public loadingCtrl:LoadingController,public http:Http,public alertCtrl: AlertController,public connectivityService:ConnectivityService, public navCtrl: NavController,public abmnu:Abmnu,public actionsheetCtrl: ActionSheetController,public platform:Platform,public modalCtrl:ModalController) {
     this.loading = this.loadingCtrl.create({
       content:"wait..."
     });
+
+
+
+    //this.abmnu.errror
+
+    console.log('wallet init');
+
+
+   // console.log(this.abmnu.errror);
+
     this.loading.present();
+    this.getReviews();
 
-    this.load();
   }
-  load()
-  {
-    this.email="abmnukmr@gmail.com";
 
-    this.abmnu.getReviews(this.email).then((data) => {
-      console.log(data);
-      this.wendor =data;
-      this.showThis=true;
-        this.loading.dismissAll();
-      console.log("goingggggggggg");
-    });
+  getReviews(){
 
 
-    console.log("goooooooooooo");
+    if(this.connectivityService.isOnline())
+    {
+
+      this.email1 = "abmnukmr@gmail.com";
+      if (this.data) {
+        console.log("g");
+        // return Promise.resolve(this.data);
+        return new Promise(resolve => {
+
+
+          this.http.get('https://vioti.herokuapp.com/profile/' + this.email1)
+            .map(res => res.json())
+            .subscribe(data => {
+                this.data = data;
+                resolve(this.data);
+                //console.log(data);
+                this.wendor = data;
+                this.showThis = true;
+                this.open = false;
+                this.loading.dismissAll();
+
+                console.log("reloded");
+
+              },
+              err => {
+                this.showThis = false;
+                this.open = true;
+                console.log("data not matched");
+                this.loading.dismissAll();
+
+                console.log("Oops!");
+
+              }
+            );
+
+
+        });
+
+
+      }
+
+      return new Promise(resolve => {
+
+
+        this.http.get('https://vioti.herokuapp.com/profile/' + this.email1)
+          .map(res => res.json())
+          .subscribe(data => {
+              this.data = data;
+              resolve(this.data);
+              this.wendor = data;
+              this.showThis = true;
+              this.open = false;
+              this.loading.dismissAll();
+
+              //console.log(data);
+              console.log("ghdgggg");
+
+
+            },
+
+            err => {
+              //
+              //      this.data={"error":"error"};
+              this.showThis = false;
+              this.open = true;
+              console.log("data not matched");
+              this.loading.dismissAll();
+
+              console.log("Oops");
+
+              //  return this.errror=2;
+
+
+            },
+            () => {
+              console.log("Done");
+//              errror=2;
+
+              //return this.errror=2;
+
+            }
+          );
+
+
+      });
+    }
+
+    else {
+      this.loading.dismissAll();
+
+      let alert = this.alertCtrl.create({
+        title: 'Oops',
+        subTitle: 'No Internet Connectivity..',
+        buttons: [
+          {
+          text:'Try Again',
+           handler:()=>{
+             this.getReviews();
+           }
+          }
+        ]
+      });
+      alert.present();
+    }
   }
+
+
+
+
 
   openMenu() {
     let actionSheet = this.actionsheetCtrl.create({
@@ -91,7 +206,14 @@ export class WalletPage {
     actionSheet.present();
   }
 
-
+  doRefresh(refresher) {
+    this.getReviews();
+    console.log('Begin async operation', refresher);
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
 
   openeditor(){
 

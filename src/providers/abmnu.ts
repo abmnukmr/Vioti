@@ -10,8 +10,9 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Abmnu {
-  data: any;
 
+  data: any;
+  open:string;
   constructor(public http: Http,public zone: NgZone) {
 
   //   this.getReviews(id);
@@ -19,8 +20,8 @@ export class Abmnu {
 
   }
 
-  getReviews(id){
 
+  getReviews(id){
 
 
 
@@ -41,6 +42,7 @@ export class Abmnu {
             },
             err => {
               console.log("Oops!");
+
             }
           );
 
@@ -61,16 +63,29 @@ export class Abmnu {
               //console.log(data);
               console.log("ghdgggg");
 
+
             },
+
             err => {
-              console.log("Oops!");
+  //          this.data={"error":"error"};
+                console.log("Oops");
+
+             //  return this.errror=2;
+
+
+            },
+            ()=>{
+              console.log("Done");
+//              errror=2;
+
+              //return this.errror=2;
+
             }
           );
 
 
     });
   }
-
 
 
 

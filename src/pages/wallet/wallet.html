@@ -6,10 +6,35 @@
 -->
 
 
+<div style="height: 200px; padding-top: 200px;padding-left: 60px;padding-right:70px;" *ngIf="open">
+
+  <ion-navbar style="padding-left:8px;">
+
+
+    <ion-buttons >
+
+      <button  [navPush]="shopopen" ion-button icon-right   block outline   >Open your shop Here.. </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</div>
+
+
+
 <ion-content style="padding: 0px; " *ngIf="showThis">
 
 
-    <img src="http://www.studentliving.ul.ie/media/CV-Shop1.jpg" style="z-index: -1; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))"/>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+
+  <img src="http://www.studentliving.ul.ie/media/CV-Shop1.jpg" style="z-index: -1; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))"/>
 
   <ion-toggle color="primary" color="energized" style="padding-top:20px;padding-left:20px;position: absolute;" ></ion-toggle>
   <ion-buttons  style="padding-top:30px;" end>
@@ -137,7 +162,7 @@
     </ion-card-header>
 
     <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
-    <ion-slides  style="width: 100%;height: 100%">
+    <ion-slides  style="width: 100%;height: 100%"  autoplay="2000" loop="true" paginationType="bullets" pager="true">
       <ion-slide *ngFor="let imgi of itemo.image; let i=index">
         <img [src]="imgi.path"  />
 
@@ -177,9 +202,10 @@
 
 
 
+  <ion-fab right bottom >
+    <button ion-fab   color="primary"(click)="additem()"><ion-icon name="add" color="action"></ion-icon></button>
 
-  <ion-fab right bottom>
-    <button ion-fab color="primary"(click)="additem()"><ion-icon name="add" color="action"></ion-icon></button>
   </ion-fab>
+
 
 </ion-content>

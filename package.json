@@ -23,6 +23,7 @@
     "@types/googlemaps": "^3.26.1",
     "angular2-google-maps": "^0.16.0",
     "angular2-text-mask": "^2.1.0",
+    "angularfire2": "^2.0.0-beta.7",
     "cropperjs": "^0.7.2",
     "crypto-md5": "^1.0.0",
     "ionic-angular": "^2.0.0-rc.5-201701232249",
@@ -36,7 +37,7 @@
     "zone.js": "0.6.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.45",
+    "@ionic/app-scripts": "^1.1.0",
     "typescript": "2.0.6"
   },
   "cordovaPlugins": [

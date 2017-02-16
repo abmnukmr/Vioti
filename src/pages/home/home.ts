@@ -34,17 +34,16 @@ import {location} from "@angular/platform-browser/src/facade/browser";
   profile=ProfilePage;
   wendor=WendorPage;
   show2:any=false;
+  mySlideOptions:any;
 
-
-  mySlideOptions = {
-    pager:true
-
-  };
 
   constructor(public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController) {
 
+
     this.showadd();
+
   }
+
 
 
 

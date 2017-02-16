@@ -5,9 +5,10 @@
   Ionic pages and navigation.
 -->
 
-
+<!--
 
 <ion-header>
+
 
   <ion-navbar>
 
@@ -20,11 +21,18 @@
     </ion-navbar>
 
 </ion-header>
+-->
 
 
 
-
-<ion-content   *ngIf="showThis" fullscreen>
+<ion-content   *ngIf="showThis" >
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
 
 
   <img src="http://www.studentliving.ul.ie/media/CV-Shop1.jpg" style="z-index: -1; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(1,1,1,1)), to(rgba(0,0,0,0)))"/>
@@ -132,7 +140,7 @@
 
       <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
 
-      <ion-slides  style="width: 100%;height: 100%"  >
+      <ion-slides  style="width: 100%;height: 100%"   autoplay="2000" loop="true" paginationType="bullets" pager="true">
         <ion-slide *ngFor="let imgi of itemo.image; let i=index">
         <img [src]="imgi.path"/>
 

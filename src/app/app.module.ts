@@ -29,6 +29,7 @@ import {TitleeditorPage} from "../pages/titleeditor/titleeditor";
 import {TitlediscriptionPage} from "../pages/titlediscription/titlediscription";
 import {TitleitemPage} from "../pages/titleitem/titleitem";
 import {AdditemPage} from "../pages/additem/additem";
+import {ShopopenPage} from "../pages/shopopen/shopopen";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {AdditemPage} from "../pages/additem/additem";
     TitleeditorPage,
     TitlediscriptionPage,
     TitleitemPage,
-    AdditemPage
+    AdditemPage,
+    ShopopenPage
 
 
   ],
@@ -120,7 +122,8 @@ import {AdditemPage} from "../pages/additem/additem";
     TitleeditorPage,
     TitlediscriptionPage,
     TitleitemPage,
-    AdditemPage
+    AdditemPage,
+    ShopopenPage
 
   ],
   providers:[Abmnu,ConnectivityService,LocationTracker],
