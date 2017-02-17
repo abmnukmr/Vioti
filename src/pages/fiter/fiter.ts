@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {NavController, ViewController} from 'ionic-angular';
-import {IonAlphaScroll} from "ionic2-alpha-scroll";
+
 import {HomePage} from "../home/home";
 
 /*

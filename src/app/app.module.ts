@@ -14,9 +14,7 @@ import {ConnectivityService} from "../providers/connectivity-service";
 import {SearchPage} from "../pages/search/search";
 import {WendorPage} from "../pages/wendor/wendor";
 import { DynamicComponentModule } from 'ng-dynamic';
-import {IonAlphaScrollModule, IonAlphaScroll} from "ionic2-alpha-scroll";
 import {FiterPage} from "../pages/fiter/fiter";
-import {MapToIterable} from "ionic2-alpha-scroll/ion-alpha-scroll";
 import {CommonModule} from "@angular/common";
 import {LocationTracker} from "../providers/location-tracker";
 import {ChooslocPage} from "../pages/choosloc/choosloc";
@@ -30,6 +28,27 @@ import {TitlediscriptionPage} from "../pages/titlediscription/titlediscription";
 import {TitleitemPage} from "../pages/titleitem/titleitem";
 import {AdditemPage} from "../pages/additem/additem";
 import {ShopopenPage} from "../pages/shopopen/shopopen";
+import {AuthProviders, AuthMethods, AngularFireModule} from "angularfire2";
+import * as firebase from "firebase";
+import {Auth} from "../providers/auth";
+
+
+
+export const firebaseConfig = {
+
+  apiKey: "AIzaSyDIotYzX--YIEEvA97mYorkPYyTuirdM_Y",
+  authDomain: "viotiservices.firebaseapp.com",
+  databaseURL: "https://viotiservices.firebaseio.com",
+  storageBucket: "viotiservices.appspot.com",
+  messagingSenderId: "553959685910"
+};
+
+const myFirebaseAuthConfig = {
+  provider: AuthProviders.Password,
+  method: AuthMethods.Password
+}
+
+firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
@@ -59,12 +78,10 @@ import {ShopopenPage} from "../pages/shopopen/shopopen";
 
   ],
   imports: [
-    IonAlphaScrollModule,
     DynamicComponentModule,
     DynamicComponentModule.forRoot({
-      imports: [CommonModule, IonicModule],
-      declarations: [MapToIterable]
-    }),
+      imports: [CommonModule, IonicModule]}),
+    AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     IonicModule.forRoot(MyApp, {
       tabsPlacement: 'bottom',
       platforms: {
@@ -126,7 +143,7 @@ import {ShopopenPage} from "../pages/shopopen/shopopen";
     ShopopenPage
 
   ],
-  providers:[Abmnu,ConnectivityService,LocationTracker],
+  providers:[Abmnu,ConnectivityService,LocationTracker,Auth],
  // directives:[Focuser],
   schemas:     [CUSTOM_ELEMENTS_SCHEMA]
 })

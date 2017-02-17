@@ -1,11 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, App, Slides} from 'ionic-angular';
+import {NavController, App, Slides, NavParams, AlertController, LoadingController} from 'ionic-angular';
 import {TabsPage} from "../tabs/tabs";
 import md5 from 'crypto-md5';
 import {SignupPage} from "../signup/signup";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ForgotPage} from "../forgot/forgot";
 import {LocationTracker} from "../../providers/location-tracker";
+import {Auth} from "../../providers/auth";
 
 /*
   Generated class for the Auth page.
@@ -19,30 +20,62 @@ import {LocationTracker} from "../../providers/location-tracker";
 
 })
 export class AuthPage {
-  @ViewChild(Slides) slides: Slides;
-  tabpage=TabsPage;
-  signup=SignupPage;
-  forgot=ForgotPage;
-  pet:string="login";
-  email: any;
-  password: any;
-  profilePicture: any = "http://www.photato.in/images/user-photo.jpg"
+  public loginForm;
+  emailChanged: boolean = false;
+  passwordChanged: boolean = false;
+  submitAttempt: boolean = false;
+  loading: any;
 
-  constructor(public navCtrl: NavController,private app: App,public formBuilder: FormBuilder,public location:LocationTracker) {
-    this.location.startTracking();
+  constructor(public navCtrl: NavController, public authService: Auth, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+//    let EMAIL_REGEXP ='/^[a-z0-9!#$%&*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i';
+    this.loginForm = formBuilder.group({
+      email: ['', Validators.compose([Validators.required])],
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+    });
   }
 
-  emailChanged(){
-    //this.profilePicture="https://www.gravatar.com/avatar/44830cc792898eca36922a70d98bf6ea"
-    this.profilePicture = "https://www.gravatar.com/avatar/" + md5(this.email.toLowerCase(), 'hex');
-     console.log(this.profilePicture);
+  elementChanged(input){
+    let field = input.inputControl.name;
+    this[field + "Changed"] = true;
   }
 
-
-
-  ionViewDidLoad() {
-    console.log('Hello AuthPage Page');
-    this.location.startTracking();
+  register(){
+    this.navCtrl.push(SignupPage);
   }
 
- }
+  resetPwd(){
+    this.navCtrl.push(ForgotPage);
+  }
+
+  loginUser(){
+    this.submitAttempt = true;
+
+    if (!this.loginForm.valid){
+      console.log(this.loginForm.value);
+    } else {
+      this.authService.doLogin(this.loginForm.value.email, this.loginForm.value.password).then( authService => {
+        this.navCtrl.setRoot(TabsPage);
+        this.loading.dismiss();
+      }, error => {
+        this.loading.dismiss().then( () => {
+          let alert = this.alertCtrl.create({
+            message: error.message,
+            buttons: [
+              {
+                text: "Ok",
+                role: 'cancel'
+              }
+            ]
+          });
+          alert.present();
+        });
+      });
+
+      this.loading = this.loadingCtrl.create({
+        dismissOnPageChange: true,
+      });
+      this.loading.present();
+    }
+  }
+
+}
