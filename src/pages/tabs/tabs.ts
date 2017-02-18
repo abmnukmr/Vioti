@@ -17,8 +17,16 @@ export class TabsPage {
   tab2Root: any = AboutPage;
   tab3Root: any = ContactPage;
   tab4Root: any = WalletPage;
+  tabBarElement:any;
 
   constructor() {
+    this.tabBarElement = document.querySelector('#tabs ion-tabbar-section');
+
+  }
+  onPageDidEnter()
+  {
+
+    this.tabBarElement.style.display = 'block';
 
   }
 }

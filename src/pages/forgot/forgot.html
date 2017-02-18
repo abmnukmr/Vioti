@@ -13,24 +13,22 @@
 -->
 
 
-<ion-content style="padding:20px;">
-  <ion-list style="padding-top:90px; padding-right:13px; ">
+<ion-content style="padding:20px;padding-top:90px;">
+  <form [formGroup]="resetpwdForm" (submit)="resetPwd()" novalidate style="padding:20px;padding-top:90px;">
+    <ion-item>
+      <ion-input #email formControlName="email" type="email" (change)="elementChanged(email)"
+                 placeholder="Email*"
+                 [class.invalid]="!resetpwdForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item  no-lines class="error-message" *ngIf="!resetpwdForm.controls.email.valid  && (emailChanged || submitAttempt)">
+      <p>Please enter a valid email.</p>
+    </ion-item>
 
-    <form [formGroup]="slideOneForm">
+    <div style="padding-top: 10px">
+      <button   ion-button icon-right outline  block  >Reset Password </button>
+    </div>
+  </form>
 
-      <ion-item>
-        <ion-label ><ion-icon   name="mail"></ion-icon></ion-label>
-        <ion-input formControlName="firstName" type="text" placeholder="Email"></ion-input>
-      </ion-item>
-
-
-
-      <div style="padding-left: 20px;padding-right: 30px;padding-top: 10px">
-        <button   ion-button icon-right outline  block  >SignUp </button>
-      </div>
-
-    </form>
-  </ion-list>
 
 </ion-content>
 

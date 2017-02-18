@@ -1,5 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, App, Slides, NavParams, AlertController, LoadingController} from 'ionic-angular';
+import {
+  NavController, App, Slides, NavParams, AlertController, LoadingController,
+  ModalController
+} from 'ionic-angular';
 import {TabsPage} from "../tabs/tabs";
 import md5 from 'crypto-md5';
 import {SignupPage} from "../signup/signup";
@@ -10,7 +13,6 @@ import {Auth} from "../../providers/auth";
 
 /*
   Generated class for the Auth page.
-
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
@@ -25,8 +27,10 @@ export class AuthPage {
   passwordChanged: boolean = false;
   submitAttempt: boolean = false;
   loading: any;
+  forgot=ForgotPage;
+  signup=SignupPage;
 
-  constructor(public navCtrl: NavController, public authService: Auth, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController,public modalCtrl: ModalController,public authService: Auth, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
 //    let EMAIL_REGEXP ='/^[a-z0-9!#$%&*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i';
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required])],
@@ -40,11 +44,29 @@ export class AuthPage {
   }
 
   register(){
-    this.navCtrl.push(SignupPage);
+
+    let modal = this.modalCtrl.create(SignupPage);
+    /* let  me = this;
+     modal.onDidDismiss(data => {
+     this.address.place = data;
+     });*/
+    // modal.present(modal);
+    console.log("modal not working")
+    modal.present();
+
   }
 
   resetPwd(){
-    this.navCtrl.push(ForgotPage);
+
+    let modal = this.modalCtrl.create(ForgotPage);
+    /* let  me = this;
+     modal.onDidDismiss(data => {
+     this.address.place = data;
+     });*/
+    // modal.present(modal);
+    console.log("modal not working")
+    modal.present();
+
   }
 
   loginUser(){
@@ -54,7 +76,7 @@ export class AuthPage {
       console.log(this.loginForm.value);
     } else {
       this.authService.doLogin(this.loginForm.value.email, this.loginForm.value.password).then( authService => {
-        this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.pop(TabsPage);
         this.loading.dismiss();
       }, error => {
         this.loading.dismiss().then( () => {
@@ -77,5 +99,6 @@ export class AuthPage {
       this.loading.present();
     }
   }
+
 
 }

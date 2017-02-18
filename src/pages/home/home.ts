@@ -14,6 +14,7 @@ import {LocationTracker} from "../../providers/location-tracker";
 import {location} from "@angular/platform-browser/src/facade/browser";
 import  firebase from "firebase";
 import {AuthPage} from "../auth/auth";
+import {Auth} from "../../providers/auth";
 
 
 
@@ -35,13 +36,24 @@ import {AuthPage} from "../auth/auth";
   loc=LocPage;
   profile=ProfilePage;
   wendor=WendorPage;
+
   show2:any=false;
 
 
-  constructor(public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController,public platform:Platform,public authService: Auth,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController) {
 
 
     this.showadd();
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+
+      }
+      else
+      {
+        navCtrl.push(AuthPage);
+      }
+    });
 
   }
 
@@ -57,10 +69,33 @@ import {AuthPage} from "../auth/auth";
 
 
   ionViewWillEnter() {
-      this.showadd();
+
+
+    firebase.auth().onAuthStateChanged((user)=> {
+      if (user) {
+
+      }
+      else
+      {
+       // this.navCtrl.push(AuthPage);
+      }
+    });
+
+    this.showadd();
    this.locationTracker.startTracking();
 
 
+  }
+
+
+
+  logout() {
+    this.authService.doLogout().then( authService => {
+      this.navCtrl.pop(AuthPage);
+
+    },error=>{
+
+    });
   }
 
 

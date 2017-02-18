@@ -22,7 +22,7 @@
     </ion-item>
 
   <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
-    <ion-item>
+    <ion-item style="padding-right:10px; ">
       <ion-input  #email formControlName="email" type="email" (change)="elementChanged(email)"
                  placeholder="Email"
                  [class.invalid]="!loginForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
@@ -30,7 +30,7 @@
     <ion-item no-lines class="error-message" *ngIf="!loginForm.controls.email.valid  && (emailChanged || submitAttempt)">
       <p style="color: #ff2553;">Please enter a valid email.</p>
     </ion-item>
-    <ion-item  >
+    <ion-item style="padding-right:10px; " >
       <ion-input #password formControlName="password" type="password" (change)="elementChanged(password)"
                  placeholder="Password"
                  [class.invalid]="!loginForm.controls.password.valid && (passwordChanged || submitAttempt)"></ion-input>
@@ -44,9 +44,9 @@
   </form>
 
     <ion-row style="margin-left:9px;color: #a82151" >
-      <ion-col><p [navPush]="forgot" style="font-size: 15px;">  Forgot Password?</p></ion-col>
+      <ion-col><p (click)="resetPwd()" style="font-size: 15px;">  Forgot Password?</p></ion-col>
       <ion-col width-10><p style="font-size: 15px;">|</p></ion-col>
-      <ion-col><p  [navPush]="signup" style="font-size:15px;margin-right: 40px;">SignUp</p></ion-col>
+      <ion-col><p  (click)="register()" style="font-size:15px;margin-right: 40px;">SignUp</p></ion-col>
 
     </ion-row>
 
