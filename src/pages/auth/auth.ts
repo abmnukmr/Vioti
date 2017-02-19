@@ -69,6 +69,17 @@ export class AuthPage {
 
   }
 
+
+
+  googlrlogin(){
+     this.authService.authgoogle().then( authService => {
+       this.navCtrl.push(TabsPage);
+       this.loading.dismiss();
+     }, error => {
+
+     });
+  }
+
   loginUser(){
     this.submitAttempt = true;
 

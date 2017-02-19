@@ -46,6 +46,7 @@ export class SignupPage {
       console.log(this.registerForm.value);
     } else {
       this.authService.register(this.registerForm.value.email, this.registerForm.value.password,this.registerForm.value.phone,this.registerForm.value.fullname).then( authService => {
+
         this.navCtrl.setRoot(AuthPage);
         this.loading.dismiss();
       }, error => {
