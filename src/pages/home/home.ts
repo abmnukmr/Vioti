@@ -15,7 +15,7 @@ import {location} from "@angular/platform-browser/src/facade/browser";
 import  firebase from "firebase";
 import {AuthPage} from "../auth/auth";
 import {Auth} from "../../providers/auth";
-
+//import {Auth, User, GoogleAuth} from '@ionic/cloud-angular';
 
 
 @Component({
@@ -40,10 +40,11 @@ import {Auth} from "../../providers/auth";
   show2:any=false;
 
 
-  constructor(public navCtrl: NavController,public platform:Platform,public authService: Auth,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController) {
+  constructor(  public authService: Auth, public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController) {
 
 
     this.showadd();
+
 
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -54,6 +55,16 @@ import {Auth} from "../../providers/auth";
         navCtrl.push(AuthPage);
       }
     });
+
+
+    /*
+    if (user) {
+      // this.user is authenticated!
+    }
+    else {
+      navCtrl.pop(AuthPage);
+    }
+    */
 
   }
 
@@ -69,15 +80,13 @@ import {Auth} from "../../providers/auth";
 
 
   ionViewWillEnter() {
-
-
-    firebase.auth().onAuthStateChanged((user)=> {
+    firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
 
       }
       else
       {
-       // this.navCtrl.push(AuthPage);
+        this.navCtrl.push(AuthPage);
       }
     });
 
@@ -89,15 +98,17 @@ import {Auth} from "../../providers/auth";
 
 
 
-  logout() {
-    this.authService.doLogout().then( authService => {
-      this.navCtrl.pop(AuthPage);
+/*  logout() {
+    this.googleAuth.logout();
 
-    },error=>{
+    console.log("addddjhjgjgj");
+    this.navCtrl.pop(AuthPage);
 
-    });
-  }
+  }*/
 
+dologout(){
+  this.authService.doLogout();
+}
 
 
 

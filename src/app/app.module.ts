@@ -31,7 +31,7 @@ import {ShopopenPage} from "../pages/shopopen/shopopen";
 import {AuthProviders, AuthMethods, AngularFireModule} from "angularfire2";
 import * as firebase from "firebase";
 import {Auth} from "../providers/auth";
-
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 
 export const firebaseConfig = {
@@ -47,6 +47,20 @@ const myFirebaseAuthConfig = {
   provider: AuthProviders.Password,
   method: AuthMethods.Password
 }
+
+
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '6f36a493'
+  },
+  'auth': {
+    'google': {
+      'webClientId': '414670723734-vodt1lsumg541g82gcbt6qpdfd7hrre7.apps.googleusercontent.com',
+      'scope': []
+    }
+  }
+}
+
 
 firebase.initializeApp(firebaseConfig);
 
@@ -81,6 +95,7 @@ firebase.initializeApp(firebaseConfig);
     DynamicComponentModule,
     DynamicComponentModule.forRoot({
       imports: [CommonModule, IonicModule]}),
+    CloudModule.forRoot(cloudSettings),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     IonicModule.forRoot(MyApp, {
       tabsPlacement: 'bottom',

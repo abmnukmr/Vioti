@@ -25,7 +25,7 @@
 
 
     <ion-buttons end>
-          <button ion-button icon-only (click)=" logout()">
+          <button ion-button icon-only (click)="dologout()">
 
 
             <ion-icon name="log-out"  padding-right="8px" ></ion-icon>
@@ -48,20 +48,57 @@
 
 
 
-    <ion-slides  loop="true" autoplay="2000" loop="true" paginationType="bullets" pager="true" spaceBetween="2px" direction="vertical" slidesPerView="2" >
-      <ion-slide>
+    <ion-slides no-padding loop="true" autoplay="2000" loop="true" parallax="true" paginationType="bullets" pager="true" spaceBetween="2px" initialSlide="2"  >
+      <ion-slide style="width: 100%;">
         <img src="assets/img/abmnu.jpg"   [navPush]="wendor"/>
-        <h1>Slide 1</h1>
+        <h1 [hidden]="true">Slide 1</h1>
       </ion-slide>
 
       <ion-slide>
           <img src="assets/img/abmnu.jpg"  [navPush]="wendor"/>
-        <h1>Slide 2</h1>
+        <h1 [hidden]="true">Slide 1</h1>
       </ion-slide>
 
       <ion-slide>
           <img src="assets/img/abmnu.jpg" [navPush]="wendor"/>
-           <h1>Slide 3</h1>
+
+        <h1 [hidden]="true">Slide 1</h1>
+      </ion-slide>
+    </ion-slides>
+
+
+
+    <ion-buttons right>
+
+      <button ion-button round small style="height:20px;width:40px; "> More</button>
+    </ion-buttons>
+
+
+
+    <ion-slides no-padding  parallax="true" style=" margin-top:14px;height:100px;" spaceBetween="5px" initialSlide="2"slidesPerView="3"  >
+      <ion-slide style="width: 100%;" class="specialitem">
+        <ion-avatar item-left [navPush]="transitionpage">
+          <img src="../../assets/img/abmnu.jpg" />
+        </ion-avatar>
+
+        <h1 [hidden]="true">Slide 1</h1>
+      </ion-slide>
+
+      <ion-slide class="specialitem">
+        <ion-avatar item-left [navPush]="transitionpage">
+          <img src="../../assets/img/abmnu.jpg" />
+        </ion-avatar>
+
+        <h1 [hidden]="true">Slide 1</h1>
+      </ion-slide>
+
+      <ion-slide class="specialitem">
+
+        <ion-avatar item-left [navPush]="transitionpage">
+          <img src="../../assets/img/abmnu.jpg" />
+        </ion-avatar>
+
+        <h1 [hidden]="true">Slide 1</h1>
       </ion-slide>
     </ion-slides>
 
@@ -79,8 +116,9 @@
 
 
 
+<!--
 
-  <ion-card class="cardo">
+    <ion-card class="cardo">
 
     <ion-item>
       <ion-avatar item-left [navPush]="transitionpage">
@@ -117,13 +155,36 @@
   </ion-card>
 
 
+-->
+
+    <ion-buttons right>
+
+      <button ion-button round small style="height:20px;width:40px; "> More</button>
+    </ion-buttons>
 
 
 
 
+    <ion-grid no-padding>
+      <ion-row wrap>
+        <ion-col width-50 style="height:140px;width: 100px;background: #ff2553; border-style: solid;
+        border-color: #a82158;">This column will take 10% of space</ion-col>
+        <ion-col width-50 style="height:140px;width: 100px;background: #39ff82; border-style: solid;
+        border-color: #a82158;">This column will take 10% of space</ion-col>
+
+        <ion-col width-50 style="height:140px;width: 100px;background: #a82151; border-style: solid;
+        border-color: #a82158;">This column will take 10% of space</ion-col>
+
+        <ion-col width-50 style="height:140px;width: 100px;background: #f8ee16; border-style: solid;
+        border-color: #a82158;">This column will take 10% of space</ion-col>
+        <ion-col width-50 style="height:140px;width: 100px;background: #3559ff; border-style: solid;
+        border-color: #a82158;">This column will take 10% of space</ion-col>
 
 
 
+
+      </ion-row>
+    </ion-grid>
 
 
 

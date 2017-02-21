@@ -25,7 +25,7 @@
 
 
 
-<ion-content   *ngIf="showThis" >
+<ion-content   *ngIf="showThis" no-padding>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
@@ -40,7 +40,7 @@
 
 
 
-  <ion-card style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;opacity: 1;margin-top:70px;margin-bottom: 1px !important;" >
+  <ion-card style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;opacity: 1;margin-top:70px;margin-bottom: 1px !important;"  no-padding>
     <ion-card-content>
 
 
@@ -61,7 +61,7 @@
   <!--- contacts card -->
 
 
-  <ion-card >
+  <ion-card  no-padding>
 
 
 
@@ -97,7 +97,7 @@
   <!-- ion card contacts end -->
 
 
-  <ion-card  style="padding-top: 0px">
+  <ion-card  style="padding-top: 0px" no-padding>
 
     <ion-card-header style="padding-top: 0px">
       <ion-row>
@@ -125,7 +125,7 @@
   <!--- item -->
 
 
-  <ion-card style="padding-top: 0px" *ngFor="let itemo of wendor.item;let i=index " >
+  <ion-card style="padding-top: 0px" *ngFor="let itemo of wendor.item;let i=index " no-padding>
 
       <ion-card-header style="padding-top: 0px">
         <ion-row>
