@@ -46,7 +46,7 @@
 
 
       <p class="card-title">{{wendor.name}}</p>
-      <p class="card-subtitle">{{wendor.location}}</p>
+      <p class="card-subtitle">{{wendor.address}}</p>
 
 
 
@@ -142,7 +142,7 @@
 
       <ion-slides  style="width: 100%;height: 100%"   autoplay="2000" loop="true" paginationType="bullets" pager="true">
         <ion-slide *ngFor="let imgi of itemo.image; let i=index">
-        <img [src]="imgi.path"/>
+        <img [src]="imgi.location"/>
 
         </ion-slide>
      </ion-slides>

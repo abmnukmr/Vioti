@@ -106,7 +106,7 @@ export class WendorPage {
     {
       "_id": "5898e365bcb80bc27b9269f3",
       "name":"abhimanyu Interprises",
-      "location":"clifornis",
+      "address":"clifornis",
       "whatsapp":"+91 9625255416",
       "phone":"+91 9625255416",
       "email":"abmnukmr@gmail.com",
