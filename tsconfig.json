@@ -21,6 +21,10 @@
   "exclude": [
     "node_modules"
   ],
+  "types": [
+    "jasmine",
+    "firebase"
+  ],
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false

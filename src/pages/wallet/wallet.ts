@@ -12,6 +12,7 @@ import {Abmnu} from "../../providers/abmnu";
 import {ShopopenPage} from "../shopopen/shopopen";
 import {Http} from "@angular/http";
 import {ConnectivityService} from "../../providers/connectivity-service";
+import * as firebase from "firebase/app";
 
 /*
   Generated class for the Wallet page.
@@ -57,7 +58,14 @@ export class WalletPage {
     if(this.connectivityService.isOnline())
     {
 
-      this.email1 = "abmnukmr@gmail.com";
+
+      var user = firebase.auth().currentUser;
+      if (user != null) {
+        var  name = user.displayName;
+        this.email1 = user.email;
+        var  photoUrl = user.photoURL;
+      }
+
       if (this.data) {
         console.log("g");
         // return Promise.resolve(this.data);

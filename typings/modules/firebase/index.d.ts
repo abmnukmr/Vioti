@@ -494,6 +494,6 @@ namespace firebase.storage {
     totalBytes: number;
   }
 }
+  export = firebase;
 
-export = firebase;
 }
