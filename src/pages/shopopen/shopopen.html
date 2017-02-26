@@ -17,38 +17,85 @@
 
 
 
-  <ion-list>
+
+  <form [formGroup]="registerForm" (submit)="doRegister()" novalidate style="padding-top: 30px;">
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="shopname" placeholder="Shop Namae*" required></ion-input>
 
+      <ion-input #fullname formControlName="fullname" type="text" (change)="elementChanged(fullname)"
+                 placeholder="Shopname"
+                 [class.invalid]="!registerForm.controls.fullname.valid && (fullnameChanged || submitAttempt)"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="catagory" placeholder="Shop Catagoey*(example stationary,Genral store)" required></ion-input>
 
+    <ion-item no-lines class="error-message" *ngIf="!registerForm.controls.fullname.valid  && (fullnameChanged || submitAttempt)">
+      <p>Your Shopnmae name can't empty.</p>
     </ion-item>
+
+
+
+
     <ion-item>
-      <ion-textarea [(ngModel)]="Address" placeholder="Address*" rows="4" required></ion-textarea>
+
+      <ion-input #catagory formControlName="catagory" type="text" (change)="elementChanged(catagory)"
+                 placeholder="Shop Catagory(eg. Stationary,genral store)"
+                 [class.invalid]="!registerForm.controls.catagory.valid && (catagoryChanged || submitAttempt)"></ion-input>
     </ion-item>
+
+    <ion-item no-lines class="error-message" *ngIf="!registerForm.controls.catagory.valid  && (catagoryChanged || submitAttempt)">
+      <p>catagory  can't empty.</p>
+    </ion-item>
+
+
+
+    <ion-item>
+
+      <ion-textarea #address formControlName="address" type="text" (change)="elementChanged(address)"
+                 placeholder="Address" rows="4"
+                 [class.invalid]="!registerForm.controls.address.valid && (addressChanged || submitAttempt)"></ion-textarea>
+    </ion-item>
+
+    <ion-item no-lines class="error-message" *ngIf="!registerForm.controls.address.valid  && (addressChanged || submitAttempt)">
+      <p>fill Proper Adress </p>
+    </ion-item>
+
+
+
+    <ion-item>
+    <ion-textarea #fullname formControlName="discription" type="text" (change)="elementChanged(discription)"
+              placeholder="Shop Catagory(eg. Stationary,genral store)" rows="4"
+              [class.invalid]="!registerForm.controls.discription.valid && (discriptionChanged || submitAttempt)"></ion-textarea>
+    </ion-item>
+
+    <ion-item no-lines class="error-message" *ngIf="!registerForm.controls.discription.valid  && (discriptionChanged || submitAttempt)">
+      <p>fill Proper discription </p>
+    </ion-item>
+
+
 
      <ion-item>
-      <ion-textarea [(ngModel)]="discription" placeholder="Shop Discription*" rows="8" required></ion-textarea>
-     </ion-item>
-    <ion-item>
-      <ion-input type="number" [(ngModel)]="Phonenumber" placeholder="Phonenumber" required></ion-input>
+    <ion-input #phone formControlName="phone" type="number" (change)="elementChanged(phone)"
+               placeholder="Phone No.*"
+               [class.invalid]="!registerForm.controls.phone.valid && (phoneChanged || submitAttempt)"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-input type="number" [(ngModel)]="Whatsappnumber" placeholder="Whatsappnumber" required></ion-input>
+    <ion-item no-lines class="error-message" *ngIf="!registerForm.controls.phone.valid  && (phoneChanged || submitAttempt)">
+      <p>Your password needs more than 10 numbers</p>
+    </ion-item>
+
+<ion-item>
+    <ion-input #wphone formControlName="wphone" type="number" (change)="elementChanged(wphone)"
+               placeholder="Whatsapp no*"
+               [class.invalid]="!registerForm.controls.wphone.valid && (wphoneChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item no-lines class="error-message" *ngIf="!registerForm.controls.wphone.valid  && (wphoneChanged || submitAttempt)">
+      <p>Your password needs more than 10 numbers</p>
     </ion-item>
 
 
 
-
-
-
-
-  </ion-list>
-  <button  [navPush]="tabpage" ion-button icon-right   block  >Submit</button>
+    <div style="padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 15px;">
+      <button  ion-button icon-right outline  block  >Submit</button>
+    </div>
+  </form>
 
 
 

@@ -103,7 +103,7 @@ firebase.initializeApp(firebaseConfig);
         android: {
           tabsPlacement: 'bottom',
           tabsHideOnSubPages: true,
-          iconMode:"ios",
+          //iconMode:"ios",
           pageTransitionDelay:'16',
           activator:"highlight",
           pageTransition:"ios-transition"

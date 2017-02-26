@@ -29,6 +29,10 @@
 
 <ion-list>
   <ion-item>
+    <ion-input type="text" [(ngModel)]="itemname" placeholder="Item Name"></ion-input>
+  </ion-item>
+
+  <ion-item>
     <ion-input type="text" [(ngModel)]="itemnumber" placeholder="Item Number"></ion-input>
   </ion-item>
 
@@ -39,7 +43,7 @@
 
 
   <ion-item>
-    <ion-input type="text" [(ngModel)]="itemprice" placeholder="Item price"></ion-input>
+    <ion-input type="text" [(ngModel)]="itemprice" placeholder="Item price(eg. 172/-(20% Off) )"></ion-input>
   </ion-item>
 
 </ion-list>
@@ -62,5 +66,13 @@
     <img [src]="img.url"  (load)="imageLoaded()" #imageSrc/>
 
   </div>
+
+
+
+
+
+
+
+
 
 </ion-content>

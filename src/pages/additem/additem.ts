@@ -7,6 +7,7 @@ import {Camera, Crop} from "ionic-native";
 import { File, Transfer, FilePath } from 'ionic-native';
 import * as cropperjs from "cropperjs";
 import * as firebase from "firebase/app";
+import {WalletPage} from "../wallet/wallet";
 //import * as cropperjs from "cropperjs";
 /*
   Generated class for the Additem page.
@@ -23,8 +24,12 @@ export class AdditemPage {
   lastImage=[] ;
   loading: Loading;
   forupload:any;
+  itemprice:any;
+  itemnumber:any;
+  discription:any;
   base64Image;
   email1:string;
+  itemname:any;
   images = [];
   imgin;
   targetimages=[];
@@ -85,45 +90,6 @@ export class AdditemPage {
   }
 
 
-  accessGallery() {
-    Camera.getPicture({
-
-    //  destinationType: Camera.DestinationType.FILE_URI,
-     // sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: Camera.DestinationType.DATA_URL,
-      allowEdit:true,
-      quality:80,
-      targetHeight:1500,
-      targetWidth:1500
-    }).then((imageData) => {
-        this.base64Image = 'data:image/jpeg;base64,' + imageData;
-        this.images.unshift({url: this.base64Image});
-        this.imgin = true;
-      },
-      (err) => {
-        console.log(err);
-      });
-  }
-
-  accesscam() {
-    Camera.getPicture({
-      sourceType: Camera.PictureSourceType.CAMERA,
-      destinationType: Camera.DestinationType.DATA_URL,
-      allowEdit:true,
-      quality:80,
-      targetHeight:1500,
-      targetWidth:1500
-    }).then((imageData) => {
-        this.base64Image = 'data:image/jpeg;base64,' + imageData;
-        this.images.unshift({url: this.base64Image});
-        this.imgin = true;
-      },
-      (err) => {
-        console.log(err);
-      });
-  }
 
   deletes(i) {
     this.images.splice(i, 1);
@@ -131,77 +97,14 @@ export class AdditemPage {
   }
 
 
-   ////
-
-/*
-  public takePicture(sourceType) {
-    // Create options for the Camera Dialog
-    var options = {
-
-      allowEdit:true,
-      quality:80,
-      targetHeight:1500,
-      targetWidth:1500,
-      destinationType: Camera.DestinationType.DATA_URL,
-
-      sourceType: sourceType,
-      saveToPhotoAlbum: false,
-      correctOrientation: true
-    };
-
-    // Get the data of an image
-    Camera.getPicture(options).then((imagePath) => {
-      // Special handling for Android library
-
-
-      if (this.platform.is('android') && sourceType === Camera.PictureSourceType.PHOTOLIBRARY) {
-        FilePath.resolveNativePath(imagePath)
-          .then(filePath => {
-
-///            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-   //         let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-
-
-            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-
-            let currentNameBuilder = imagePath.substr(imagePath.lastIndexOf('/')+1);
-
-            let currentName = currentNameBuilder.substr(0,currentNameBuilder.lastIndexOf('?'));
-
-            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-
-
-
-
-            // this.presentToast(correctPath+"filename="+currentName);
-
-            //let currentNameBuilder = imagePath.substr(imagePath.lastIndexOf('/')+1);
-
-            //let currentName = currentNameBuilder.substr(0,currentNameBuilder.lastIndexOf('?'));
-
-          });
-      } else {
-        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      }
-
-
-
-    }, (err) => {
-      this.presentToast('Error while selecting image.');
-    });
-  }
-
-  */
 
   public takePicture(sourceType) {
     // Create options for the Camera Dialog
     var options = {
       allowEdit:true,
-      quality:80,
-      targetHeight:1500,
-      targetWidth:1500,
+      quality:60,
+      targetHeight:1200,
+      targetWidth:1200,
 
       sourceType: sourceType,
       saveToPhotoAlbum: false,
@@ -211,7 +114,7 @@ export class AdditemPage {
     // Get the data of an image
     Camera.getPicture(options).then((imagePath) => {
       this.base64Image = 'data:image/jpeg;base64,' + imagePath;
-      this.images.unshift({url: this.base64Image});
+      this.images.unshift({url: imagePath});
       this.imgin = true;
 
       // Special handling for Android library
@@ -247,7 +150,7 @@ export class AdditemPage {
 // Copy the image to a local folder
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     File.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-      this.lastImage.unshift(newFileName);
+      this.lastImage.push(newFileName);
     //  this.presentToast(this.lastImage);
 //      this.targetimages.unshift(this.lastImage);
     }, error => {
@@ -269,7 +172,7 @@ export class AdditemPage {
     if (img === null) {
       return '';
     } else {
-      return cordova.file.dataDirectory + img;
+      return cordova.file.dataDirectory+img;
     }
   }
 
@@ -285,11 +188,11 @@ export class AdditemPage {
       var  photoUrl = user.photoURL;
     }
     // Destination URL
-    var url =encodeURI ("https://vioti.herokuapp.com/profile/upload/email/abmnukmr@gmail.com");
+    var url = "https://vioti.herokuapp.com/profile/upload/email/"+this.email1;
 
     // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
-    this.presentToast(targetPath);
+   // this.presentToast(targetPath);
     // File name only
     var filename = this.lastImage;
 
@@ -302,11 +205,11 @@ export class AdditemPage {
            },
       chunkedMode:true,
       mimeType: "image/png",
-      params : {'fileName': filename}
+      params : {itemname:this.itemname,itemno: this.itemnumber,discription:this.discription,itemprice:this.itemprice}
     };
 
     const fileTransfer = new Transfer();
-    this.presentToast(fileTransfer);
+    //this.presentToast(fileTransfer);
 
     this.loading = this.loadingCtrl.create({
       content: 'Uploading...',
@@ -314,14 +217,15 @@ export class AdditemPage {
     this.loading.present();
 
     // Use the FileTransfer to upload the image
-    fileTransfer.upload('https://vioti.herokuapp.com/profile/upload/email/abmnukmr@gmail.com', targetPath,options).then(data => {
+    fileTransfer.upload( targetPath,url,options).then(data => {
       this.loading.dismissAll()
       console.log(data);
+      this.navCtrl.popTo(WalletPage);
       this.presentToast('Image succesful uploaded.');
     }, err => {
       this.loading.dismissAll()
-      this.presentToast(err);
-      console.log(err);
+      this.presentToast("Failed");
+     // console.log(err);
      // this.presentToast('Error while uploading file.');
     });
   }
