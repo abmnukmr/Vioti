@@ -13,6 +13,7 @@ import {ShopopenPage} from "../shopopen/shopopen";
 import {Http} from "@angular/http";
 import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase/app";
+import {EdititemPage} from "../edititem/edititem";
 
 /*
   Generated class for the Wallet page.
@@ -29,6 +30,10 @@ export class WalletPage {
   data: any;
   email1:any;
   wendor:any;
+  item_name:any;
+  item_no:any;
+  item_discription:any;
+  item_price:any;
   showThis:boolean=false;
   loading:Loading;
   open=false;
@@ -172,9 +177,8 @@ export class WalletPage {
 
 
 
-  openMenu() {
+  openMenu(id,itemname,itemno,itemdiscription,itemprice) {
     let actionSheet = this.actionsheetCtrl.create({
-      title: 'Item',
       cssClass: 'action-sheets-basic-page',
       buttons: [
         {
@@ -182,7 +186,7 @@ export class WalletPage {
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'md-create' : null,
           handler: () => {
-            this.openitem();
+            this.edit(itemname,itemno,itemdiscription,itemprice,id);
             console.log('Delete clicked');
           }
         },
@@ -190,6 +194,7 @@ export class WalletPage {
           text: 'Delete',
           icon: !this.platform.is('ios') ? 'md-trash' : null,
           handler: () => {
+            this.showConfirm(id);
             console.log('Share clicked');
           }
         },
@@ -223,7 +228,56 @@ export class WalletPage {
     }, 2000);
   }
 
-  openeditor(){
+
+  showConfirm(id) {
+    let confirm = this.alertCtrl.create({
+      title: 'Are you sure?',
+      message: 'this item will be remove from you list item',
+      buttons: [
+        {
+          text: 'cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.deleteReview(id)
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+
+  deleteReview(id) {
+
+    this.http.get('https://vioti.herokuapp.com/profile/email/'+this.email1+'/delete/' + id).subscribe((res) => {
+
+      console.log(res.json());
+
+     let index = this.wendor.item.indexOf(this.wendor.item);
+     this.wendor.item.splice(id, 1);
+      setTimeout(() => {
+        console.log('Async operation has ended');
+        this.getReviews();
+      }, 2000);
+
+    });
+
+  }
+
+
+  edit(itemname,itemno,itemdiscription,itemprice,id){
+    this.navCtrl.push(EdititemPage,{item_name:itemname,item_no:itemno,item_price:itemprice,item_discription:itemdiscription,_id:id});
+
+
+  }
+
+
+    openeditor(){
 
     let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.wendor.name,shoplocation:this.wendor.location});
     modal.present();

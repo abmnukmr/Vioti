@@ -53,7 +53,8 @@ $toggle-ios-background-color-off:#cb1b58;
 $toggle-ios-border-color-off:#cb1b58;
 $toggle-ios-background-color-off:#fff;
 $refresher-icon-color:#cb1b58;
-
+$card-ios-margin-left:0px;
+$card-ios-margin-right:0px;
 
   // App Material Design Variables
 // --------------------------------------------------
@@ -69,12 +70,13 @@ $toolbar-md-background: #fff;
 $tabs-md-background: #fff;
 $segment-button-md-border-color-activated:#fff;
 $segment-button-md-text-color-activated:#fff;
-$toggle-md-handle-background-color-on:   #fff;
-$toggle-md-handle-background-color-off: #cb1b58;
+$toggle-md-handle-background-color-on:  #cb1b58;
+$toggle-md-handle-background-color-off:  #fff;
 $toggle-md-active-color:#cb1b58;
 $toggle-md-disabled-opacity:1;
 
-
+$card-md-margin-left:0px;
+$card-md-margin-right:0px;
 
 
 
@@ -98,6 +100,9 @@ $toggle-wp-track-border-color-off: #a82158;
 $toggle-wp-track-border-color-on: #a82158;
 $toggle-wp-active-color: #a82158;
 $toggle-wp-inactive-color: #a82158;
+$card-wp-margin-left:0px;
+$card-wp-margin-right:0px;
+
 // App Theme
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can

@@ -5,6 +5,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import {AuthPage} from "../pages/auth/auth";
 import {SignupPage} from "../pages/signup/signup";
 import {ForgotPage} from "../pages/forgot/forgot";
+import { Diagnostic } from 'ionic-native';
 
 @Component({
   templateUrl:'app.html'
@@ -18,9 +19,21 @@ export class MyApp {
 
     platform.ready().then(() => {
 
+      Diagnostic.isLocationEnabled()
+        .then((isEnabled) => {
+          if(isEnabled){
+            console.log('Is available? ' + isEnabled);
+           }
+          else {
+           Diagnostic.switchToLocationSettings();
 
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+           }})
+        .catch((e)=> {
+            console.error(e);
+
+      });
+
+
       StatusBar.styleDefault();
       Splashscreen.hide();
     });

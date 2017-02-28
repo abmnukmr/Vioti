@@ -32,6 +32,8 @@ import {AuthProviders, AuthMethods, AngularFireModule} from "angularfire2";
 import * as firebase from "firebase";
 import {Auth} from "../providers/auth";
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import {SearchlocPage} from "../pages/searchloc/searchloc";
+import {EdititemPage} from "../pages/edititem/edititem";
 
 
 export const firebaseConfig = {
@@ -87,7 +89,9 @@ firebase.initializeApp(firebaseConfig);
     TitlediscriptionPage,
     TitleitemPage,
     AdditemPage,
-    ShopopenPage
+    ShopopenPage,
+    SearchlocPage,
+    EdititemPage
 
 
   ],
@@ -155,7 +159,10 @@ firebase.initializeApp(firebaseConfig);
     TitlediscriptionPage,
     TitleitemPage,
     AdditemPage,
-    ShopopenPage
+    ShopopenPage,
+    SearchlocPage,
+    EdititemPage
+
 
   ],
   providers:[Abmnu,ConnectivityService,LocationTracker,Auth],

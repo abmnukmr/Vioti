@@ -16,6 +16,7 @@ import {WalletPage} from "../wallet/wallet";
   Ionic pages and navigation.
 */
 declare var cordova: any;
+declare var cordova: any;
 @Component({
   selector: 'page-additem',
   templateUrl: 'additem.html'
@@ -151,7 +152,7 @@ export class AdditemPage {
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     File.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       this.lastImage.push(newFileName);
-    //  this.presentToast(this.lastImage);
+      //  this.presentToast(this.lastImage);
 //      this.targetimages.unshift(this.lastImage);
     }, error => {
       this.presentToast('Error while storing file.');
@@ -192,7 +193,7 @@ export class AdditemPage {
 
     // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
-   // this.presentToast(targetPath);
+    // this.presentToast(targetPath);
     // File name only
     var filename = this.lastImage;
 
@@ -202,7 +203,7 @@ export class AdditemPage {
       //fileName: filename,
       headers:{
         'Access-Control-Allow-Origin':'*',
-           },
+      },
       chunkedMode:true,
       mimeType: "image/png",
       params : {itemname:this.itemname,itemno: this.itemnumber,discription:this.discription,itemprice:this.itemprice}
@@ -225,8 +226,8 @@ export class AdditemPage {
     }, err => {
       this.loading.dismissAll()
       this.presentToast("Failed");
-     // console.log(err);
-     // this.presentToast('Error while uploading file.');
+      // console.log(err);
+      // this.presentToast('Error while uploading file.');
     });
   }
 

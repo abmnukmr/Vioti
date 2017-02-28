@@ -51,6 +51,8 @@ export class ChooslocPage {
 
 
 
+
+
   updateSearch() {
     if (this.autocomplete.query == '') {
       this.autocompleteItems = [];
@@ -182,7 +184,7 @@ export class ChooslocPage {
         if (res.length) {
           var result = res[0];
           var position = result.position;
-          var ltlng=  JSON.stringify(result.position);
+          this. ltlng=  JSON.stringify(result.position);
           this.map5.moveCamera(position);
           this.map5.animateCamera({
             'target': position,

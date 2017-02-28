@@ -2,7 +2,7 @@
 <ion-header >
   <ion-navbar >
 
-
+    <ion-title ><p style="color: rgba(168,33,88,0.97);font-size: 12px;">{{address}}</p></ion-title>
     <ion-buttons end>
       <button ion-button icon-only  (click)="showAddressModal()" >
 
@@ -10,14 +10,6 @@
       </button>
     </ion-buttons>
 
-    <ion-buttons end>
-
-
-      <button ion-button icon-only  [navPush]="choosloc">
-
-        <ion-icon name="ios-pin-outline" padding-right="8px"></ion-icon>
-      </button>
-    </ion-buttons>
 
 
 
@@ -31,7 +23,7 @@
 
 <ion-content no-padding="true" >
 
-  <p  style="color: #007aff;margin-left:20px;width: 100%;text-align: center;">{{address}}</p>
+  <p  style="color: #a82158;margin-left:20px;width: 100%;text-align: center;">{{lati}}{{long}}</p>
 
 
 

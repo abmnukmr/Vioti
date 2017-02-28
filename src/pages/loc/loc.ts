@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, ModalController} from 'ionic-angular';
 import {
   GoogleMapsMarker, GoogleMapsMarkerOptions, GoogleMap, GoogleMapsEvent, GoogleMapsLatLng,
   CameraPosition, Geocoder
 } from "ionic-native";
 import {map} from "rxjs/operator/map";
+import {SearchlocPage} from "../searchloc/searchloc";
 
 /*
   Generated class for the Loc page.
@@ -20,14 +21,44 @@ import {map} from "rxjs/operator/map";
 export class LocPage {
   // latlng:any;
   //address:any;
+  latlng: any;
+  address: any;
+  lati: any;
+  long: any;
+  lt:any;
 
-  constructor(public navCtrl: NavController, public navprms: NavParams) {
+  constructor(public navCtrl: NavController, public navprms: NavParams,public modalCtrl:ModalController) {
     //this.tabBarElement=document.querySelector('#tabs ion-tabbar-section');
+
+    this.address = this.navprms.get("address");
+
+
+    this.latlng = this.navprms.get("Latlng");
+
+       this.lt=JSON.parse (this.latlng);
+    this.lati = this.lt.lat;
+
+    this.long = this.lt.lng;
+
+  }
+  showAddressModal() {
+    let modal = this.modalCtrl.create(SearchlocPage);
+    /* let  me = this;
+     modal.onDidDismiss(data => {
+     this.address.place = data;
+     });*/
+    // modal.present(modal);
+    console.log("modal not working")
+    modal.present();
   }
 
-  latlng: any = this.navprms.get("Latlng");
 
-  address: any = this.navprms.get("address");
 
 
 }
+
+
+//
+
+
+

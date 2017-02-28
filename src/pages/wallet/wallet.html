@@ -21,7 +21,7 @@
 
 
 
-<ion-content style="padding: 0px; " *ngIf="showThis">
+<ion-content style="padding: 0px; " *ngIf="showThis" fullscreen>
 
 
 
@@ -34,17 +34,17 @@
   </ion-refresher>
 
 
-  <img src="http://www.studentliving.ul.ie/media/CV-Shop1.jpg" style="z-index: -1; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))"/>
+  <img src="http://www.studentliving.ul.ie/media/CV-Shop1.jpg" style="z-index: -2; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))"/>
 
-  <ion-toggle color="primary" color="energized" style="padding-top:20px;padding-left:20px;position: absolute;" ></ion-toggle>
+  <ion-toggle color="primary" color="energized" style="padding-top:20px;padding-left:20px;position: absolute;" [checked]="wendor.status"></ion-toggle>
   <ion-buttons  style="padding-top:30px;" end>
 
       <button ion-button icon-right="" clear small   >
         <ion-icon name="ios-camera-outline"  color="action"></ion-icon>
       </button>
   </ion-buttons>
-
-<ion-card style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;opacity: 1;margin-top: 70px;margin-bottom: 1px !important;">
+<div style="padding-right: 10px;padding-left:10px; ">
+<ion-card style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;opacity: 1;margin-top: 70px;margin-bottom: 1px !important;padding-left:10px;padding-right: 10px;">
   <ion-card-content>
 
     <ion-fab right >
@@ -120,13 +120,12 @@
      <ion-col width-50>
      <h2 style="color:#cb1b58;">Discription</h2>
      </ion-col>
-       <ion-col width-50>
+
     <ion-fab right>
       <button ion-button icon-right clear small (click)="opendiscription()">
         <ion-icon name="md-create"  color="primary"></ion-icon>
       </button>
     </ion-fab>
-       </ion-col>
      </ion-row>
    </ion-card-header>
 
@@ -140,20 +139,20 @@
   </ion-card>
 
 
-
+</div>
 
 <!--- item -->
 
-  <ion-card style="padding-top: 0px"*ngFor="let itemo of wendor.item;let i=index " >
+  <ion-card style="padding-top: 0px"*ngFor="let itemo of wendor.item;let i=index ">
 
-    <ion-card-header style="padding-top: 0px">
+    <ion-card-header style="padding-top:3px">
       <ion-row no-padding>
         <ion-col width-50 no-padding>
           <h2 style="color:#cb1b58;"><b>{{itemo.itemname}}</b></h2>
           <h6 style="color:rgba(68,48,66,0.53);font-size:10px;">{{itemo.itemno}}</h6>
         </ion-col>
           <ion-fab right>
-            <button ion-button icon-right clear small (click)="openMenu()">
+            <button ion-button icon-right clear small (click)="openMenu(itemo.id,itemo.itemname,itemo.itemno,itemo.price,itemo.discription)">
               <ion-icon name="md-more"  color="primary"></ion-icon>
             </button>
           </ion-fab>
@@ -162,7 +161,7 @@
     </ion-card-header>
 
     <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
-    <ion-slides  style="width: 100%;height: 100%"   loop="true" >
+    <ion-slides   style="width: 100%;height: 100%;padding: 0px;"  loop="true" >
       <ion-slide *ngFor="let imgi of itemo.image; let i=index">
         <img [src]="imgi.location"/>
 
@@ -171,7 +170,7 @@
 
     </ion-slides>
 
-    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53);margin-top: 5px; "></div>
+    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53);"></div>
 
 
 
