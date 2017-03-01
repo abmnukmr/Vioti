@@ -7,6 +7,13 @@
 <ion-header>
 
   <ion-navbar>
+
+    <ion-buttons left>
+      <button ion-button icon-only (click)="Dismiss()">
+
+        <ion-icon name="close" padding-right="8px" ></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-buttons right>
       <button ion-button block outline  (click)="updatedata()" >Save</button>
     </ion-buttons>

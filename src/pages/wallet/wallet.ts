@@ -187,7 +187,7 @@ export class WalletPage {
           icon: !this.platform.is('ios') ? 'md-create' : null,
           handler: () => {
             this.edit(itemname,itemno,itemdiscription,itemprice,id);
-            console.log('Delete clicked');
+           // console.log('Delete clicked');
           }
         },
         {
@@ -271,7 +271,8 @@ export class WalletPage {
 
 
   edit(itemname,itemno,itemdiscription,itemprice,id){
-    this.navCtrl.push(EdititemPage,{item_name:itemname,item_no:itemno,item_price:itemprice,item_discription:itemdiscription,_id:id});
+    let modal = this.modalCtrl.create(EdititemPage,{item_name:itemname,item_no:itemno,item_price:itemprice,item_discription:itemdiscription,_id:id});
+    modal.present();
 
 
   }
