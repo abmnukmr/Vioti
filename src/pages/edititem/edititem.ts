@@ -75,14 +75,15 @@ export class EdititemPage {
       .map(res => res.json()).subscribe(data => {
         console.log(data)
        this.loading.dismissAll();
-        this.navCtrl.push(WalletPage);
+      this.Dismiss();
+        //this.navCtrl.push(WalletPage);
       }, err => {
         console.log("Error!:", err.json());
        this.loading.dismissAll();
       });
 
       this.loading.dismissAll();
-      this.navCtrl.push(WalletPage);
+      this.Dismiss();
 
   }
 
