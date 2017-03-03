@@ -1,6 +1,8 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import { MyApp } from './app.component';
+import {QRCodeModule, QRCodeComponent} from 'angular2-qrcode';
+//import { QRCodeModule } from 'angular2-qrcode';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -34,6 +36,9 @@ import {Auth} from "../providers/auth";
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import {SearchlocPage} from "../pages/searchloc/searchloc";
 import {EdititemPage} from "../pages/edititem/edititem";
+import {ProfilephotoPage} from "../pages/profilephoto/profilephoto";
+import {QrcodePage} from "../pages/qrcode/qrcode";
+import {BarcodereadPage} from "../pages/barcoderead/barcoderead";
 
 
 export const firebaseConfig = {
@@ -91,11 +96,16 @@ firebase.initializeApp(firebaseConfig);
     AdditemPage,
     ShopopenPage,
     SearchlocPage,
-    EdititemPage
+    EdititemPage,
+    ProfilephotoPage,
+    QrcodePage,
+    BarcodereadPage
+
 
 
   ],
   imports: [
+    QRCodeModule,
     DynamicComponentModule,
     DynamicComponentModule.forRoot({
       imports: [CommonModule, IonicModule]}),
@@ -161,7 +171,11 @@ firebase.initializeApp(firebaseConfig);
     AdditemPage,
     ShopopenPage,
     SearchlocPage,
-    EdititemPage
+    EdititemPage,
+    ProfilephotoPage,
+    QrcodePage,
+    BarcodereadPage
+
 
 
   ],

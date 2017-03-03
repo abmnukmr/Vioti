@@ -10,10 +10,12 @@ import {TitleitemPage} from "../titleitem/titleitem";
 import {AdditemPage} from "../additem/additem";
 import {Abmnu} from "../../providers/abmnu";
 import {ShopopenPage} from "../shopopen/shopopen";
-import {Http} from "@angular/http";
+import {Http, RequestOptions, Headers} from "@angular/http";
 import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase/app";
 import {EdititemPage} from "../edititem/edititem";
+import {ProfilephotoPage} from "../profilephoto/profilephoto";
+import {QrcodePage} from "../qrcode/qrcode";
 
 /*
   Generated class for the Wallet page.
@@ -28,6 +30,7 @@ import {EdititemPage} from "../edititem/edititem";
 export class WalletPage {
 
   data: any;
+  finalstatus:string;
   email1:any;
   wendor:any;
   item_name:any;
@@ -280,8 +283,71 @@ export class WalletPage {
 
     openeditor(){
 
-    let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.wendor.name,shoplocation:this.wendor.location});
+    let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.wendor.name,shoplocation:this.wendor.address});
     modal.present();
+
+  }
+
+
+
+  togglechage(){
+
+
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      var  name = user.displayName;
+      this.email1 = user.email;
+      var  photoUrl = user.photoURL;
+    }
+
+    var statuss=this.wendor.status;
+
+    if(statuss=="true")
+    {
+      this.finalstatus="false";
+    }
+    else {
+      this.finalstatus="true";
+    }
+
+    console.log(this.finalstatus);
+
+    var sttatus={
+      status:this.finalstatus
+    }
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers: headers});
+
+    this.http.post('https://vioti.herokuapp.com/profile/upload/email/status/' + this.email1, JSON.stringify(sttatus), options)
+      .map(res => res.json()).subscribe(data => {
+      console.log(data)
+        }, err => {
+      console.log("Error!:", err.json());
+
+    });
+
+
+
+
+
+  }
+
+
+
+openbarcode(){
+
+  let modal = this.modalCtrl.create(QrcodePage,{shopname:this.wendor.name});
+  modal.present();
+
+}
+
+
+  profilepc(){
+    let modal = this.modalCtrl.create(ProfilephotoPage);
+    modal.present();
+
 
   }
 

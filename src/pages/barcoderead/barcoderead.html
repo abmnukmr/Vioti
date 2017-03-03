@@ -1,0 +1,195 @@
+<!--
+  Generated template for the Wallet page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-header>
+
+
+  <ion-navbar>
+
+    <ion-buttons end>
+      <div  style="width:10px; height:10px;border-radius:10px;background: #a82158 "  [hidden]="col"  end></div>
+
+      <div  style="width:10px; height:10px;border-radius:10px;background: #39ff82;"  [hidden]="col1" end></div>
+    </ion-buttons>
+
+
+    <ion-buttons end>
+      <button ion-button icon-only   >
+        <ion-icon name="navigate" padding-right="8px" ></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button icon-only   >
+        <ion-icon name="refresh" padding-right="8px" ></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content   *ngIf="showThis" no-padding fullscreen>
+  <!--
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+  -->
+
+
+  <img [src]="wendor.profileimage" style="z-index: -1; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(1,1,1,1)), to(rgba(0,0,0,0)));margin-top:58px;"/>
+
+
+
+  <div style="padding-right: 10px;padding-left:10px;margin-top: 160px; ">
+    <ion-card style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;opacity: 1;margin-top:77px;margin-bottom: 1px !important;"  no-padding>
+      <ion-card-content>
+
+
+
+        <p class="card-title">{{wendor.name}}</p>
+        <p class="card-subtitle">{{wendor.address}}</p>
+
+
+
+
+
+      </ion-card-content>
+
+
+
+    </ion-card>
+
+    <!--- contacts card -->
+
+
+    <ion-card  no-padding>
+
+
+
+      <ion-card-content>
+
+
+
+        <ion-row style="padding-top: 0px;padding-bottom: 0px;">
+
+          <button ion-button icon-left clear small>
+            <ion-icon name="ios-mail-outline"></ion-icon>
+            <p>{{wendor.email}}</p>
+          </button>
+        </ion-row>
+        <ion-row style="padding-top: 0px;padding-bottom: 0px;">
+          <button ion-button icon-left clear small>
+            <ion-icon name="ios-call-outline"></ion-icon>
+            <div>{{wendor.phone}}</div>
+          </button>
+        </ion-row>
+        <ion-row style="padding-top: 0px;padding-bottom: 0px;">
+          <button ion-button icon-left clear small>
+            <ion-icon name="logo-whatsapp"></ion-icon>
+            <div>{{wendor.whatsapp}}</div>
+          </button>
+        </ion-row>
+
+
+      </ion-card-content>
+
+    </ion-card>
+
+    <!-- ion card contacts end -->
+
+
+    <ion-card  style="padding-top: 0px" no-padding>
+
+      <ion-card-header style="padding-top: 0px">
+        <ion-row>
+          <ion-col width-50>
+            <h2 style="color:#cb1b58;">Discription</h2>
+          </ion-col>
+          <ion-col width-50>
+
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+
+      <div style="width: 100%;height: 1px;background:#cb1b58; "></div>
+
+      <ion-card-content>
+
+        <p style="text-align:justify;padding-top: 10px;">{{wendor.discription}} </p>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+
+
+  <!--- item -->
+
+
+  <ion-card style="padding-left: 0px;" *ngFor="let itemo of wendor.item;let i=index " no-padding>
+
+    <ion-card-header style="padding-top:4px;">
+      <ion-row>
+        <ion-col width-50>
+
+          <h2 style="color:rgba(203,27,88,0.97);"><b>{{itemo.itemname}}</b></h2>
+          <h6 style="color:rgba(68,48,66,0.53);font-size:10px;">{{itemo.itemno}}</h6>
+        </ion-col>
+        <ion-col width-50>
+
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+
+    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
+
+    <ion-slides   style="width: 100%;height: 100%;padding: 0px;"  loop="true" paginationType="fraction" pager="true" autoplay="2000" loop="true" zoom="true" >
+      <ion-slide *ngFor="let imgi of itemo.image; let i=index">
+        <img [src]="imgi.location"/>
+
+      </ion-slide>
+
+
+    </ion-slides>
+
+    <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53);"></div>
+
+
+
+
+    <ion-card-content>
+
+
+      <ion-row no-padding>
+        <ion-col col-10>
+
+          <button ion-button icon-left clear small  >
+            <ion-icon name="pricetag"></ion-icon>
+            <p>Price:-</p>
+          </button>
+        </ion-col>
+        <div ><p style="text-align:justify;color: #a82158;font-size: large;"><b>{{itemo.price}}</b></p></div>
+
+      </ion-row>
+
+      <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
+      <p style="text-align:justify;color:rgba(9,2,5,0.68);font-family: Arial, Helvetica, sans-serif; ">{{itemo.discription}}</p>
+
+
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
