@@ -20,10 +20,23 @@ export class QrcodePage {
 
   shopname:string;
    email1:string;
+  qrdata1:any;
+  qrdata:any;
+  shopimage:string;
+  shopcata:string;
   constructor(public navCtrl: NavController, public navParams: NavParams,public victrl:ViewController) {
 
 
     this.shopname=this.navParams.get("shopname");
+    //shopname:this.wendor.name,shopimage:this.wendor.profileimage,shopcata:this.wendor.catagory
+    this.shopimage=this.navParams.get("shopimage");
+    this.shopcata=this.navParams.get("shopcata");
+
+    var qrdata={
+      shopname:this.shopname,
+      shopimage:this.shopimage,
+      shopcata:this.shopcata
+    }
 
 
     var user = firebase.auth().currentUser;
@@ -32,6 +45,14 @@ export class QrcodePage {
       this.email1 = user.email;
       var  photoUrl = user.photoURL;
     }
+
+    this.qrdata={
+      shopemail:this.email1,
+      shopname:this.shopname,
+      shopimage:this.shopimage,
+      shopcata:this.shopcata
+    }
+  this.qrdata1=JSON.stringify(this.qrdata)
 
   }
 

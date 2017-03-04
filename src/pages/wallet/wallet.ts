@@ -283,7 +283,7 @@ export class WalletPage {
 
     openeditor(){
 
-    let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.wendor.name,shoplocation:this.wendor.address});
+    let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.wendor.name,shoplocation:this.wendor.address,shopcata:this.wendor.catagory});
     modal.present();
 
   }
@@ -338,7 +338,7 @@ export class WalletPage {
 
 openbarcode(){
 
-  let modal = this.modalCtrl.create(QrcodePage,{shopname:this.wendor.name});
+  let modal = this.modalCtrl.create(QrcodePage,{shopname:this.wendor.name,shopimage:this.wendor.profileimage,shopcata:this.wendor.catagory});
   modal.present();
 
 }

@@ -20,9 +20,10 @@ export class BarcodereadPage {
   wendor:any;
   loading: Loading;
   email:string;
+  shopname:string;
   col:boolean=false;
   col1:boolean=false;
-  constructor(public navCtrl: NavController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
 
 
 
@@ -45,11 +46,8 @@ export class BarcodereadPage {
     {
       this.loading.present();
 
-      var user = firebase.auth().currentUser;
-      if (user != null) {
-        var  name = user.displayName;
-        this.email = user.email;
-        var  photoUrl = user.photoURL;}
+      this.email=this.navParams.get("email1");
+
       //this.email="abmnukmr@gmail.com";
 
       this.abmnu.getReviews(this.email).then((data) => {

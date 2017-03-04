@@ -17,6 +17,7 @@ export class TitleeditorPage {
   shoplocation:string;
   shopname:string;
   loading:any;
+  catagoory:any;
   email1:any;
   update:any;
 
@@ -24,7 +25,7 @@ export class TitleeditorPage {
 
     this.shopname=this.navParams.get("shopname");
     this.shoplocation=this.navParams.get("shoplocation");
-
+     this.catagoory=this.navParams.get("shopcata");
     this.loading = this.loadingCtrl.create({
       content:"Saving..."
     });
@@ -48,7 +49,8 @@ export class TitleeditorPage {
 
     this.update = {
       shopname: this.shopname,
-      shoplocation: this.shoplocation
+      shoplocation: this.shoplocation,
+      shopcata:this.catagoory
       //item_discription: this.discription,
       //item_price: this.itemprice,
       //item_id: this.id

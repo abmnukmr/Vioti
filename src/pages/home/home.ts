@@ -1,5 +1,5 @@
 import {Component, Input, NgZone} from '@angular/core';
-import {NavController, ModalController, MenuController, Platform} from 'ionic-angular';
+import {NavController, ModalController, MenuController, Platform, Alert, AlertController} from 'ionic-angular';
 import {Abmnu} from "../../providers/abmnu";
 import {TransitionPage} from "../transition/transition";
 import {ProfilePage} from "../Profile/profile";
@@ -15,6 +15,8 @@ import {location} from "@angular/platform-browser/src/facade/browser";
 import  firebase from "firebase";
 import {AuthPage} from "../auth/auth";
 import {Auth} from "../../providers/auth";
+import { BarcodeScanner } from 'ionic-native';
+import {BarcodereadPage} from "../barcoderead/barcoderead";
 //import {Auth, User, GoogleAuth} from '@ionic/cloud-angular';
 
 
@@ -36,11 +38,12 @@ import {Auth} from "../../providers/auth";
   loc=LocPage;
   profile=ProfilePage;
   wendor=WendorPage;
+  data:any;
 
   show2:any=false;
 
 
-  constructor(  public authService: Auth, public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController) {
+  constructor(  public authService: Auth,public alertCtrl:AlertController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController) {
 
 
     this.showadd();
@@ -57,16 +60,27 @@ import {Auth} from "../../providers/auth";
     });
 
 
-    /*
-    if (user) {
-      // this.user is authenticated!
-    }
-    else {
-      navCtrl.pop(AuthPage);
-    }
-    */
 
   }
+
+
+scan(){
+
+ // BarcodeScanner.scan().then((barcodeData) => {
+
+  this.platform.ready().then(() => {
+    BarcodeScanner.scan().then((result) => {
+
+      this.data=JSON.parse(result.text);
+   //   alert(this.data.shopemail);
+      this.navCtrl.push(BarcodereadPage,{email1:this.data.shopemail});
+
+    },err=>{
+
+    });
+  });
+
+}
 
 
 
