@@ -3,6 +3,8 @@ import {NavController, LoadingController, Loading, AlertController} from 'ionic-
 import {Abmnu} from "../../providers/abmnu";
 import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase";
+import { Geolocation } from 'ionic-native';
+import { LaunchNavigator, LaunchNavigatorOptions } from 'ionic-native';
 
 /*
   Generated class for the Wendor page.
@@ -16,13 +18,24 @@ import * as firebase from "firebase";
 })
 export class WendorPage {
   showThis:boolean=false;
+  name:string;
   wendor:any;
   loading: Loading;
   email:string;
+  lati:number;
+  lngi:number;
   col:boolean=false;
   col1:boolean=false;
   constructor(public navCtrl: NavController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
 
+
+
+    Geolocation.getCurrentPosition().then((resp) => {
+      this.lati= resp.coords.latitude
+      this.lngi= resp.coords.longitude
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
 
 
     this.loading = this.loadingCtrl.create({
@@ -32,6 +45,18 @@ export class WendorPage {
     this.load();
 
   }
+
+  nevigate(){
+
+    //31.7104269,76.5258813
+    LaunchNavigator.navigate([this.wendor.lat, this.wendor.lng], {
+     // start: 'this.lati,this.lngi'
+
+      destinationName:this.wendor.name
+    });
+  }
+
+
 
 
 
@@ -58,7 +83,7 @@ export class WendorPage {
        this.loading.dismissAll();
       console.log("get");
       if(this.wendor.status=="true"){
-         this.col=true;
+         this.col1=false;
         console.log("gettttttt");
       }
      else {
@@ -100,40 +125,6 @@ export class WendorPage {
     }, 2000);
   }
 
-/*
-
-  wendor=
-    {
-      "_id": "5898e365bcb80bc27b9269f3",
-      "name":"abhimanyu Interprises",
-      "address":"clifornis",
-      "whatsapp":"+91 9625255416",
-      "phone":"+91 9625255416",
-      "email":"abmnukmr@gmail.com",
-      "discription":"abhimany shop for electronics and xbee network",
-      "folowers":"2",
-      "status":"open",
-      "item": [
-        {"image":[
-          {"img":"https://i.ytimg.com/vi/rFBxuK6z0DA/maxresdefault.jpg"},
-          {"img":"https://i.ytimg.com/vi/ilwOlSb1bUs/maxresdefault.jpg"},
-          {"img":"http://indianhealthyrecipes.com/wp-content/uploads/2015/03/mango-pickle-recipe-8.jpg"}
-          ],
-          "price":"140/-",
-          "discription":"my shop best item",
-          "itemno":"#1"},
-        {"image":[
-          {"img":"http://indianhealthyrecipes.com/wp-content/uploads/2015/03/mango-pickle-recipe-8.jpg"},
-          {"img":"https://i.ytimg.com/vi/ilwOlSb1bUs/maxresdefault.jpg"},
-          {"img":"https://i.ytimg.com/vi/rFBxuK6z0DA/maxresdefault.jpg"}
-          ],
-          "price":"140/-",
-          "discription":"my shop best item",
-          "itemno":"#1"}
-      ]
-    };
-
-*/
 
 
 

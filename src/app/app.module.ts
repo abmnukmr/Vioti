@@ -39,6 +39,8 @@ import {EdititemPage} from "../pages/edititem/edititem";
 import {ProfilephotoPage} from "../pages/profilephoto/profilephoto";
 import {QrcodePage} from "../pages/qrcode/qrcode";
 import {BarcodereadPage} from "../pages/barcoderead/barcoderead";
+import {OnemorePage} from "../pages/onemore/onemore";
+import {LocationeditPage} from "../pages/locationedit/locationedit";
 
 
 export const firebaseConfig = {
@@ -99,7 +101,10 @@ firebase.initializeApp(firebaseConfig);
     EdititemPage,
     ProfilephotoPage,
     QrcodePage,
-    BarcodereadPage
+    BarcodereadPage,
+    OnemorePage,
+    LocationeditPage
+
 
 
 
@@ -174,7 +179,9 @@ firebase.initializeApp(firebaseConfig);
     EdititemPage,
     ProfilephotoPage,
     QrcodePage,
-    BarcodereadPage
+    BarcodereadPage,
+    OnemorePage,
+    LocationeditPage
 
 
 

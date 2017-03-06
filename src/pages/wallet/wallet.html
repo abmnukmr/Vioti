@@ -58,7 +58,16 @@
     <p class="card-title">{{wendor.name}}</p>
     <p class="card-subtitle">{{wendor.address}}</p>
 
-    <p style="font-size: 0.9em;color: rgba(180,180,180,0.97);text-align: center;">{{wendor.catagory}}</p>
+    <ion-row>
+      <ion-col width-99>
+        <p style="font-size: 0.9em;color: rgba(180,180,180,0.97);text-align: center;">{{wendor.catagory}}</p>
+      </ion-col>
+      <ion-row>
+        <ion-icon name="people" style="color: rgba(168,33,88,0.97);"></ion-icon><p style="font-size: 0.7em;color: rgba(180,180,180,0.97);">{{wendor.visits}}</p>
+      </ion-row>
+
+    </ion-row>
+
 
 
 
@@ -132,6 +141,12 @@
            <ion-icon name="barcode"  color="primary"></ion-icon>
          </button>
        </ion-fab>
+       <ion-fab right style="margin-right: 60px;">
+         <button ion-button icon-right clear small (click)="placeedit()" >
+           <ion-icon name="pin"  color="primary"></ion-icon>
+         </button>
+       </ion-fab>
+
      </ion-row>
    </ion-card-header>
 

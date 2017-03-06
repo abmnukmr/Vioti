@@ -6,28 +6,36 @@ import {AuthPage} from "../pages/auth/auth";
 import {SignupPage} from "../pages/signup/signup";
 import {ForgotPage} from "../pages/forgot/forgot";
 import { Diagnostic } from 'ionic-native';
+import {LocationTracker} from "../providers/location-tracker";
 
 @Component({
   templateUrl:'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+
+  rootPage=TabsPage;
   app:IonicApp;
   nav:NavController;
-  constructor(platform: Platform) {
-
-
+  constructor(platform: Platform,public location:LocationTracker)
+  {
+    this.location.startTracking();
     platform.ready().then(() => {
+
 
       Diagnostic.isLocationEnabled()
         .then((isEnabled) => {
           if(isEnabled){
             console.log('Is available? ' + isEnabled);
-           }
+            this.rootPage=TabsPage;
+
+          }
           else {
            Diagnostic.switchToLocationSettings();
+         //   this.location.startTracking();
 
-           }})
+
+
+          }})
         .catch((e)=> {
             console.error(e);
 

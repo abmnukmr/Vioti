@@ -16,6 +16,8 @@ import * as firebase from "firebase/app";
 import {EdititemPage} from "../edititem/edititem";
 import {ProfilephotoPage} from "../profilephoto/profilephoto";
 import {QrcodePage} from "../qrcode/qrcode";
+import {OnemorePage} from "../onemore/onemore";
+import {LocationeditPage} from "../locationedit/locationedit";
 
 /*
   Generated class for the Wallet page.
@@ -203,10 +205,10 @@ export class WalletPage {
         },
 
         {
-          text: 'Share',
-          icon: !this.platform.is('ios') ? 'md-share' : null,
+          text: 'Add one more image',
+          icon: !this.platform.is('ios') ? 'md-image' : null,
           handler: () => {
-            console.log('Favorite clicked');
+           this.addonemore(id);
           }
         },
         {
@@ -281,6 +283,21 @@ export class WalletPage {
   }
 
 
+
+  placeedit(){
+    let modal = this.modalCtrl.create(LocationeditPage);
+    modal.present();
+
+
+  }
+
+  addonemore(id){
+    let modal = this.modalCtrl.create(OnemorePage,{_id:id});
+    modal.present();
+  }
+
+
+
     openeditor(){
 
     let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.wendor.name,shoplocation:this.wendor.address,shopcata:this.wendor.catagory});
@@ -329,8 +346,7 @@ export class WalletPage {
     });
 
 
-
-
+    this.getReviews();
 
   }
 

@@ -3,6 +3,7 @@ import {NavController, NavParams, Loading, LoadingController, AlertController} f
 import {Abmnu} from "../../providers/abmnu";
 import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase/app";
+import { LaunchNavigator, LaunchNavigatorOptions } from 'ionic-native';
 
 /*
   Generated class for the Barcoderead page.
@@ -18,13 +19,13 @@ export class BarcodereadPage {
 
   showThis:boolean=false;
   wendor:any;
+  name:string;
   loading: Loading;
   email:string;
   shopname:string;
   col:boolean=false;
   col1:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
-
 
 
     this.loading = this.loadingCtrl.create({
@@ -88,6 +89,19 @@ export class BarcodereadPage {
 
     }
   }
+
+
+  nevigate(){
+
+    //31.7104269,76.5258813
+    LaunchNavigator.navigate([this.wendor.lat, this.wendor.lng], {
+      // start: 'this.lati,this.lngi'
+//      this.name=;
+
+    destinationName:this.wendor.name
+    });
+  }
+
 
   doRefresh(refresher) {
     this.load();

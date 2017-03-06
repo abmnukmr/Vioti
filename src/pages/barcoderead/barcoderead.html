@@ -19,13 +19,13 @@
 
 
     <ion-buttons end>
-      <button ion-button icon-only   >
+      <button ion-button icon-only  (click)="nevigate()"  >
         <ion-icon name="navigate" padding-right="8px" ></ion-icon>
       </button>
     </ion-buttons>
 
     <ion-buttons end>
-      <button ion-button icon-only   >
+      <button ion-button icon-only (click)="load()"  >
         <ion-icon name="refresh" padding-right="8px" ></ion-icon>
       </button>
     </ion-buttons>
@@ -55,13 +55,19 @@
   <div style="padding-right: 10px;padding-left:10px;margin-top: 160px; ">
     <ion-card style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;opacity: 1;margin-top:77px;margin-bottom: 1px !important;"  no-padding>
       <ion-card-content>
-
-
-
         <p class="card-title">{{wendor.name}}</p>
         <p class="card-subtitle">{{wendor.address}}</p>
 
-        <p style="font-size: 0.9em;color: rgba(180,180,180,0.97);text-align: center;">{{wendor.catagory}}</p>
+        <ion-row>
+          <ion-col width-99>
+            <p style="font-size: 0.9em;color: rgba(180,180,180,0.97);text-align: center;">{{wendor.catagory}}</p>
+          </ion-col>
+          <ion-row>
+            <ion-icon name="people" style="color: rgba(168,33,88,0.97);"></ion-icon><p style="font-size: 0.7em;color: rgba(180,180,180,0.97);">{{wendor.visits}}</p>
+          </ion-row>
+
+        </ion-row>
+
 
 
 
