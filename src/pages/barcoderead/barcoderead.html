@@ -145,7 +145,7 @@
   <!--- item -->
 
 
-  <ion-card style="padding-left: 0px;" *ngFor="let itemo of wendor.item;let i=index " no-padding>
+  <ion-card style="padding-left: 0px;" *ngFor="let itemo of wendor.item|orderBy :['+itemno'] " no-padding>
 
     <ion-card-header style="padding-top:4px;">
       <ion-row>

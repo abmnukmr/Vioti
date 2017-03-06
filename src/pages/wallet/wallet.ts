@@ -9,6 +9,7 @@ import {TitlediscriptionPage} from "../titlediscription/titlediscription";
 import {TitleitemPage} from "../titleitem/titleitem";
 import {AdditemPage} from "../additem/additem";
 import {Abmnu} from "../../providers/abmnu";
+import {OrderByPipe} from "../pipes/order-by-pipe";
 import {ShopopenPage} from "../shopopen/shopopen";
 import {Http, RequestOptions, Headers} from "@angular/http";
 import {ConnectivityService} from "../../providers/connectivity-service";
@@ -272,12 +273,19 @@ export class WalletPage {
 
     });
 
+    this.getReviews();
+
   }
 
 
   edit(id,itemname,itemno,itemdiscription,itemprice){
     let modal = this.modalCtrl.create(EdititemPage,{item_name:itemname,item_no:itemno,item_price:itemprice,item_discription:itemdiscription,_id:id});
     modal.present();
+    modal.onDidDismiss(() => {
+      this.getReviews();
+
+
+    });
 
 
   }
@@ -287,6 +295,12 @@ export class WalletPage {
   placeedit(){
     let modal = this.modalCtrl.create(LocationeditPage);
     modal.present();
+    modal.onDidDismiss(() => {
+      this.getReviews();
+
+
+    });
+
 
 
   }
@@ -294,6 +308,12 @@ export class WalletPage {
   addonemore(id){
     let modal = this.modalCtrl.create(OnemorePage,{_id:id});
     modal.present();
+    modal.onDidDismiss(() => {
+      this.getReviews();
+
+
+    });
+
   }
 
 
@@ -302,6 +322,11 @@ export class WalletPage {
 
     let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.wendor.name,shoplocation:this.wendor.address,shopcata:this.wendor.catagory});
     modal.present();
+      modal.onDidDismiss(() => {
+        this.getReviews();
+
+
+      });
 
   }
 
@@ -356,6 +381,12 @@ openbarcode(){
 
   let modal = this.modalCtrl.create(QrcodePage,{shopname:this.wendor.name,shopimage:this.wendor.profileimage,shopcata:this.wendor.catagory});
   modal.present();
+  modal.onDidDismiss(() => {
+    this.getReviews();
+
+
+  });
+
 
 }
 
@@ -363,6 +394,11 @@ openbarcode(){
   profilepc(){
     let modal = this.modalCtrl.create(ProfilephotoPage);
     modal.present();
+    modal.onDidDismiss(() => {
+      this.getReviews();
+
+
+    });
 
 
   }
@@ -371,12 +407,23 @@ openbarcode(){
     let modal = this.modalCtrl.create(TitlecontactPage,{shopcontactemail:this.wendor.email,shopcontactphone:this.wendor.phone,shopcontactwhatsapp:this.wendor.whatsapp});
     modal.present();
 
+    modal.onDidDismiss(() => {
+      this.getReviews();
+
+
+    });
+
   }
 
   opendiscription(){
 
     let modal = this.modalCtrl.create(TitlediscriptionPage,{shopdiscription:this.wendor.discription});
     modal.present();
+    modal.onDidDismiss(() => {
+      this.getReviews();
+
+
+    });
 
 
   }
@@ -384,6 +431,12 @@ openbarcode(){
  openitem() {
    let modal = this.modalCtrl.create(TitleitemPage);
    modal.present();
+   modal.onDidDismiss(() => {
+     this.getReviews();
+
+
+   });
+
  }
 
   additem(){
@@ -391,6 +444,11 @@ openbarcode(){
     let modal = this.modalCtrl.create(AdditemPage);
     modal.present();
 
+    modal.onDidDismiss(() => {
+      this.getReviews();
+
+
+    });
 
   }
 

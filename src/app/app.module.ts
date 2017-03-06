@@ -41,6 +41,7 @@ import {QrcodePage} from "../pages/qrcode/qrcode";
 import {BarcodereadPage} from "../pages/barcoderead/barcoderead";
 import {OnemorePage} from "../pages/onemore/onemore";
 import {LocationeditPage} from "../pages/locationedit/locationedit";
+import {OrderByPipe} from "../pipes/order-by-pipe";
 
 
 export const firebaseConfig = {
@@ -77,6 +78,7 @@ firebase.initializeApp(firebaseConfig);
   declarations: [
     MyApp,
     AboutPage,
+    OrderByPipe,
     ContactPage,
     WalletPage,
     HomePage,
