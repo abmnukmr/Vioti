@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import firebase from 'firebase';
+import {ToastController} from "ionic-angular";
 
 /*
   Generated class for the Auth provider.
@@ -18,7 +19,7 @@ export class Auth {
 
 
 
-  constructor() {
+  constructor(public toastCtrl: ToastController) {
     this.fireAuth = firebase.auth();
     this.userData = firebase.database().ref('/userProfile');
   }
@@ -26,11 +27,17 @@ export class Auth {
     return this.fireAuth.signInWithEmailAndPassword(email, password);
   }
 
+
+
+
   register(email: string, password: string,phone:string,name:string): any {
+
+
     return this.fireAuth.createUserWithEmailAndPassword(email, password)
       .then((newUser) => {
         this.userData.child(newUser.uid).set({email:email, phone:phone, name:name});
       });
+
   }
 
   resetPassword(email: string): any {

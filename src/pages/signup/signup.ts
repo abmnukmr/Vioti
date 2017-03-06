@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
+import {NavController, NavParams, AlertController, LoadingController, ToastController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Auth} from "../../providers/auth";
 import {HomePage} from "../home/home";
 import {AuthPage} from "../auth/auth";
+import * as firebase from "firebase/app";
 
 /*
   Generated class for the Signup page.
@@ -23,8 +24,7 @@ export class SignupPage {
   submitAttempt: boolean = false;
   loading: any;
 
-  constructor(public navCtrl: NavController, public authService: Auth, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
- //   let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+  constructor(public navCtrl: NavController,public toastCtrl: ToastController, public authService: Auth, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
@@ -39,6 +39,15 @@ export class SignupPage {
     this[field + "Changed"] = true;
   }
 
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
   doRegister(){
     this.submitAttempt = true;
 
@@ -47,7 +56,12 @@ export class SignupPage {
     } else {
       this.authService.register(this.registerForm.value.email, this.registerForm.value.password,this.registerForm.value.phone,this.registerForm.value.fullname).then( authService => {
 
-        this.navCtrl.setRoot(AuthPage);
+        firebase.auth().onAuthStateChanged(function(user) {
+          user.sendEmailVerification();
+        });
+          this.presentToast("Verfication mail sent Successfully. Verify your account");
+        this.navCtrl.pop(AuthPage);
+
         this.loading.dismiss();
       }, error => {
         this.loading.dismiss().then( () => {

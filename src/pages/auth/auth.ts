@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {
   NavController, App, Slides, NavParams, AlertController, LoadingController,
-  ModalController, Platform
+  ModalController, Platform, ToastController
 } from 'ionic-angular';
 import { GoogleAuth, User } from '@ionic/cloud-angular';
 
@@ -17,10 +17,10 @@ import {GooglePlus} from 'ionic-native';
 import firebase from 'firebase'
 
 /*
-  Generated class for the Auth page.
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+ Generated class for the Auth page.
+ See http://ionicframework.com/docs/v2/components/#navigation for more info on
+ Ionic pages and navigation.
+ */
 @Component({
   selector: 'page-auth',
   templateUrl: 'auth.html'
@@ -32,17 +32,19 @@ export class AuthPage {
   passwordChanged: boolean = false;
   submitAttempt: boolean = false;
   loading: any;
+  verified:boolean;
   forgot=ForgotPage;
   signup=SignupPage;
   userProfile: any = null;
-   public user:any;
+  public user:any;
   public fireAuth: any;
   public userData: any;
 
   constructor(public googleAuth: GoogleAuth, public navCtrl: NavController,public modalCtrl: ModalController,
-              public af: AngularFire,
+              public af: AngularFire,public toastCtrl: ToastController,
               public alertController : AlertController,
               private platform: Platform  ,   public authService: Auth, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+
 //    let EMAIL_REGEXP ='/^[a-z0-9!#$%&*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i';
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required])],
@@ -53,16 +55,7 @@ export class AuthPage {
 
     this.fireAuth = firebase.auth();
 
-    this.af.auth.subscribe(user => {
-      if(user) {
-        //alert(‘fire user logged in’);
-       this.user = user;
-      }else {
-        //alert(‘fire user logged out’);
-       this.user = {};
-      }
-    });
-
+   this.verfy();
   }
 
   elementChanged(input){
@@ -112,6 +105,17 @@ export class AuthPage {
       })
     })
 
+  }
+
+
+
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
   }
 
   displayAlert(value,title)
@@ -185,36 +189,77 @@ export class AuthPage {
     });
   }
 
+  verfy(){
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user.emailVerified) {
+
+        this.verified=true;
+        console.log('Email is verified');
+      }
+      else {
+        this.verified=false;
+        console.log('Email is not verified');
+      }
+    });
+  }
+
+
+
+
+
   loginUser(){
     this.submitAttempt = true;
 
     if (!this.loginForm.valid){
       console.log(this.loginForm.value);
-    } else {
-      this.authService.doLogin(this.loginForm.value.email, this.loginForm.value.password).then( authService => {
-        this.navCtrl.pop(TabsPage);
-        this.loading.dismiss();
-      }, error => {
-        this.loading.dismiss().then( () => {
-          let alert = this.alertCtrl.create({
-            message: error.message,
-            buttons: [
-              {
-                text: "Ok",
-                role: 'cancel'
-              }
-            ]
-          });
-          alert.present();
-        });
-      });
-
-      this.loading = this.loadingCtrl.create({
-        dismissOnPageChange: true,
-      });
-      this.loading.present();
     }
-  }
+    else {
+
+
+        this.authService.doLogin(this.loginForm.value.email, this.loginForm.value.password).then(authService => {
+
+          firebase.auth().onAuthStateChanged((user)=> {
+            if (user.emailVerified) {
+
+              this.navCtrl.pop(TabsPage);
+
+              console.log('Email is verified');
+            }
+            else {
+              this.verified=false;
+              this.presentToast("Please verify your account by sent verfication link to your email");
+              console.log('Email is not verified');
+            }
+          });
+
+
+
+          this.loading.dismiss();
+        }, error => {
+          this.loading.dismiss().then(() => {
+            let alert = this.alertCtrl.create({
+              message: error.message,
+              buttons: [
+                {
+                  text: "Ok",
+                  role: 'cancel'
+                }
+              ]
+            });
+            alert.present();
+          });
+        });
+
+        this.loading = this.loadingCtrl.create({
+          dismissOnPageChange: true,
+        });
+        this.loading.present();
+      }
+
+    }
+
+
+
 
 
 }

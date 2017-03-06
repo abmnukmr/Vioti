@@ -162,7 +162,7 @@ export class AdditemPage {
   private presentToast(text) {
     let toast = this.toastCtrl.create({
       message: text,
-      duration: 8000,
+      duration: 2000,
       position: 'top'
     });
     toast.present();

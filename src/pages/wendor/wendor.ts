@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, LoadingController, Loading, AlertController} from 'ionic-angular';
+import {NavController, LoadingController, Loading, AlertController, ToastController} from 'ionic-angular';
 import {Abmnu} from "../../providers/abmnu";
 import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase";
@@ -26,7 +26,7 @@ export class WendorPage {
   lngi:number;
   col:boolean=false;
   col1:boolean=false;
-  constructor(public navCtrl: NavController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
+  constructor(public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
 
 
 

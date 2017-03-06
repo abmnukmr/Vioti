@@ -1,5 +1,8 @@
 import {Component, Input, NgZone} from '@angular/core';
-import {NavController, ModalController, MenuController, Platform, Alert, AlertController} from 'ionic-angular';
+import {
+  NavController, ModalController, MenuController, Platform, Alert, AlertController,
+  ToastController
+} from 'ionic-angular';
 import {Abmnu} from "../../providers/abmnu";
 import {TransitionPage} from "../transition/transition";
 import {ProfilePage} from "../Profile/profile";
@@ -43,14 +46,25 @@ import {BarcodereadPage} from "../barcoderead/barcoderead";
   show2:any=false;
 
 
-  constructor(  public authService: Auth,public alertCtrl:AlertController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController) {
+  constructor(  public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController) {
 
 
     this.showadd();
 
 
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged((user)=> {
       if (user) {
+        if(user.emailVerified)
+        {
+
+        }
+        else {
+          navCtrl.push(AuthPage);
+          this.presentToast("Please verify your account by sent verfication link to your email");
+
+        }
+
+
 
       }
       else
@@ -58,11 +72,23 @@ import {BarcodereadPage} from "../barcoderead/barcoderead";
         navCtrl.push(AuthPage);
       }
     });
+    //
 
 
 
+      }
+
+
+
+
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
   }
-
 
 scan(){
 
@@ -100,7 +126,7 @@ scan(){
       }
       else
       {
-        this.navCtrl.push(AuthPage);
+        this.navCtrl.pop(AuthPage);
       }
     });
 
