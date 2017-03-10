@@ -1,10 +1,14 @@
-page-about {
 
-}
 .ion-title{
   color: #4c9eee;
 }
-
+.list-avatar{
+  ion-note {
+    font-size: 12px;
+    align-self: flex-start;
+    margin-top: 0px;
+  }
+}
 
 .ion-card{
   width: 100%;

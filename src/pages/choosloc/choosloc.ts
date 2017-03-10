@@ -27,6 +27,7 @@ export class ChooslocPage {
   map5: GoogleMap;
   marker1:any;
   ltlng:any;
+  butn:boolean=true;
   tabBarElement: any;
   listshow:boolean=true;
   autocompleteItems;
@@ -186,6 +187,9 @@ export class ChooslocPage {
           var result = res[0];
           var position = result.position;
           this. ltlng=  JSON.stringify(result.position);
+          if(this.ltlng !==null){
+            this.butn=false;
+          }
           this.map5.moveCamera(position);
           this.map5.animateCamera({
             'target': position,

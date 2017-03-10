@@ -46,6 +46,7 @@ export class WendorPage {
 
   }
 
+
   nevigate(){
 
     //31.7104269,76.5258813
@@ -56,8 +57,19 @@ export class WendorPage {
     });
   }
 
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 4000,
+      position: 'top'
+    });
+    toast.present();
+  }
 
-
+  doref(){
+     this.load();
+      this.presentToast("Refreshing....");
+   }
 
 
 

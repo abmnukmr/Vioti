@@ -5,7 +5,7 @@
   <name>ionicc</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="main.html" />
+    <content src="index.html" />
     <access origin="*" />
     <preference name="loadUrlTimeoutValue" value="70000" />
     <allow-intent href="http://*/*" />

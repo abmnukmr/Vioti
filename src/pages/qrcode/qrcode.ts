@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ViewController} from 'ionic-angular';
-import {QRCodeComponent} from 'angular2-qrcode';
 import * as firebase from "firebase/app";
-
+import {QRCodeComponent} from 'angular2-qrcode';
 /*
   Generated class for the Qrcode page.
 

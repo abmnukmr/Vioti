@@ -1,35 +1,6 @@
 page-auth {
 
 }
-ion-content{
-  padding: 0px;
-}
-
-ion-card{
-  padding: 0px;
-  width: 100%;
-}
-ion-input{
-}
-ion-avatar > img {
-  margin: auto;
-  width: 80px;
-  z-index: 2;
-  margin-top: 30px;
-  height: auto;
-  background: #50becb;
-}
-.platform-windowsphone .cio {
-  text-transform: uppercase;
-  width: 10px;
-  height: 10px;
-  background-color: #cb1b58;
-}
-.signin{
-  height: 750px;
-  width: 100%;
-}
-.signup{
-  height: 750px;
-  width: 100%;
+.item-block{
+  display: flex;
 }

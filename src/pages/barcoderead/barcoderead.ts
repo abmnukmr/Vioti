@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, Loading, LoadingController, AlertController} from 'ionic-angular';
+import {NavController, NavParams, Loading, LoadingController, AlertController, ToastController} from 'ionic-angular';
 import {Abmnu} from "../../providers/abmnu";
 import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase/app";
@@ -25,7 +25,7 @@ export class BarcodereadPage {
   shopname:string;
   col:boolean=false;
   col1:boolean=false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController,public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
 
 
     this.loading = this.loadingCtrl.create({
@@ -89,6 +89,25 @@ export class BarcodereadPage {
 
     }
   }
+
+
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 4000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+  doref(){
+    this.load();
+    this.presentToast("Refreshing....");
+  }
+
+
+
+
 
 
   nevigate(){

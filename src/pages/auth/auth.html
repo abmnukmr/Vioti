@@ -1,6 +1,5 @@
 <!--
   Generated template for the Auth page.
-
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
@@ -12,20 +11,20 @@
          xmlns:padding-right="http://www.w3.org/1999/xhtml" xmlns:padding-right="http://www.w3.org/1999/xhtml"
          xmlns:width="http://www.w3.org/1999/xhtml" xmlns:padding-right="http://www.w3.org/1999/xhtml"></ion-nav>
 
-<ion-content  style="min-height: 100%;min-width: 100%;padding: 0px;padding-top: 0px;" class="slide-zoom" >
+<ion-content  style="min-width: 100%;padding: 0px;padding-top: 0px;" class="slide-zoom" >
 
 
-     <ion-item no-lines>
-      <ion-avatar >
-        <img [src]="profilePicture">
-      </ion-avatar>
-    </ion-item>
+  <ion-item no-lines>
+    <ion-avatar >
+      <img [src]="profilePicture">
+    </ion-avatar>
+  </ion-item>
 
   <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
     <ion-item style="padding-right:10px; ">
       <ion-input  #email formControlName="email" type="email" (change)="elementChanged(email)"
-                 placeholder="Email"
-                 [class.invalid]="!loginForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
+                  placeholder="Email"
+                  [class.invalid]="!loginForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
     </ion-item>
     <ion-item no-lines class="error-message" *ngIf="!loginForm.controls.email.valid  && (emailChanged || submitAttempt)">
       <p style="color: #ff2553;">Please enter a valid email.</p>
@@ -38,36 +37,31 @@
     <ion-item no-lines class="error-message" *ngIf="!loginForm.controls.password.valid  && (passwordChanged || submitAttempt)">
       <p style="color: #ff2553;">Your password needs more than 6 characters.</p>
     </ion-item>
-      <div style="padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 15px;">
-        <button  [navPush]="tabpage" ion-button icon-right outline  block  >Log In </button>
-      </div>
+    <div style="padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 15px;">
+      <button  [navPush]="tabpage" ion-button icon-right outline  block  >Log In </button>
+    </div>
   </form>
 
-    <ion-row style="margin-left:9px;color: #a82151" >
-      <ion-col><p (click)="resetPwd()" style="font-size: 15px;">  Forgot Password?</p></ion-col>
-      <ion-col width-10><p style="font-size: 15px;">|</p></ion-col>
-      <ion-col><p  (click)="register()" style="font-size:15px;margin-right: 40px;">SignUp</p></ion-col>
+  <ion-row style="margin-left:9px;color: #a82151" >
+    <ion-col><p (click)="resetPwd()" style="font-size: 15px;">  Forgot Password?</p></ion-col>
+    <ion-col width-10><p style="font-size: 15px;">|</p></ion-col>
+    <ion-col><p  (click)="register()" style="font-size:15px;margin-right: 40px;">SignUp</p></ion-col>
 
-    </ion-row>
+  </ion-row>
 
-<!--
-    <div style="padding-top:20px;margin-top: 60px;">
-      <p center text-center >Or SignIn With</p>
-      <ion-row>
-
-          <ion-buttons left>
-            <button ion-button icon-right color="facebook"  style="width:140px; padding-right:60px;"> <ion-icon style="width: 20px;height: 20px; color:#fff;  background:rgba(251,244,251,0);margin-left: 15px;" name="logo-facebook"></ion-icon><p  style="margin-left: 20px;">Facebook</p></button>
-          </ion-buttons>
-
-                  <ion-buttons right style="margin-left: 20px;">
-            <button  ion-button icon-right (click)="googlePlusLogin()"  color="google"  style="width:135px;padding-right:70px;"><ion-icon  style="width: 20px;height: 20px; color:#fff;  background:rgba(251,244,251,0);margin-left: 15px;" name="logo-google"> </ion-icon><p  style="margin-left: 20px;"> Google</p></button>
-          </ion-buttons>
-
-      </ion-row>
-    </div>
-
-
--->
+  <!--
+      <div style="padding-top:20px;margin-top: 60px;">
+        <p center text-center >Or SignIn With</p>
+        <ion-row>
+            <ion-buttons left>
+              <button ion-button icon-right color="facebook"  style="width:140px; padding-right:60px;"> <ion-icon style="width: 20px;height: 20px; color:#fff;  background:rgba(251,244,251,0);margin-left: 15px;" name="logo-facebook"></ion-icon><p  style="margin-left: 20px;">Facebook</p></button>
+            </ion-buttons>
+                    <ion-buttons right style="margin-left: 20px;">
+              <button  ion-button icon-right (click)="googlePlusLogin()"  color="google"  style="width:135px;padding-right:70px;"><ion-icon  style="width: 20px;height: 20px; color:#fff;  background:rgba(251,244,251,0);margin-left: 15px;" name="logo-google"> </ion-icon><p  style="margin-left: 20px;"> Google</p></button>
+            </ion-buttons>
+        </ion-row>
+      </div>
+  -->
 
 
 </ion-content>

@@ -55,6 +55,7 @@ $toggle-ios-background-color-off:#fff;
 $refresher-icon-color:#cb1b58;
 $card-ios-margin-left:0px;
 $card-ios-margin-right:0px;
+$list-inset-ios-margin-bottom:0px;
 
   // App Material Design Variables
 // --------------------------------------------------
@@ -63,7 +64,7 @@ $card-ios-margin-right:0px;
 $toolbar-md-button-color:#cb1b58;
 $toolbar-md-title-text-color:#cb1b58 ;
 $searchbar-md-input-search-icon-color: #cb1b58;
-$searchbar-md-input-box-shadow: #b5b5b5;
+$searchbar-md-input-clear-icon-color:#cb1b58;
 $segment-button-md-text-color-activated:#fff;
 
 $toolbar-md-background: #fff;
@@ -72,6 +73,7 @@ $segment-button-md-border-color-activated:#fff;
 $segment-button-md-text-color-activated:#fff;
 $toggle-md-handle-background-color-on:  #cb1b58;
 $toggle-md-handle-background-color-off:  #fff;
+$searchbar-md-input-box-shadow: rgba(255, 255, 255, 0);
 $toggle-md-active-color:#cb1b58;
 $toggle-md-disabled-opacity:1;
 

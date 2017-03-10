@@ -1,8 +1,7 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import { MyApp } from './app.component';
-import {QRCodeModule, QRCodeComponent} from 'angular2-qrcode';
-//import { QRCodeModule } from 'angular2-qrcode';
+import { QRCodeModule } from 'angular2-qrcode';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -10,7 +9,6 @@ import { TabsPage } from '../pages/tabs/tabs';
 import {WalletPage} from "../pages/wallet/wallet";
 import {Abmnu} from "../providers/abmnu";
 import {TransitionPage} from "../pages/transition/transition";
-import {AgmCoreModule} from "angular2-google-maps/core";
 import {ProfilePage} from "../pages/Profile/profile";
 import {ConnectivityService} from "../providers/connectivity-service";
 import {SearchPage} from "../pages/search/search";
@@ -42,6 +40,8 @@ import {BarcodereadPage} from "../pages/barcoderead/barcoderead";
 import {OnemorePage} from "../pages/onemore/onemore";
 import {LocationeditPage} from "../pages/locationedit/locationedit";
 import {OrderByPipe} from "../pipes/order-by-pipe";
+import {AbmnuPage} from "../pages/abmnu/abmnu";
+import {BarcodePage} from "../pages/barcode/barcode";
 
 
 export const firebaseConfig = {
@@ -105,7 +105,9 @@ firebase.initializeApp(firebaseConfig);
     QrcodePage,
     BarcodereadPage,
     OnemorePage,
-    LocationeditPage
+    LocationeditPage,
+    AbmnuPage,
+    BarcodePage
 
 
 
@@ -124,7 +126,7 @@ firebase.initializeApp(firebaseConfig);
         android: {
           tabsPlacement: 'bottom',
           tabsHideOnSubPages: true,
-          //iconMode:"ios",
+          iconMode:"ios",
           pageTransitionDelay:'16',
           activator:"highlight",
           pageTransition:"ios-transition"
@@ -147,10 +149,7 @@ firebase.initializeApp(firebaseConfig);
         }
       }
     }
-    ),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDS1s-CmlAqqWpEpS8D7hm8-TchEtq_Dyc'
-    })
+    )
   ],
 
   bootstrap: [IonicApp],

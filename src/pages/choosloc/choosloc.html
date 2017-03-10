@@ -10,7 +10,10 @@
       </ion-title>
 
     <ion-buttons right>
-      <button ion-button block outline (click)="save()" > Save</button>    </ion-buttons>
+      <button ion-button icon-only  (click)="save()"[hidden]="butn" >
+        <ion-icon name="navigate" padding-right="8px" ></ion-icon>
+
+      </button>    </ion-buttons>
 
   </ion-navbar>
 
