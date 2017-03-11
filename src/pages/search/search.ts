@@ -1,9 +1,12 @@
+
 import {Component, NgZone} from '@angular/core';
 import {NavController, ViewController, Searchbar, AlertController} from 'ionic-angular';
 
 import {ViewChild} from "@angular/core/src/metadata/di";
 import {FormControl} from "@angular/forms";
 import 'rxjs/add/operator/debounceTime';
+import {Shopdata} from "../../providers/shopdata";
+import { Geolocation } from 'ionic-native';
 /*
   Generated class for the Search page.
 
@@ -27,10 +30,29 @@ export class SearchPage {
   searchTerm:string="";
   searchControl: FormControl;
   searching: any = false;
-  constructor (public viewCtrl: ViewController, private zone: NgZone,public alertCtrl: AlertController) {
-    this.searchControl = new FormControl();
+  _fitdata:any;
+  _lat:any;
 
+  _lng:any;
+  constructor (public viewCtrl: ViewController, private zone: NgZone,public alertCtrl: AlertController,public _shopdata:Shopdata) {
+    this.searchControl = new FormControl();
+     this.load();
     this.initializeItems();
+    Geolocation.getCurrentPosition().then((resp) => {
+      this._lat=resp.coords.latitude
+      this._lng= resp.coords.longitude
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+
+    let watch = Geolocation.watchPosition();
+    watch.subscribe((data) => {
+      // data can be a set of coordinates, or an error (if an error occurred).
+      // data.coords.latitude
+      // data.coords.longitude
+    });
+
+
 
 
 
@@ -39,7 +61,7 @@ export class SearchPage {
   showRadio() {
 
     let alert = this.alertCtrl.create();
-    alert.setTitle('Searchby');
+    alert.setTitle('Search by');
 
     alert.addInput({
       type: 'radio',
@@ -72,7 +94,7 @@ export class SearchPage {
       text: 'Ok',
       handler: data => {
         console.log('Radio data:', data);
-        this.testRadioOpen = false;
+        this.testRadioOpen =true;
         this.title=data;
         this.testRadioResult = data;
       }
@@ -85,34 +107,29 @@ export class SearchPage {
   }
 
 
-  initializeItems() {
-    this.items = [
-      {"name":"jgjdsg","catagory":"foodpoint","email":"abmnukmr@gmail.com"},
+  load() {
 
-      {"name":"Goivind Paan Shop ","catagory":"paaan parag","email":"developer.abmnu@gmail.com"},
-      {"name":"Rohit garments ","catagory":"sationary","email":"developer.abmnu@gmail.com"},
-      {"name":"Goivind Paan Shop ","catagory":"paaan parag","email":"developer.abmnu@gmail.com"},
-      {"name":"Goivind Paan Shop ","catagory":"paaan parag","email":"developer.abmnu@gmail.com"},
+     console.log("gjgjh");
+    this._shopdata.load(this._lat,this._lng).then((data) => {
+      console.log(data);
+      this._fitdata =data;
+     // console.log(this.items);
+      console.log("callback"+JSON.stringify(data));
 
-      {"name":"Goivind Paan Shop ","catagory":"paaan parag","email":"developer.abmnu@gmail.com"},
-      {"name":"Rohit garments  vibgyor  ","catagory":"sationary","email":"kkkkkkkk@gmail.com"},
-      {"name":"Goivind Paan Shop ","catagory":"paaan parag","email":"developer.abmnu@gmail.com"},
-      {"name":"Goivind Paan Shop ","catagory":"paaan parag","email":"developer.abmnu@gmail.com"},
+       return this._fitdata;
+    });
 
-      {"name":"Goivind Paan Shop ","catagory":"paaan parag","email":"developer.abmnu@gmail.com"},
-      {"name":"Rohit garments ","catagory":"sationary","email":"developer.abmnu@gmail.com"},
-      {"name":"Goivind Paan Shop ","catagory":"paaan parag","email":"developer.abmnu@gmail.com"},
-      {"name":"Goivind Paan Shop ","catagory":"paaan parag","email":"developer.abmnu@gmail.com"}
+///    this.items =[{"name":"Abhimanyu Interpric","address":"California, USA","profileimage":"https://vioti.s3.amazonaws.com/1489231269432image.jpg","whatsapp":"+91 9625255416","phone":"91 9625255416","catagory":"Breakery & sweet store","lat":31.712002509892525,"lng":76.52625798438149,"email":"developer.abmnu@gmail.com","discription":"My shop having all type of electronics and all type of mechanical design\nfhgd\ndhhf\nfjjghhcghv\nvhjbv\nfhjh","visits":"20000000","status":"false","distance":"534.24"},{"name":"Georgian","address":"US","profileimage":"https://vioti.s3.amazonaws.com/1488987835479image.jpg","whatsapp":"+91 9625255416vgx","phone":"+91 9625255416","catagory":"coffee shop","lat":31.7101933,"lng":76.5269653,"email":"abmnukmr@gmail.com","discription":"My shop having all type of electronics and all type of mechanical design\nfhgd\ndhhf\nfjjghhcghv\nvhjbv\nfhjh","visits":"20000000","status":"false","distance":"534.45"}]
+
+    //console.log("bmbm"+JSON.stringify(data));
 
 
+  }
 
 
+  initializeItems(){
 
-
-
-
-    ]
-
+      this.items=this._fitdata;
   }
 
 
@@ -120,10 +137,9 @@ export class SearchPage {
 
 
 
-
-
-
   ionViewDidEnter() {
+
+
     setTimeout(()=>{
        console.log("Searchbar open")
       this.searchbar.setFocus();
@@ -134,7 +150,6 @@ export class SearchPage {
 
 
 
-
   dismiss4() {
     this.viewCtrl.dismiss();
   }
@@ -142,9 +157,8 @@ export class SearchPage {
   ionViewDidLoad() {
 
 
-
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-
+      this.load();
       this.searching = false;
 
     });
@@ -209,6 +223,19 @@ export class SearchPage {
       }
     }
 
+    if(this.title=="phone"){
+
+
+      if (val && val.trim() != '') {
+        this.items = this.items.filter((item) => {
+          this.filtter=this.title;
+          console.log(this.filtter);
+          return (item.phone.toLowerCase().indexOf(val.toLowerCase()) > -1);
+
+
+        })
+      }
+    }
 
 
   }
@@ -217,64 +244,6 @@ export class SearchPage {
 
 
   ///////////////// map list
-
-
-
-
-  applyHaversine(locations){
-
-    let usersLocation = {
-      lat: 40.713744,
-      lng: -74.009056
-    };
-
-    locations.map((location) => {
-
-      let placeLocation = {
-        lat: location.latitude,
-        lng: location.longitude
-      };
-
-      location.distance = this.getDistanceBetweenPoints(
-        usersLocation,
-        placeLocation,
-        'km'
-      ).toFixed(2);
-    });
-
-    return locations;
-  }
-
-  getDistanceBetweenPoints(start, end, units){
-
-    let earthRadius = {
-      miles: 3958.8,
-      km: 6371
-    };
-
-    let R = earthRadius[units || 'km'];
-    let lat1 = start.lat;
-    let lon1 = start.lng;
-    let lat2 = end.lat;
-    let lon2 = end.lng;
-
-    let dLat = this.toRad((lat2 - lat1));
-    let dLon = this.toRad((lon2 - lon1));
-    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(this.toRad(lat1)) * Math.cos(this.toRad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    let d = R * c;
-
-    return d;
-
-  }
-
-  toRad(x){
-    return x * Math.PI / 180;
-  }
-
 
 
 

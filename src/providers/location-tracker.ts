@@ -28,8 +28,8 @@ export class LocationTracker {
       desiredAccuracy: 20,
       stationaryRadius: 20,
       distanceFilter: 10,
-      debug: true,
-      interval: 10
+      interval: 10,
+      startOnBoot:true
     };
 
     BackgroundGeolocation.configure((location) => {

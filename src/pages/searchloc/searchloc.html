@@ -1,14 +1,60 @@
 <!--
-  Generated template for the Searchloc page.
+  Generated template for the Search page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 
-<ion-content  >
-  <ion-searchbar  #searchbar [showCancelButton]="true"  class="ser" (animated)="true" (autocomplete)="true"(ionCancel)="dismiss4()" autofocus>
-    <ion-icon name="paper-plane"></ion-icon>
-  </ion-searchbar>
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-toolbar>
+
+      <ion-searchbar  #searchbar [formControl]="searchControl" (ionInput)="getItems($event)" [showCancelButton]="true"  class="ser" (animated)="true" (ionCancel)="dismiss4()" autofocus>
+      </ion-searchbar>
+
+
+
+    </ion-toolbar>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="showRadio()">
+
+
+        <ion-icon name="md-more"  padding-right="8px" ></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  no-padding >
+
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+
+  <ion-list >
+    <ion-item *ngFor="let item of items" >
+
+      <ion-avatar item-left >
+        <img  style="margin-top:0px;" src="assets/img/abmnu.jpg">
+      </ion-avatar>
+
+      <h2 style="color:#cb1b58;">{{item.name}}</h2>
+      <p>{{item.catagory}}</p>
+      <div item-right>
+        <ion-row >
+          <ion-icon name="ios-pin-outline"  color="primary" ></ion-icon>
+          <p item-right style="font-size: 10px;">4100km</p>
+        </ion-row>
+      </div>
+    </ion-item>
+  </ion-list>
 
 
 </ion-content>

@@ -42,6 +42,7 @@ import {LocationeditPage} from "../pages/locationedit/locationedit";
 import {OrderByPipe} from "../pipes/order-by-pipe";
 import {AbmnuPage} from "../pages/abmnu/abmnu";
 import {BarcodePage} from "../pages/barcode/barcode";
+import {Shopdata} from "../providers/shopdata";
 
 
 export const firebaseConfig = {
@@ -187,7 +188,7 @@ firebase.initializeApp(firebaseConfig);
 
 
   ],
-  providers:[Abmnu,ConnectivityService,LocationTracker,Auth],
+  providers:[Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth],
  // directives:[Focuser],
   schemas:     [CUSTOM_ELEMENTS_SCHEMA]
 })
