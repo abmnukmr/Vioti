@@ -15,6 +15,7 @@ import {Auth} from "../../providers/auth";
 import { AngularFire, FirebaseAuthState,  } from 'angularfire2';
 import {GooglePlus} from 'ionic-native';
 import firebase from 'firebase'
+import {HomePage} from "../home/home";
 
 /*
  Generated class for the Auth page.
@@ -233,7 +234,7 @@ export class AuthPage {
           firebase.auth().onAuthStateChanged((user)=> {
             if (user.emailVerified) {
 
-              this.navCtrl.push(TabsPage);
+              this.navCtrl.setRoot(TabsPage);
 
               console.log('Email is verified');
             }
