@@ -32,6 +32,8 @@ export class AuthPage {
   passwordChanged: boolean = false;
   submitAttempt: boolean = false;
   loading: any;
+  tabBarElement: any;
+
   verified:boolean;
   forgot=ForgotPage;
   signup=SignupPage;
@@ -52,6 +54,7 @@ export class AuthPage {
     });
 
 
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
 
     this.fireAuth = firebase.auth();
 
@@ -64,6 +67,15 @@ export class AuthPage {
   }
 
 
+  ionViewWillEnter() {
+    this.tabBarElement.style.display = 'none';
+
+  }
+
+  ionViewWillLeave() {
+    this.tabBarElement.style.display = 'flex';
+    // this.navCtrl.pop();
+  }
 
 
   googlePlusLogin()
@@ -221,7 +233,7 @@ export class AuthPage {
           firebase.auth().onAuthStateChanged((user)=> {
             if (user.emailVerified) {
 
-              this.navCtrl.pop(TabsPage);
+              this.navCtrl.push(TabsPage);
 
               console.log('Email is verified');
             }

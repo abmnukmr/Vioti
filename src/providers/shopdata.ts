@@ -41,7 +41,22 @@ export class Shopdata {
   {
 
     if(this.data){
-      return Promise.resolve(this.data);
+      return new Promise(resolve => {
+
+        this.http.get('https://vioti.herokuapp.com/search/all/shop').map(res => res.json()).subscribe(data => {
+
+          this.data = this.applyHaversine(data.location,lati,lngi);
+
+          this.data.sort((locationA, locationB) => {
+            return locationA.distance - locationB.distance;
+          });
+
+          resolve(this.data);
+        });
+
+      });
+
+
     }
 
     return new Promise(resolve => {

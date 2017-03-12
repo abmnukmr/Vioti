@@ -20,6 +20,8 @@ import {AuthPage} from "../auth/auth";
 import {Auth} from "../../providers/auth";
 import { BarcodeScanner } from 'ionic-native';
 import {BarcodereadPage} from "../barcoderead/barcoderead";
+
+import {Shopdata} from "../../providers/shopdata";
 //import {Auth, User, GoogleAuth} from '@ionic/cloud-angular';
 
 
@@ -42,12 +44,12 @@ import {BarcodereadPage} from "../barcoderead/barcoderead";
   profile=ProfilePage;
   wendor=WendorPage;
   data:any;
-
+  _fitdata:any;
   show2:any=false;
 
 
-  constructor(  public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController) {
-
+  constructor(  public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController,public _shopdata:Shopdata) {
+  this.load(this.locationTracker.lat,this.locationTracker.lng);
 
     this.showadd();
 
@@ -59,7 +61,7 @@ import {BarcodereadPage} from "../barcoderead/barcoderead";
 
         }
         else {
-          navCtrl.push(AuthPage);
+          navCtrl.setRoot(AuthPage);
           this.presentToast("Please verify your account by sent verfication link to your email");
 
         }
@@ -69,7 +71,7 @@ import {BarcodereadPage} from "../barcoderead/barcoderead";
       }
       else
       {
-        navCtrl.push(AuthPage);
+        navCtrl.setRoot(AuthPage);
       }
     });
     //
@@ -120,16 +122,16 @@ scan(){
 
 
   ionViewWillEnter() {
-    firebase.auth().onAuthStateChanged(function(user) {
+    /*firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
 
       }
       else
       {
-        this.navCtrl.pop(AuthPage);
+        this.navCtrl.setRoot(AuthPage);
       }
     });
-
+*/
     this.showadd();
    this.locationTracker.startTracking();
 
@@ -189,6 +191,24 @@ dologout(){
   openMenu() {
     this.menuCtrl.open();
   }
+
+
+
+
+
+  load(lat,lng) {
+
+    console.log("gjgjh");
+    this._shopdata.load(lat, lng).then((data) => {
+      console.log(data);
+      // console.log(this.items);
+      console.log("callback" + JSON.stringify(data));
+
+      return this._fitdata;
+    });
+  }
+
+
 
 
 

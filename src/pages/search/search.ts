@@ -7,6 +7,8 @@ import {FormControl} from "@angular/forms";
 import 'rxjs/add/operator/debounceTime';
 import {Shopdata} from "../../providers/shopdata";
 import { Geolocation } from 'ionic-native';
+import {LocationTracker} from "../../providers/location-tracker";
+import {WendorPage} from "../wendor/wendor";
 /*
   Generated class for the Search page.
 
@@ -29,28 +31,18 @@ export class SearchPage {
   testRadioResult;
   searchTerm:string="";
   searchControl: FormControl;
+  spinshow:boolean=false;
+  listshow:boolean=false;
   searching: any = false;
   _fitdata:any;
   _lat:any;
 
   _lng:any;
-  constructor (public viewCtrl: ViewController, private zone: NgZone,public alertCtrl: AlertController,public _shopdata:Shopdata) {
+  constructor (public navCtrl: NavController,public viewCtrl: ViewController, private zone: NgZone,public alertCtrl: AlertController,public _shopdata:Shopdata,public locationTracker: LocationTracker) {
     this.searchControl = new FormControl();
-     this.load();
+     this.load(this.locationTracker.lat,this.locationTracker.lng);
     this.initializeItems();
-    Geolocation.getCurrentPosition().then((resp) => {
-      this._lat=resp.coords.latitude
-      this._lng= resp.coords.longitude
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
 
-    let watch = Geolocation.watchPosition();
-    watch.subscribe((data) => {
-      // data can be a set of coordinates, or an error (if an error occurred).
-      // data.coords.latitude
-      // data.coords.longitude
-    });
 
 
 
@@ -107,11 +99,12 @@ export class SearchPage {
   }
 
 
-  load() {
+  load(lat,lng) {
 
      console.log("gjgjh");
-    this._shopdata.load(this._lat,this._lng).then((data) => {
+    this._shopdata.load(lat,lng).then((data) => {
       console.log(data);
+      this.spinshow=true;
       this._fitdata =data;
      // console.log(this.items);
       console.log("callback"+JSON.stringify(data));
@@ -148,6 +141,10 @@ export class SearchPage {
 
   }
 
+  goto(email){
+    this.navCtrl.push(WendorPage,{"email":email});
+  }
+
 
 
   dismiss4() {
@@ -158,7 +155,7 @@ export class SearchPage {
 
 
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-      this.load();
+      this.load(this.locationTracker.lat,this.locationTracker.lng);
       this.searching = false;
 
     });
@@ -176,7 +173,7 @@ export class SearchPage {
     this.searching = true;
     // Reset items back to all of the items
     this.initializeItems();
-
+   this.listshow=true;
     // set val to the value of the ev target
     var val = ev.target.value;
 

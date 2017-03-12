@@ -42,7 +42,7 @@ export class LocPage {
 
   }
   showAddressModal() {
-    let modal = this.modalCtrl.create(SearchlocPage);
+    let modal = this.modalCtrl.create(SearchlocPage,{"lat":this.lati,"lng":this.long});
     /* let  me = this;
      modal.onDidDismiss(data => {
      this.address.place = data;

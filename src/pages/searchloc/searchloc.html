@@ -38,23 +38,53 @@
   </div>
 
 
-  <ion-list >
-    <ion-item *ngFor="let item of items" >
+  <ion-list  >
+    <ion-item *ngFor="let item of items"  tappable (click)="goto(item.email)" >
 
       <ion-avatar item-left >
-        <img  style="margin-top:0px;" src="assets/img/abmnu.jpg">
+        <img  style="margin-top:0px;" [src]="item.profileimage">
       </ion-avatar>
 
-      <h2 style="color:#cb1b58;">{{item.name}}</h2>
+      <h2 >{{item.name}}</h2>
       <p>{{item.catagory}}</p>
       <div item-right>
+        <div  style="width:8px; height:8px;border-radius:8px;background: #39ff82;"  [hidden]="item.status==='true'?false:true" end></div>
         <ion-row >
           <ion-icon name="ios-pin-outline"  color="primary" ></ion-icon>
-          <p item-right style="font-size: 10px;">4100km</p>
+          <p item-right style="font-size: 10px;">{{item.distance}}km</p>
+
         </ion-row>
       </div>
     </ion-item>
   </ion-list>
+
+
+  <div [hidden]="spinshow" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+
+  <ion-list [hidden]="listshow" no-lines>
+    <ion-item *ngFor="let item of _fitdata" tappable (click)="goto(item.email)">
+
+      <ion-avatar item-left >
+        <img  style="margin-top:0px;" [src]="item.profileimage">
+      </ion-avatar>
+
+      <h2 >{{item.name}}</h2>
+      <p>{{item.catagory}}</p>
+      <div item-right>
+        <div  style="width:8px; height:8px;border-radius:8px;background: #39ff82;"  [hidden]="item.status==='true'?false:true" end></div>
+        <ion-row >
+          <ion-icon name="ios-pin-outline"  color="primary" ></ion-icon>
+          <p item-right style="font-size: 10px;">{{item.distance}}km</p>
+
+        </ion-row>
+      </div>
+    </ion-item>
+  </ion-list>
+
+
 
 
 </ion-content>

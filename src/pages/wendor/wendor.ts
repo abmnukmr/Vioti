@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, LoadingController, Loading, AlertController, ToastController} from 'ionic-angular';
+import {NavController, LoadingController, Loading, AlertController, ToastController, NavParams} from 'ionic-angular';
 import {Abmnu} from "../../providers/abmnu";
 import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase";
@@ -26,7 +26,7 @@ export class WendorPage {
   lngi:number;
   col:boolean=false;
   col1:boolean=false;
-  constructor(public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
+  constructor(public navprms: NavParams,public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
 
 
 
@@ -80,12 +80,7 @@ export class WendorPage {
     if(this.connectivityService.isOnline())
     {
       this.loading.present();
-
-      var user = firebase.auth().currentUser;
-      if (user != null) {
-      var  name = user.displayName;
-        this.email = user.email;
-      var  photoUrl = user.photoURL;}
+        this.email =this.navprms.get("email");
     //this.email="abmnukmr@gmail.com";
 
     this.abmnu.getReviews(this.email).then((data) => {
