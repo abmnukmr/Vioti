@@ -40,7 +40,7 @@ export class SearchPage {
   _lng:any;
   constructor (public navCtrl: NavController,public viewCtrl: ViewController, private zone: NgZone,public alertCtrl: AlertController,public _shopdata:Shopdata,public locationTracker: LocationTracker) {
     this.searchControl = new FormControl();
-     this.load(this.locationTracker.lat,this.locationTracker.lng);
+     this.load(locationTracker.lat,locationTracker.lng);
     this.initializeItems();
 
 
@@ -132,6 +132,7 @@ export class SearchPage {
 
   ionViewDidEnter() {
 
+    this.load(this.locationTracker.lat,this.locationTracker.lng);
 
     setTimeout(()=>{
        console.log("Searchbar open")
@@ -153,9 +154,9 @@ export class SearchPage {
 
   ionViewDidLoad() {
 
+    this.load(this.locationTracker.lat,this.locationTracker.lng);
 
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-      this.load(this.locationTracker.lat,this.locationTracker.lng);
       this.searching = false;
 
     });

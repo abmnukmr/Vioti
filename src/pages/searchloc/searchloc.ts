@@ -123,6 +123,7 @@ export class SearchlocPage {
 
 
   ionViewDidEnter() {
+    this.load(this.navParams.get("lat"),this.navParams.get("lng"));
 
 
     setTimeout(()=>{
@@ -144,9 +145,9 @@ export class SearchlocPage {
 
   ionViewDidLoad() {
 
+    this.load(this.navParams.get("lat"),this.navParams.get("lng"));
 
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-      this.load(this.navParams.get("lat"),this.navParams.get("lng"));
 
       this.searching = false;
 

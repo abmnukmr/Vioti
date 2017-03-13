@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Geolocation } from 'ionic-native';
+import {LocationTracker} from "./location-tracker";
 /*
   Generated class for the Shopdata provider.
 
@@ -14,26 +15,13 @@ export class Shopdata {
 
   _lat:any;
   _lng:any;
-  constructor(public http: Http) {
+  constructor(public http: Http,public locationTracker: LocationTracker) {
     console.log('Hello Shopdata Provider');
 
-    Geolocation.getCurrentPosition().then((resp) => {
-      this._lat=resp.coords.latitude
-      this._lng= resp.coords.longitude
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-
-    let watch = Geolocation.watchPosition();
-    watch.subscribe((data) => {
-      // data can be a set of coordinates, or an error (if an error occurred).
-      // data.coords.latitude
-      // data.coords.longitude
-    });
 
 
+    this.load(locationTracker.lat,locationTracker.lng);
 
-    this.load(this._lat,this._lng);
 
   }
 
@@ -79,8 +67,8 @@ export class Shopdata {
   applyHaversine(locations,lati,lngi){
 
     let usersLocation = {
-      lat:35.89808098 ,
-      lng: 73.6868687
+      lat:lati,
+      lng: lngi
     };
 
     locations.map((location) => {

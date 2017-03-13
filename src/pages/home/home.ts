@@ -49,7 +49,7 @@ import {Shopdata} from "../../providers/shopdata";
 
 
   constructor(  public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController,public _shopdata:Shopdata) {
-  this.load(this.locationTracker.lat,this.locationTracker.lng);
+  this.load(locationTracker.lat,locationTracker.lng);
 
     this.showadd();
 
