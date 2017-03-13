@@ -5,7 +5,7 @@ import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase";
 import { Geolocation } from 'ionic-native';
 import { LaunchNavigator, LaunchNavigatorOptions } from 'ionic-native';
-
+import {CallNumber} from 'ionic-native';
 /*
   Generated class for the Wendor page.
 
@@ -44,6 +44,13 @@ export class WendorPage {
 
     this.load();
 
+  }
+
+
+  call(number){
+    CallNumber.callNumber(number, true)
+      .then(() => console.log('Launched dialer!'))
+      .catch(() => console.log('Error launching dialer'));
   }
 
 

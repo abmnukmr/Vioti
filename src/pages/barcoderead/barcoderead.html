@@ -95,18 +95,23 @@
             <p>{{wendor.email}}</p>
           </button>
         </ion-row>
+
         <ion-row style="padding-top: 0px;padding-bottom: 0px;">
-          <button ion-button icon-left clear small>
-            <ion-icon name="ios-call-outline"></ion-icon>
+
+          <button ion-button icon-left clear small *ngIf="wendor.status_phone==='true'? true:false">
+            <ion-icon name="call"></ion-icon>
             <div>{{wendor.phone}}</div>
           </button>
+
         </ion-row>
+        <!--
         <ion-row style="padding-top: 0px;padding-bottom: 0px;">
           <button ion-button icon-left clear small>
             <ion-icon name="logo-whatsapp"></ion-icon>
             <div>{{wendor.whatsapp}}</div>
           </button>
         </ion-row>
+       -->
 
 
       </ion-card-content>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
   NavController, ActionSheetController, Platform, ToolbarItem, ModalController, Loading,
-  LoadingController, Alert, AlertController
+  LoadingController, Alert, AlertController, ToastController
 } from 'ionic-angular';
 import {TitleeditorPage} from "../titleeditor/titleeditor";
 import {TitlecontactPage} from "../titlecontact/titlecontact";
@@ -34,17 +34,20 @@ export class WalletPage {
 
   data: any;
   finalstatus:string;
+  finalstatuss:string;
   email1:any;
+
   wendor:any;
   item_name:any;
   item_no:any;
   item_discription:any;
+  icon:any;
   item_price:any;
   showThis:boolean=false;
   loading:Loading;
   open=false;
   shopopen=ShopopenPage;
-  constructor(public loadingCtrl:LoadingController,public http:Http,public alertCtrl: AlertController,public connectivityService:ConnectivityService, public navCtrl: NavController,public abmnu:Abmnu,public actionsheetCtrl: ActionSheetController,public platform:Platform,public modalCtrl:ModalController) {
+  constructor(public loadingCtrl:LoadingController,public http:Http,public toastCtrl: ToastController,public alertCtrl: AlertController,public connectivityService:ConnectivityService, public navCtrl: NavController,public abmnu:Abmnu,public actionsheetCtrl: ActionSheetController,public platform:Platform,public modalCtrl:ModalController) {
     this.loading = this.loadingCtrl.create({
       content:"wait..."
     });
@@ -277,6 +280,17 @@ export class WalletPage {
 
   }
 
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+
+
 
   edit(id,itemname,itemno,itemdiscription,itemprice){
     let modal = this.modalCtrl.create(EdititemPage,{item_name:itemname,item_no:itemno,item_price:itemprice,item_discription:itemdiscription,_id:id});
@@ -377,7 +391,59 @@ export class WalletPage {
 
 
 
-openbarcode(){
+
+
+  togglechagephone(){
+    this.presentToast("wait..")
+
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      var  name = user.displayName;
+      this.email1 = user.email;
+      var  photoUrl = user.photoURL;
+    }
+
+    var statuss=this.wendor.status_phone;
+
+    if(statuss=="true")
+    {
+
+       this.finalstatuss="false";
+    }
+    else {
+      this.finalstatuss="true";
+    }
+
+    console.log("gjgjhgj"+ this.finalstatuss);
+
+    var stttatus={
+      statuss:this.finalstatuss
+    }
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers: headers});
+
+    this.http.post('https://vioti.herokuapp.com/profile/upload/email/status/phonevisible/' + this.email1, JSON.stringify(stttatus), options)
+      .map(res => res.json()).subscribe(data => {
+      console.log(data)
+    }, err => {
+      console.log("Error!:", err.json());
+
+    });
+
+
+    this.getReviews();
+
+  }
+
+
+
+
+
+
+
+  openbarcode(){
 
   let modal = this.modalCtrl.create(QrcodePage,{shopname:this.wendor.name,shopimage:this.wendor.profileimage,shopcata:this.wendor.catagory});
   modal.present();

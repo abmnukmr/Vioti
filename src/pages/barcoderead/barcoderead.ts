@@ -3,7 +3,8 @@ import {NavController, NavParams, Loading, LoadingController, AlertController, T
 import {Abmnu} from "../../providers/abmnu";
 import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase/app";
-import { LaunchNavigator, LaunchNavigatorOptions } from 'ionic-native';
+import {LaunchNavigator, LaunchNavigatorOptions, CallNumber} from 'ionic-native';
+
 
 /*
   Generated class for the Barcoderead page.
@@ -38,6 +39,11 @@ export class BarcodereadPage {
 
 
 
+  call(number){
+    CallNumber.callNumber(number, true)
+      .then(() => console.log('Launched dialer!'))
+      .catch(() => console.log('Error launching dialer'));
+  }
 
 
 
