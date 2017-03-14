@@ -38,13 +38,12 @@ export class BarcodereadPage {
   }
 
 
-
   call(number){
+
     CallNumber.callNumber(number, true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
   }
-
 
 
   load()

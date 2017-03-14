@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 import {Platform, IonicApp, NavController} from 'ionic-angular';
 import {StatusBar, Splashscreen, Toast} from 'ionic-native';
 import { TabsPage } from '../pages/tabs/tabs';
-import {AuthPage} from "../pages/auth/auth";
-import {SignupPage} from "../pages/signup/signup";
-import {ForgotPage} from "../pages/forgot/forgot";
 import { Diagnostic } from 'ionic-native';
 import {LocationTracker} from "../providers/location-tracker";
 
@@ -40,7 +37,9 @@ export class MyApp {
             console.error(e);
 
       });
+      StatusBar.overlaysWebView(true); // let status bar overlay webview
 
+      StatusBar.backgroundColorByHexString('#cb1b58');
 
       StatusBar.styleDefault();
       Splashscreen.hide();

@@ -11,6 +11,14 @@
 
   <ion-navbar>
 
+
+
+    <ion-buttons end>
+      <button ion-button icon-only  (click)="likefav ()"  >
+        <ion-icon [name]="fav" padding-right="8px" ></ion-icon>
+      </button>
+    </ion-buttons>
+
 <ion-buttons end>
 
       <div  style="width:10px; height:10px;border-radius:10px;background: #39ff82;"  [hidden]="col1" end></div>
@@ -65,7 +73,7 @@
           <p style="font-size: 0.9em;color: rgba(180,180,180,0.97);text-align: center;">{{wendor.catagory}}</p>
         </ion-col>
         <ion-row>
-          <ion-icon name="people" style="color: rgba(168,33,88,0.97);"></ion-icon><p style="font-size: 0.7em;color: rgba(180,180,180,0.97);">{{wendor.visits}}</p>
+          <ion-icon name="people" style="color: rgba(168,33,88,0.97);"></ion-icon><p style="font-size: 0.7em;color: rgba(180,180,180,0.97);">{{len}}</p>
         </ion-row>
 
       </ion-row>

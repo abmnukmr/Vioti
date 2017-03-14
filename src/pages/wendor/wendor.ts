@@ -6,6 +6,7 @@ import * as firebase from "firebase";
 import { Geolocation } from 'ionic-native';
 import { LaunchNavigator, LaunchNavigatorOptions } from 'ionic-native';
 import {CallNumber} from 'ionic-native';
+import {RequestOptions, Headers, Http} from "@angular/http";
 /*
   Generated class for the Wendor page.
 
@@ -20,13 +21,23 @@ export class WendorPage {
   showThis:boolean=false;
   name:string;
   wendor:any;
+  emailsearch:string;
   loading: Loading;
   email:string;
+  len:any;
+
+  emailo:string;
+  liked:boolean;
   lati:number;
   lngi:number;
+  num:number;
+  update:any;
+  count:any;
+  email1:string;
+  fav:string;
   col:boolean=false;
   col1:boolean=false;
-  constructor(public navprms: NavParams,public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
+  constructor(public navprms: NavParams,public http:Http, public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
 
 
 
@@ -48,6 +59,7 @@ export class WendorPage {
 
 
   call(number){
+  //  this.num=Number(number)
     CallNumber.callNumber(number, true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
@@ -89,13 +101,46 @@ export class WendorPage {
       this.loading.present();
         this.email =this.navprms.get("email");
     //this.email="abmnukmr@gmail.com";
+      var user = firebase.auth().currentUser;
+      if (user != null) {
+        var  name = user.displayName;
+        this.emailsearch = user.email;
+        var  photoUrl = user.photoURL;
+      }
 
-    this.abmnu.getReviews(this.email).then((data) => {
+
+      this.abmnu.getReviews(this.email).then((data) => {
         console.log(data);
         this.wendor =data;
          this.showThis=true;
        this.loading.dismissAll();
       console.log("get");
+
+
+        this.len=this.wendor.fav.length;
+        var i;
+        for(i=0; i<this.len; i++){
+
+          if(this.wendor.fav[i].email==this.emailsearch){
+            this.liked=true;
+           }
+
+
+        }
+        if(this.liked==true){
+          this.fav='heart';
+        }
+        else {
+          this.fav='ios-heart-outline';
+        }
+
+
+
+
+
+
+
+
       if(this.wendor.status=="true"){
          this.col1=false;
         console.log("gettttttt");
@@ -138,6 +183,112 @@ export class WendorPage {
       refresher.complete();
     }, 2000);
   }
+
+
+
+    likefav (){
+
+    if(this.fav=='heart'){
+
+    this.unlikeshop();
+
+
+    }
+
+    else {
+
+      this.likeashop();
+
+    }
+
+
+
+    }
+
+
+   likeashop(){
+     this.fav='heart'
+     this.len=this.len+1;
+   //  this.presentToast("Saving your request");
+     this.loading.present();
+       var user = firebase.auth().currentUser;
+       if (user != null) {
+         this.email1 = user.email;
+
+       }
+     this.emailo=this.wendor.email,
+       this.update = {
+         email:this.wendor.email,
+         useremail:this.email1,
+         name:this.wendor.name,
+         profileimage:this.wendor.profileimage,
+         catagory:this.wendor.catagory,
+         status:this.wendor.status
+
+       }
+       console.log("updated start");
+       var headers = new Headers();
+       headers.append('content-type', 'application/json;charset=UTF-8');
+       headers.append('Access-Control-Allow-Origin', '*');
+       let options = new RequestOptions({headers: headers});
+
+       this.http.post('https://vioti.herokuapp.com/profile/like/shop/' + this.emailo, JSON.stringify(this.update), options)
+         .map(res => res.json()).subscribe(data => {
+         console.log(data)
+       //  this.loading.dismissAll();
+        // this.Dismiss();
+         //this.navCtrl.push(WalletPage);
+       }, err => {
+         console.log("Error!:", err.json());
+        // this.loading.dismissAll();
+       });
+
+
+
+
+
+
+   }
+
+   unlikeshop(){
+
+     this.fav='ios-heart-outline'
+     this.len=this.len-1;
+     //  this.presentToast("Saving your request");
+    // this.loading.present();
+     var user = firebase.auth().currentUser;
+     if (user != null) {
+       this.email1 = user.email;
+
+     }
+     this.emailo=this.wendor.email,
+       this.update = {
+         useremail:this.email1,
+
+       }
+     console.log("updated start");
+     var headers = new Headers();
+     headers.append('content-type', 'application/json;charset=UTF-8');
+     headers.append('Access-Control-Allow-Origin', '*');
+     let options = new RequestOptions({headers: headers});
+
+     this.http.post('https://vioti.herokuapp.com/profile/dislike/shop/' + this.emailo, JSON.stringify(this.update), options)
+       .map(res => res.json()).subscribe(data => {
+       console.log(data)
+       //  this.loading.dismissAll();
+       // this.Dismiss();
+       //this.navCtrl.push(WalletPage);
+     }, err => {
+       console.log("Error!:", err.json());
+       // this.loading.dismissAll();
+     });
+
+
+
+
+   }
+
+
 
 
 
