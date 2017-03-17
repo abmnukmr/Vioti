@@ -30,6 +30,8 @@ export class OnemorePage {
   itemnumber:any;
   discription:any;
   base64Image;
+
+  butn:boolean=false;
   email1:string;
   itemname:any;
   images = [];
@@ -44,6 +46,10 @@ export class OnemorePage {
   constructor(public navCtrl: NavController, public navprms: NavParams, public victrl:ViewController, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController) {
 
     this.id = this.navprms.get("_id");
+    this.loading = this.loadingCtrl.create({
+      content:"Uploading..."
+    });
+
 
   }
 
@@ -122,7 +128,7 @@ export class OnemorePage {
       this.base64Image = 'data:image/jpeg;base64,' + imagePath;
       this.images.unshift({url: imagePath});
       this.imgin = true;
-
+      this.butn=true;
       // Special handling for Android library
       if (this.platform.is('android') && sourceType === Camera.PictureSourceType.PHOTOLIBRARY) {
         FilePath.resolveNativePath(imagePath)
@@ -185,6 +191,7 @@ export class OnemorePage {
 
 
   public uploadImage() {
+    this.loading.present();
 
 
     var user = firebase.auth().currentUser;
@@ -218,10 +225,6 @@ export class OnemorePage {
     const fileTransfer = new Transfer();
     //this.presentToast(fileTransfer);
 
-    this.loading = this.loadingCtrl.create({
-      content: 'Uploading...',
-    });
-    this.loading.present();
 
     // Use the FileTransfer to upload the image
     fileTransfer.upload( targetPath,url,options).then(data => {

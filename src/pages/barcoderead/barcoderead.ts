@@ -63,21 +63,12 @@ export class BarcodereadPage {
 
 
 
-
-
-
-
-
-
-
-
-
-  call(number){
-    //  this.num=Number(number)
-    CallNumber.callNumber('9625255416', true)
-      .then(() => console.log('Launched dialer!'))
-      .catch(() => console.log('Error launching dialer'));
+  ionViewDidEnter() {
+    this.updatedata();
   }
+
+
+
 
 
   nevigate(){
@@ -104,6 +95,42 @@ export class BarcodereadPage {
     this.presentToast("Refreshing....");
   }
 
+
+
+
+  updatedata() {
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      var name = user.displayName;
+      this.email1 = user.email;
+      var photoUrl = user.photoURL;
+    }
+
+    this.update = {
+      name:this.navprms.get("name"),
+      email: this.navprms.get("email1"),
+      profileimage:this.navprms.get("image"),
+      catagory:this.navprms.get("catagory")
+
+
+    }
+    console.log("updated start");
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers: headers});
+
+    this.http.post('https://vioti.herokuapp.com/favourite/user/scan/' + this.email1, JSON.stringify(this.update), options)
+      .map(res => res.json()).subscribe(data => {
+      console.log(data)
+
+      //this.navCtrl.push(WalletPage);
+    }, err => {
+      console.log("Error!:", err.json());
+     });
+
+
+  }
 
 
 

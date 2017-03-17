@@ -30,6 +30,7 @@ export class AdditemPage {
   discription:any;
   base64Image;
   email1:string;
+  butn:boolean=false;
   itemname:any;
   images = [];
   imgin;
@@ -40,6 +41,11 @@ export class AdditemPage {
 
 
   constructor(public navCtrl: NavController, public victrl:ViewController, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController) {
+    this.loading = this.loadingCtrl.create({
+      content: 'Uploading...',
+    });
+
+
   }
 
   ionViewDidLoad() {
@@ -117,7 +123,7 @@ export class AdditemPage {
       this.base64Image = 'data:image/jpeg;base64,' + imagePath;
       this.images.unshift({url: imagePath});
       this.imgin = true;
-
+      this.butn=true;
       // Special handling for Android library
       if (this.platform.is('android') && sourceType === Camera.PictureSourceType.PHOTOLIBRARY) {
         FilePath.resolveNativePath(imagePath)
@@ -180,6 +186,7 @@ export class AdditemPage {
 
 
   public uploadImage() {
+    this.loading.present();
 
 
     var user = firebase.auth().currentUser;
@@ -212,10 +219,6 @@ export class AdditemPage {
     const fileTransfer = new Transfer();
     //this.presentToast(fileTransfer);
 
-    this.loading = this.loadingCtrl.create({
-      content: 'Uploading...',
-    });
-    this.loading.present();
 
     // Use the FileTransfer to upload the image
     fileTransfer.upload( targetPath,url,options).then(data => {

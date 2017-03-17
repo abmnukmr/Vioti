@@ -76,15 +76,6 @@ export class WendorPage {
 
 
 
-
-  call(number){
-  //  this.num=Number(number)
-    CallNumber.callNumber('9625255416', true)
-      .then(() => console.log('Launched dialer!'))
-      .catch(() => console.log('Error launching dialer'));
-  }
-
-
   nevigate(){
 
     //31.7104269,76.5258813

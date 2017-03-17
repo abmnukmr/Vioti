@@ -43,6 +43,7 @@ import {OrderByPipe} from "../pipes/order-by-pipe";
 import {AbmnuPage} from "../pages/abmnu/abmnu";
 import {BarcodePage} from "../pages/barcode/barcode";
 import {Shopdata} from "../providers/shopdata";
+import {Favourite} from "../providers/favourite";
 
 
 export const firebaseConfig = {
@@ -188,7 +189,7 @@ firebase.initializeApp(firebaseConfig);
 
 
   ],
-  providers:[Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth],
+  providers:[Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth,Favourite],
  // directives:[Focuser],
   schemas:     [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -110,7 +110,7 @@ scan(){
 
       this.data=JSON.parse(result.text);
    //   alert(this.data.shopemail);
-      this.navCtrl.push(BarcodereadPage,{email1:this.data.shopemail});
+      this.navCtrl.push(BarcodereadPage,{email1:this.data.shopemail,name:this.data.shopname,image:this.data.shopimage,catagory:this.data.shopcata });
 
     },err=>{
 
