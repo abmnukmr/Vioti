@@ -3,10 +3,11 @@ import {NavController, LoadingController, Loading, AlertController, ToastControl
 import {Abmnu} from "../../providers/abmnu";
 import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase";
-import { Geolocation } from 'ionic-native';
+import { Geolocation,AdMob } from 'ionic-native';
 import { LaunchNavigator, LaunchNavigatorOptions } from 'ionic-native';
 import {CallNumber} from 'ionic-native';
 import {RequestOptions, Headers, Http} from "@angular/http";
+import {LocationTracker} from "../../providers/location-tracker";
 /*
   Generated class for the Wendor page.
 
@@ -37,7 +38,11 @@ export class WendorPage {
   fav:string;
   col:boolean=false;
   col1:boolean=false;
-  constructor(public navprms: NavParams,public http:Http, public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
+  admobId:any;
+  searching:boolean=false;
+  constructor(public navprms: NavParams,public locationTracker:LocationTracker,public http:Http, public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
+
+
 
 
 
@@ -49,18 +54,32 @@ export class WendorPage {
     });
 
 
+
     this.loading = this.loadingCtrl.create({
-      content:"Loading..."
+      content:"wait..."
     });
 
+
     this.load();
+
 
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
   call(number){
   //  this.num=Number(number)
-    CallNumber.callNumber(number, true)
+    CallNumber.callNumber('9625255416', true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
   }
@@ -94,11 +113,15 @@ export class WendorPage {
 
 
 
+
+
+
   load()
   {
+
+    this.loading.present();
     if(this.connectivityService.isOnline())
     {
-      this.loading.present();
         this.email =this.navprms.get("email");
     //this.email="abmnukmr@gmail.com";
       var user = firebase.auth().currentUser;
@@ -113,9 +136,7 @@ export class WendorPage {
         console.log(data);
         this.wendor =data;
          this.showThis=true;
-       this.loading.dismissAll();
-      console.log("get");
-
+        this.loading.dismissAll();
 
         this.len=this.wendor.fav.length;
         var i;
@@ -210,7 +231,8 @@ export class WendorPage {
      this.fav='heart'
      this.len=this.len+1;
    //  this.presentToast("Saving your request");
-     this.loading.present();
+
+     //this.loading.present();
        var user = firebase.auth().currentUser;
        if (user != null) {
          this.email1 = user.email;
@@ -235,7 +257,8 @@ export class WendorPage {
        this.http.post('https://vioti.herokuapp.com/profile/like/shop/' + this.emailo, JSON.stringify(this.update), options)
          .map(res => res.json()).subscribe(data => {
          console.log(data)
-       //  this.loading.dismissAll();
+      console.log("liking");
+
         // this.Dismiss();
          //this.navCtrl.push(WalletPage);
        }, err => {

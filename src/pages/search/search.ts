@@ -156,15 +156,13 @@ export class SearchPage {
 
     this.load(this.locationTracker.lat,this.locationTracker.lng);
 
-    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+    this.searchControl.valueChanges.debounceTime(300).subscribe(search => {
       this.searching = false;
 
     });
 
 
   }
-
-
 
 
 

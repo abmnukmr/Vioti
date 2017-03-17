@@ -9,9 +9,8 @@ import {Keyboard} from "ionic-native"
 import {map} from "rxjs/operator/map";
 import MapTypeId = google.maps.MapTypeId;
 import ControlPosition = google.maps.ControlPosition;
-import {HomePage} from "../home/home";
+
 import {LocPage} from "../loc/loc";
-import {ProfilePage} from "../Profile/profile";
 import {LocationTracker} from "../../providers/location-tracker";
 /*
   Generated class for the Choosloc page.
@@ -36,7 +35,7 @@ export class ChooslocPage {
   item:any;
   show:boolean=true;
   service = new google.maps.places.AutocompleteService();
-  constructor(public navCtrl: NavController,  public victrl: ViewController,public platform: Platform,private zone: NgZone, public location:LocationTracker) {
+  constructor(public locationTracker:LocationTracker, public navCtrl: NavController,  public victrl: ViewController,public platform: Platform,private zone: NgZone, public location:LocationTracker) {
     platform.ready().then(() => {
 
 
@@ -49,6 +48,7 @@ export class ChooslocPage {
       query: ''
     };
   }
+
 
 
 
@@ -76,12 +76,15 @@ export class ChooslocPage {
   }
 
   ionViewWillEnter() {
+    this.locationTracker.hideaddd();
+
     this.tabBarElement.style.display = 'none';
     this.loadMap();
 
   }
 
   ionViewWillLeave() {
+
     this.tabBarElement.style.display = 'flex';
    // this.navCtrl.pop();
   }

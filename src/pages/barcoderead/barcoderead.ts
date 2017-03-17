@@ -4,6 +4,8 @@ import {Abmnu} from "../../providers/abmnu";
 import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase/app";
 import {LaunchNavigator, LaunchNavigatorOptions, CallNumber} from 'ionic-native';
+import {RequestOptions, Headers, Http} from "@angular/http";
+import {LocationTracker} from "../../providers/location-tracker";
 
 
 /*
@@ -17,53 +19,143 @@ import {LaunchNavigator, LaunchNavigatorOptions, CallNumber} from 'ionic-native'
   templateUrl: 'barcoderead.html'
 })
 export class BarcodereadPage {
-
   showThis:boolean=false;
-  wendor:any;
   name:string;
+  wendor:any;
+  emailsearch:string;
   loading: Loading;
   email:string;
-  shopname:string;
+  len:any;
+
+  emailo:string;
+  liked:boolean;
+  lati:number;
+  lngi:number;
+  num:number;
+  update:any;
+  count:any;
+  email1:string;
+  fav:string;
   col:boolean=false;
   col1:boolean=false;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController,public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
+  admobId:any;
+  searching:boolean=false;
+  constructor(public navprms: NavParams, locationTracker:LocationTracker,public http:Http, public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
+
+
+
+
+
+
+
 
 
     this.loading = this.loadingCtrl.create({
-      content:"Loading..."
+      content:"wait..."
     });
 
+
     this.load();
+
 
   }
 
 
-  call(number){
 
-    CallNumber.callNumber(number, true)
+
+
+
+
+
+
+
+
+
+
+  call(number){
+    //  this.num=Number(number)
+    CallNumber.callNumber('9625255416', true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
   }
 
 
+  nevigate(){
+
+    //31.7104269,76.5258813
+    LaunchNavigator.navigate([this.wendor.lat, this.wendor.lng], {
+      // start: 'this.lati,this.lngi'
+
+      destinationName:this.wendor.name
+    });
+  }
+
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 4000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+  doref(){
+    this.load();
+    this.presentToast("Refreshing....");
+  }
+
+
+
+
+
   load()
   {
+
+    this.loading.present();
     if(this.connectivityService.isOnline())
     {
-      this.loading.present();
-
-      this.email=this.navParams.get("email1");
-
+      this.email =this.navprms.get("email1");
       //this.email="abmnukmr@gmail.com";
+      var user = firebase.auth().currentUser;
+      if (user != null) {
+        var  name = user.displayName;
+        this.emailsearch = user.email;
+        var  photoUrl = user.photoURL;
+      }
+
 
       this.abmnu.getReviews(this.email).then((data) => {
         console.log(data);
         this.wendor =data;
         this.showThis=true;
         this.loading.dismissAll();
-        console.log("get");
+
+        this.len=this.wendor.fav.length;
+        var i;
+        for(i=0; i<this.len; i++){
+
+          if(this.wendor.fav[i].email==this.emailsearch){
+            this.liked=true;
+          }
+
+
+        }
+        if(this.liked==true){
+          this.fav='heart';
+        }
+        else {
+          this.fav='ios-heart-outline';
+        }
+
+
+
+
+
+
+
+
         if(this.wendor.status=="true"){
-          this.col=true;
+          this.col1=false;
           console.log("gettttttt");
         }
         else {
@@ -96,37 +188,6 @@ export class BarcodereadPage {
   }
 
 
-  private presentToast(text) {
-    let toast = this.toastCtrl.create({
-      message: text,
-      duration: 4000,
-      position: 'top'
-    });
-    toast.present();
-  }
-
-  doref(){
-    this.load();
-    this.presentToast("Refreshing....");
-  }
-
-
-
-
-
-
-  nevigate(){
-
-    //31.7104269,76.5258813
-    LaunchNavigator.navigate([this.wendor.lat, this.wendor.lng], {
-      // start: 'this.lati,this.lngi'
-//      this.name=;
-
-    destinationName:this.wendor.name
-    });
-  }
-
-
   doRefresh(refresher) {
     this.load();
     console.log('Begin async operation', refresher);
@@ -137,40 +198,114 @@ export class BarcodereadPage {
     }, 2000);
   }
 
-  /*
 
-   wendor=
-   {
-   "_id": "5898e365bcb80bc27b9269f3",
-   "name":"abhimanyu Interprises",
-   "address":"clifornis",
-   "whatsapp":"+91 9625255416",
-   "phone":"+91 9625255416",
-   "email":"abmnukmr@gmail.com",
-   "discription":"abhimany shop for electronics and xbee network",
-   "folowers":"2",
-   "status":"open",
-   "item": [
-   {"image":[
-   {"img":"https://i.ytimg.com/vi/rFBxuK6z0DA/maxresdefault.jpg"},
-   {"img":"https://i.ytimg.com/vi/ilwOlSb1bUs/maxresdefault.jpg"},
-   {"img":"http://indianhealthyrecipes.com/wp-content/uploads/2015/03/mango-pickle-recipe-8.jpg"}
-   ],
-   "price":"140/-",
-   "discription":"my shop best item",
-   "itemno":"#1"},
-   {"image":[
-   {"img":"http://indianhealthyrecipes.com/wp-content/uploads/2015/03/mango-pickle-recipe-8.jpg"},
-   {"img":"https://i.ytimg.com/vi/ilwOlSb1bUs/maxresdefault.jpg"},
-   {"img":"https://i.ytimg.com/vi/rFBxuK6z0DA/maxresdefault.jpg"}
-   ],
-   "price":"140/-",
-   "discription":"my shop best item",
-   "itemno":"#1"}
-   ]
-   };
 
-   */
+  likefav (){
+
+    if(this.fav=='heart'){
+
+      this.unlikeshop();
+
+
+    }
+
+    else {
+
+      this.likeashop();
+
+    }
+
+
+
+  }
+
+
+  likeashop(){
+    this.fav='heart'
+    this.len=this.len+1;
+    //  this.presentToast("Saving your request");
+
+    //this.loading.present();
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      this.email1 = user.email;
+
+    }
+    this.emailo=this.wendor.email,
+      this.update = {
+        email:this.wendor.email,
+        useremail:this.email1,
+        name:this.wendor.name,
+        profileimage:this.wendor.profileimage,
+        catagory:this.wendor.catagory,
+        status:this.wendor.status
+
+      }
+    console.log("updated start");
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers: headers});
+
+    this.http.post('https://vioti.herokuapp.com/profile/like/shop/' + this.emailo, JSON.stringify(this.update), options)
+      .map(res => res.json()).subscribe(data => {
+      console.log(data)
+      console.log("liking");
+
+      // this.Dismiss();
+      //this.navCtrl.push(WalletPage);
+    }, err => {
+      console.log("Error!:", err.json());
+      // this.loading.dismissAll();
+    });
+
+
+
+
+
+
+  }
+
+  unlikeshop(){
+
+    this.fav='ios-heart-outline'
+    this.len=this.len-1;
+    //  this.presentToast("Saving your request");
+    // this.loading.present();
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      this.email1 = user.email;
+
+    }
+    this.emailo=this.wendor.email,
+      this.update = {
+        useremail:this.email1,
+
+      }
+    console.log("updated start");
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers: headers});
+
+    this.http.post('https://vioti.herokuapp.com/profile/dislike/shop/' + this.emailo, JSON.stringify(this.update), options)
+      .map(res => res.json()).subscribe(data => {
+      console.log(data)
+      //  this.loading.dismissAll();
+      // this.Dismiss();
+      //this.navCtrl.push(WalletPage);
+    }, err => {
+      console.log("Error!:", err.json());
+      // this.loading.dismissAll();
+    });
+
+
+
+
+  }
+
+
+
 
 
 

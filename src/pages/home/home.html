@@ -48,9 +48,8 @@
 
 
 
-  <ion-content no-padding="true" >
+  <ion-content no-padding="true"  style="background: #f0f0f0;" >
 
-    <p  style="color: #007aff;margin-left:20px;width: 100%;text-align: center;">{{address}}{{locationTracker.lat}}{{locationTracker.lng}}</p>
 
 
 
@@ -75,117 +74,42 @@
 
 
 
-    <ion-buttons right>
-
-      <button ion-button round small style="height:20px;width:40px; "> More</button>
-    </ion-buttons>
+<div style="width: 100%;background-color: #cb1b58;height: 160px;position: relative;text-align: center;margin-top: 2px;">
 
 
+  <p  class="card-titlees"   >{{address}}</p>
+    <p  class="card-subtitlees"   >{{locationTracker.lat}},{{locationTracker.lng}}</p>
+    <img src="assets/icon/loc.svg" (click)="load(locationTracker.lat,locationTracker.lng)"   style="height:40px; width:40px;margin-left:3%; margin-top:25%;" end/>
 
-    <ion-slides no-padding  parallax="true" style=" margin-top:14px;height:100px;" spaceBetween="5px" initialSlide="2"slidesPerView="3"  >
-      <ion-slide style="width: 100%;" class="specialitem">
-        <ion-avatar item-left [navPush]="transitionpage">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-
-        <h1 [hidden]="true">Slide 1</h1>
-      </ion-slide>
-
-      <ion-slide class="specialitem">
-        <ion-avatar item-left [navPush]="transitionpage">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-
-        <h1 [hidden]="true">Slide 1</h1>
-      </ion-slide>
-
-      <ion-slide class="specialitem">
-
-        <ion-avatar item-left [navPush]="transitionpage">
-          <img src="../../assets/img/abmnu.jpg" />
-        </ion-avatar>
-
-        <h1 [hidden]="true">Slide 1</h1>
-      </ion-slide>
-    </ion-slides>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-    <ion-card class="cardo">
-
-    <ion-item>
-      <ion-avatar item-left [navPush]="transitionpage">
-        <img src="../../assets/img/abmnu.jpg" />
-      </ion-avatar>
-      <h2>Ishan genral store</h2>
-      <p>{{title}}</p>
-
-    </ion-item>
-
-
-    <ion-row>
-
-        <ion-col>
-          <button ion-button icon-left clear small  id="button" [navPush]="choosloc" [navParams]="{lat:31.710909, lng:76.526932}">
-            <ion-icon name="pin"></ion-icon>
-            <div>0.004Km</div>
-
-          </button>
-        </ion-col>
-
-        <ion-col center text-center>
-          <button ion-button icon-left clear small [navPush]="profile">
-            <ion-icon name="paper-plane"></ion-icon>
-            <div>Visit Shop</div>
-          </button>
-
-        </ion-col>
-
-
-
-
-    </ion-row>
-  </ion-card>
-
-
--->
+</div>
 
     <ion-buttons right>
 
-      <button ion-button round small style="height:20px;width:40px; "> More</button>
+      <button ion-button round  outline style="height:20px;width:40px; "> More</button>
     </ion-buttons>
 
 
 
 
     <ion-grid no-padding>
-      <ion-row wrap>
-        <ion-col width-50 style="height:140px;width: 100px;background: #ff2553; border-style: solid;
-        border-color: #a82158;">This column will take 10% of space</ion-col>
-        <ion-col width-50 style="height:140px;width: 100px;background: #39ff82; border-style: solid;
-        border-color: #a82158;">This column will take 10% of space</ion-col>
+      <ion-row wrap  style="padding-right: 1px;">
 
-        <ion-col width-50 style="height:140px;width: 100px;background: #a82151; border-style: solid;
-        border-color: #a82158;">This column will take 10% of space</ion-col>
 
-        <ion-col width-50 style="height:140px;width: 100px;background: #f8ee16; border-style: solid;
-        border-color: #a82158;">This column will take 10% of space</ion-col>
-        <ion-col width-50 style="height:140px;width: 100px;background: #3559ff; border-style: solid;
-        border-color: #a82158;">This column will take 10% of space</ion-col>
+        <ion-col width-50   (click)="goto(item.email)"   *ngFor="let item of _fitdata" style="height:175px;width: 100px;background: #f0f0f0; position: relative;text-align: center;" >
+
+          <img [src]="item.profileimage" style="height:100%;width: 100%;z-index: -2;"/>
+
+          <div style="width: 100%;height: 30%;background-color: rgba(3,0,3,0.41);margin-top:0%;" class="card-titlee"></div>
+
+          <div [hidden]="item.status==='true'?false:true" style="width:8px; height:8px;border-radius:8px;background: #39ff82;margin-top:2%;margin-left:90%; " class="card-titlee" end></div>
+
+          <p class="card-titlee"> {{item.name}} </p>
+          <p class="card-subtitlee">{{item.catagory}}</p>
+
+
+
+        </ion-col>
+
 
 
 

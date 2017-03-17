@@ -55,6 +55,8 @@
 -->
 
 
+
+
   <img [src]="wendor.profileimage" style="z-index: -1; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(1,1,1,1)), to(rgba(0,0,0,0)));margin-top:58px;"/>
 
 
@@ -99,14 +101,17 @@
       <ion-row style="padding-top: 0px;padding-bottom: 0px;">
 
         <button ion-button icon-left clear small>
-          <ion-icon name="ios-mail-outline"></ion-icon>
-          <p>{{wendor.email}}</p>
+          <ion-icon name="mail"></ion-icon>
+          <a href="mailto:{{wendor.email}}">{{wendor.email}}</a>
+
         </button>
       </ion-row>
       <ion-row style="padding-top: 0px;padding-bottom: 0px;">
         <button ion-button icon-left clear small *ngIf="wendor.status_phone==='true'? true:false">
           <ion-icon name="call"></ion-icon>
-          <div>{{wendor.phone}}</div>
+
+          <a href="tel:{{wendor.phone}}">{{wendor.phone}}</a>
+
         </button>
       </ion-row>
       <!--
@@ -205,6 +210,7 @@
 
     </ion-card-content>
   </ion-card>
+
 
 
 </ion-content>

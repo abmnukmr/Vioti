@@ -6,6 +6,8 @@ import {
 } from "ionic-native";
 import {map} from "rxjs/operator/map";
 import {SearchlocPage} from "../searchloc/searchloc";
+import {Shopdata} from "../../providers/shopdata";
+import {WendorPage} from "../wendor/wendor";
 
 /*
   Generated class for the Loc page.
@@ -26,8 +28,9 @@ export class LocPage {
   lati: any;
   long: any;
   lt:any;
+  _fitdata:any;
 
-  constructor(public navCtrl: NavController, public navprms: NavParams,public modalCtrl:ModalController) {
+  constructor(public navCtrl: NavController, public navprms: NavParams,public modalCtrl:ModalController,public _shopdata:Shopdata) {
     //this.tabBarElement=document.querySelector('#tabs ion-tabbar-section');
 
     this.address = this.navprms.get("address");
@@ -39,6 +42,7 @@ export class LocPage {
     this.lati = this.lt.lat;
 
     this.long = this.lt.lng;
+    this. load(this.lati,this.long);
 
   }
   showAddressModal() {
@@ -53,12 +57,33 @@ export class LocPage {
   }
 
 
+  load(lat,lng) {
+
+
+    console.log("gjgjh");
+    this._shopdata.load(lat, lng).then((data) => {
+      console.log(data);
+      // console.log(this.items);
+      console.log("callback" + JSON.stringify(data));
+      this._fitdata=data;
+      return this._fitdata;
+    });
+
+
+
+  }
+
+  goto(email){
+    this.navCtrl.push(WendorPage,{"email":email});
+  }
+
+
 
 
 }
 
 
-//
+
 
 
 

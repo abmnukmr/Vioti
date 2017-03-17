@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Geolocation, Geoposition, BackgroundGeolocation } from 'ionic-native';
+import { Geolocation, Geoposition, BackgroundGeolocation,AdMob } from 'ionic-native';
 import 'rxjs/add/operator/filter';
 /*
   Generated class for the LocationTracker provider.
@@ -15,6 +15,31 @@ export class LocationTracker {
   public lng: number = 0;
 
   constructor(public zone: NgZone) {
+
+  }
+
+
+
+  showaddd(){
+    let options = {
+      adId: 'ca-app-pub-4636392031780588/9811500955',
+      adSize: 'SMART_BANNER',
+      isTesting: false,
+      x:10,
+      y:50
+
+    };
+
+    AdMob.createBanner(options).then(() => {
+      AdMob.showBanner(2);
+    });
+
+  }
+
+
+
+  hideaddd(){
+      AdMob.removeBanner();
 
   }
 
@@ -56,7 +81,8 @@ export class LocationTracker {
 
     let options = {
       frequency: 500,
-      enableHighAccuracy: true
+      enableHighAccuracy: true,
+      startOnBoot:true
     };
 
     this.watch = Geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {

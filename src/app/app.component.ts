@@ -41,7 +41,7 @@ export class MyApp {
 
       StatusBar.backgroundColorByHexString('#cb1b58');
 
-      StatusBar.styleDefault();
+    //  StatusBar.styleDefault();
       Splashscreen.hide();
     });
 

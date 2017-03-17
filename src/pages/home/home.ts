@@ -10,19 +10,16 @@ import {Completeservice} from "../../providers/completeservice";
 import {SearchPage} from "../search/search";
 import {WendorPage} from "../wendor/wendor";
 import {FiterPage} from "../fiter/fiter";
-import {Geolocation, GoogleMapsAnimation, GoogleMapsMarkerOptions, GoogleMapsLatLng, Geocoder} from 'ionic-native';
+import {Geolocation, GoogleMapsAnimation, GoogleMapsMarkerOptions, GoogleMapsLatLng, Geocoder, AdMob} from 'ionic-native';
 import {ChooslocPage} from "../choosloc/choosloc";
 import {LocPage} from "../loc/loc";
 import {LocationTracker} from "../../providers/location-tracker";
-import {location} from "@angular/platform-browser/src/facade/browser";
 import  firebase from "firebase";
 import {AuthPage} from "../auth/auth";
 import {Auth} from "../../providers/auth";
 import { BarcodeScanner } from 'ionic-native';
 import {BarcodereadPage} from "../barcoderead/barcoderead";
-
 import {Shopdata} from "../../providers/shopdata";
-//import {Auth, User, GoogleAuth} from '@ionic/cloud-angular';
 
 
 @Component({
@@ -44,14 +41,27 @@ import {Shopdata} from "../../providers/shopdata";
   profile=ProfilePage;
   wendor=WendorPage;
   data:any;
+  locdata:any;
   _fitdata:any;
   show2:any=false;
+  lat_val:any;
+  lng_val:any;
 
 
   constructor(  public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController,public _shopdata:Shopdata) {
-  this.load(locationTracker.lat,locationTracker.lng);
+
+
+
+
+
+   this.load(locationTracker.lat,locationTracker.lng);
 
     this.showadd();
+
+
+
+
+
 
 
     firebase.auth().onAuthStateChanged((user)=> {
@@ -82,7 +92,6 @@ import {Shopdata} from "../../providers/shopdata";
 
 
 
-
   private presentToast(text) {
     let toast = this.toastCtrl.create({
       message: text,
@@ -109,6 +118,13 @@ scan(){
   });
 
 }
+
+
+
+
+
+
+
 
 
 
@@ -166,14 +182,13 @@ dologout(){
      }
 
      showmap(){
-       let modal = this.modalCtrl.create(ChooslocPage);
+        this.navCtrl.setRoot(ChooslocPage);
        /* let  me = this;
         modal.onDidDismiss(data => {
         this.address.place = data;
         });*/
        // modal.present(modal);
        console.log("modal not working")
-       modal.present();
 
 
      }
@@ -194,20 +209,27 @@ dologout(){
 
 
 
+  goto(email){
+    this.navCtrl.push(WendorPage,{"email":email});
+  }
+
 
 
   load(lat,lng) {
+
 
     console.log("gjgjh");
     this._shopdata.load(lat, lng).then((data) => {
       console.log(data);
       // console.log(this.items);
       console.log("callback" + JSON.stringify(data));
-
+       this._fitdata=data;
       return this._fitdata;
     });
-  }
 
+
+
+     }
 
 
 
@@ -238,8 +260,12 @@ dologout(){
              // var addresss="fatuha"
 
                this.address = [
+                 result.subThoroughfare || "",
+                 result.thoroughfare || "",
+                 result.locality || "",
+                 result.adminArea || "",
                  result.postalCode || "",
-                result.country ].join(" ");
+                 result.country ].join(" ");
 
 
 

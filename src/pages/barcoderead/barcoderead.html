@@ -11,6 +11,14 @@
 
   <ion-navbar>
 
+
+
+    <ion-buttons end>
+      <button ion-button icon-only  (click)="likefav ()"  >
+        <ion-icon [name]="fav" padding-right="8px" ></ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-buttons end>
 
       <div  style="width:10px; height:10px;border-radius:10px;background: #39ff82;"  [hidden]="col1" end></div>
@@ -47,7 +55,9 @@
   -->
 
 
-  <img [src]="wendor.profileimage" style="z-index: -1; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(1,1,1,1)), to(rgba(0,0,0,0)));"/>
+
+
+  <img [src]="wendor.profileimage" style="z-index: -1; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(1,1,1,1)), to(rgba(0,0,0,0)));margin-top:58px;"/>
 
 
 
@@ -65,7 +75,7 @@
             <p style="font-size: 0.9em;color: rgba(180,180,180,0.97);text-align: center;">{{wendor.catagory}}</p>
           </ion-col>
           <ion-row>
-            <ion-icon name="people" style="color: rgba(168,33,88,0.97);"></ion-icon><p style="font-size: 0.7em;color: rgba(180,180,180,0.97);">{{wendor.visits}}</p>
+            <ion-icon name="people" style="color: rgba(168,33,88,0.97);"></ion-icon><p style="font-size: 0.7em;color: rgba(180,180,180,0.97);">{{len}}</p>
           </ion-row>
 
         </ion-row>
@@ -91,19 +101,20 @@
         <ion-row style="padding-top: 0px;padding-bottom: 0px;">
 
           <button ion-button icon-left clear small>
-            <ion-icon name="ios-mail-outline"></ion-icon>
-            <p>{{wendor.email}}</p>
+            <ion-icon name="mail"></ion-icon>
+            <a href="mailto:{{wendor.email}}">{{wendor.email}}</a>
+
           </button>
         </ion-row>
-
         <ion-row style="padding-top: 0px;padding-bottom: 0px;">
-
           <button ion-button icon-left clear small *ngIf="wendor.status_phone==='true'? true:false">
             <ion-icon name="call"></ion-icon>
-            <div>{{wendor.phone}}</div>
-          </button>
 
+            <a href="tel:{{wendor.phone}}">{{wendor.phone}}</a>
+
+          </button>
         </ion-row>
+
         <!--
         <ion-row style="padding-top: 0px;padding-bottom: 0px;">
           <button ion-button icon-left clear small>
@@ -111,8 +122,7 @@
             <div>{{wendor.whatsapp}}</div>
           </button>
         </ion-row>
-       -->
-
+      -->
 
       </ion-card-content>
 
@@ -201,6 +211,7 @@
 
     </ion-card-content>
   </ion-card>
+
 
 
 </ion-content>
