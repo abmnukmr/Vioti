@@ -100,7 +100,6 @@ export class SignupPage {
       lng:this.locationTracker.lng,
       email:this.registerForm.value.email,
       otp:"123456"
-
     }
     console.log("updated start");
     var headers = new Headers();
