@@ -5,6 +5,8 @@ import {Auth} from "../../providers/auth";
 import {HomePage} from "../home/home";
 import {AuthPage} from "../auth/auth";
 import * as firebase from "firebase/app";
+import {Headers, RequestOptions, Http} from "@angular/http";
+import {LocationTracker} from "../../providers/location-tracker";
 
 /*
   Generated class for the Signup page.
@@ -23,8 +25,9 @@ export class SignupPage {
   fullnameChanged: boolean = false;
   submitAttempt: boolean = false;
   loading: any;
+  update:any;
 
-  constructor(public navCtrl: NavController,public toastCtrl: ToastController, public authService: Auth, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+  constructor(public http:Http,public locationTracker: LocationTracker,public navCtrl: NavController,public toastCtrl: ToastController, public authService: Auth, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
@@ -59,6 +62,8 @@ export class SignupPage {
         firebase.auth().onAuthStateChanged(function(user) {
           user.sendEmailVerification();
         });
+
+        this.updatedata();
           this.presentToast("Verfication mail sent Successfully. Verify your account");
         this.navCtrl.pop(AuthPage);
 
@@ -84,5 +89,38 @@ export class SignupPage {
       this.loading.present();
     }
   }
+
+
+  updatedata() {
+
+    this.update = {
+      name:this.registerForm.value.fullname,
+      phone:this.registerForm.value.phone,
+      lat:this.locationTracker.lat,
+      lng:this.locationTracker.lng,
+      email:this.registerForm.value.email,
+      otp:"123456"
+
+    }
+    console.log("updated start");
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers: headers});
+
+    this.http.post('https://vioti.herokuapp.com/user/create/new', JSON.stringify(this.update), options)
+      .map(res => res.json()).subscribe(data => {
+      console.log(data)
+      //this.navCtrl.push(WalletPage);
+    }, err => {
+
+      console.log("user  Not  inseted in mongo db");
+
+    });
+
+
+  }
+
+
 
 }
