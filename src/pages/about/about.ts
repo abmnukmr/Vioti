@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import {NavController, Loading, LoadingController, AlertController, Segment} from 'ionic-angular';
+import {NavController, Loading, LoadingController, AlertController, Segment, ToastController} from 'ionic-angular';
 import {TransitionPage} from "../transition/transition";
 import {LocationTracker} from "../../providers/location-tracker";
 import {ConnectivityService} from "../../providers/connectivity-service";
@@ -36,7 +36,7 @@ export class AboutPage {
   showThis:boolean=false;
   open=false;
   shopopen=ShopopenPage;
-  constructor(public loadingCtrl:LoadingController,public alertCtrl: AlertController,public navCtrl: NavController,public locationTracker:LocationTracker,public connectivityService:ConnectivityService,public http:Http,public _favrouite:Favourite) {
+  constructor(public toastCtrl:ToastController,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public navCtrl: NavController,public locationTracker:LocationTracker,public connectivityService:ConnectivityService,public http:Http,public _favrouite:Favourite) {
 
 
     this.loading = this.loadingCtrl.create({
@@ -141,6 +141,23 @@ export class AboutPage {
     });
     this.load();
 
+  }
+
+
+  refresh(){
+    this.load();
+    this.presentToast("refreshing...");
+  }
+
+
+
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
   }
 
 

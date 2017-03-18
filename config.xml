@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.ionicc416717" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://java.sun.com/JSP/Page">
+<widget id="com.vaioti" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://java.sun.com/JSP/Page">
   <name>ionicc</name>
   <description>An awesome Ionic/Cordova app.</description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+  <author email="abhimanyu@vaioti.in" href="http://vaioti.in/">Ionic Framework Team</author>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="loadUrlTimeoutValue" value="70000"/>
