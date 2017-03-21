@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {TermsPage} from "../terms/terms";
+import {PhoneverPage} from "../phonever/phonever";
 
 /*
   Generated class for the Otp page.
@@ -12,11 +14,24 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'otp.html'
 })
 export class OtpPage {
+  term=TermsPage;
+ phone:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.phone=this.navParams.get("phone");
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  }
 
   ionViewDidLoad() {
+
     console.log('ionViewDidLoad OtpPage');
+
+  }
+  goto(){
+   this.navCtrl.push(TermsPage,{"phone":this.phone});
+  }
+
+  senback(){
+    this.navCtrl.pop(PhoneverPage);
   }
 
 }

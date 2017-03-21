@@ -7,12 +7,38 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>phonever</ion-title>
+<ion-title>Verification</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content  no-padding>
+  <p>{{num}}</p>
 
+    <form [formGroup]="registerForm"    novalidate style="padding-top: 30px;">
+
+
+        <ion-item>
+
+          <ion-label color="primary" fixed>+91(IN)</ion-label>
+          <ion-input #phone formControlName="phone" type="number" (change)="elementChanged(phone)"
+                 placeholder="Phone No."
+                 [class.invalid]="!registerForm.controls.phone.valid && (phoneChanged || submitAttempt)"></ion-input>
+      </ion-item>
+        <ion-item no-lines class="error-message" *ngIf="!registerForm.controls.phone.valid  && (phoneChanged || submitAttempt)">
+          <p>Your Number should be in 10 digit</p>
+        </ion-item>
+
+      <div style="padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 15px;">
+
+        <button ion-button icon-right full (click)="gotonext()" >Verify your Number</button>
+      </div>
+
+    </form>
+
+
+<!--
+  <button  ion-button icon-right  block full  >Verify your Number </button>
+-->
 </ion-content>

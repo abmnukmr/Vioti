@@ -7,12 +7,29 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>otp</ion-title>
+    <ion-title>OTP</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content  >
+
+
+  <ion-list padding-top="260px;">
+
+    <ion-item >
+      <ion-label fixed>OTP</ion-label>
+      <ion-input type="number" placeholder="XXXXXX"></ion-input>
+    </ion-item>
+
+
+  </ion-list>
+        <button  ion-button icon-right full  (click)="goto()"  >Approve</button>
+         <p style="color: #cb1b58;text-align: center;" (click)="senback()">Resend Verification Code on{{phone}} </p>
+
+
+
+
 
 </ion-content>

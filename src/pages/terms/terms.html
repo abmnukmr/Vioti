@@ -1,0 +1,33 @@
+<!--
+  Generated template for the Terms page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Terms & Condition</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+  <p style="color: #cb1b58;padding-left:8px;padding-right:8px;"><b>Please read Terms & Condition carefully. </b></p>
+  <p style="color: rgba(3,0,3,0.56);text-align: justify;padding-left:8px;padding-right:8px;"> 1. We will have access to your device IEMI/UIID No. and Model No. for security purpose.<p>
+  <p style="color: rgba(3,0,3,0.56);text-align: justify;padding-left:8px;padding-right:8px;"> 2. Any objectionable/illegal content will be liable to legal prosecute under <b>SECTION-66 A</b> of information act.</p>
+  <p style="color: rgba(3,0,3,0.56);text-align: justify;padding-left:8px;padding-right:8px;"> 3. Reports by other customer may lead to blockage your shop account.</p>
+
+   <ion-item style="width: 100%;height: 70px;">
+      <ion-label style="color: #cb1b58" > I Agree with all the Terms & Condition. </ion-label>
+
+     <ion-checkbox  (ionChange)="chnge()"></ion-checkbox>
+   </ion-item>
+
+
+
+
+      <button ion-button full (click)="goto()" *ngIf="chech" >Proceed</button>
+</ion-content>

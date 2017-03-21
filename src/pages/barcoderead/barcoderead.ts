@@ -40,7 +40,7 @@ export class BarcodereadPage {
   col1:boolean=false;
   admobId:any;
   searching:boolean=false;
-  constructor(public navprms: NavParams, locationTracker:LocationTracker,public http:Http, public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
+  constructor(public navprms: NavParams, public  locationTracker:LocationTracker,public http:Http, public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
 
 
 

@@ -7,14 +7,13 @@
 
 
 <div style="height: 200px; padding-top: 200px;padding-left: 60px;padding-right:70px;" *ngIf="open">
-
-  <ion-navbar style="padding-left:8px;">
-    <img src="assets/icon/shopreload.svg"  style="height:60px; width:60px;margin-left:40%;" (click)="getReviews()"/>
-
+ <ion-navbar style="padding-left:8px;">
+    <img src="assets/icon/shopreload.svg"   style="height:100px; width:100px;margin-left:30%;" (click)="getReviews()"/>
+     <p style="text-align: center;color: #cb1b58">Reload</p>
 
     <ion-buttons >
 
-      <button  [navPush]="shopopen" ion-button icon-right   block outline  style="margin-top: 90px;" >Open your shop Here.. </button>
+      <button  [navPush]="phonever" ion-button icon-right  block full style="margin-top: 90px;margin-left:10px; " >Open your shop Here.. </button>
     </ion-buttons>
   </ion-navbar>
 

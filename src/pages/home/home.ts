@@ -20,6 +20,10 @@ import {Auth} from "../../providers/auth";
 import { BarcodeScanner } from 'ionic-native';
 import {BarcodereadPage} from "../barcoderead/barcoderead";
 import {Shopdata} from "../../providers/shopdata";
+import {
+  Push,
+  PushToken
+} from '@ionic/cloud-angular';
 
 
 @Component({
@@ -46,9 +50,9 @@ import {Shopdata} from "../../providers/shopdata";
   show2:any=false;
   lat_val:any;
   lng_val:any;
-
-
-  constructor(  public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController,public _shopdata:Shopdata) {
+  link:any;
+  jsonn:any;
+  constructor( public push: Push, public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController,public _shopdata:Shopdata) {
 
 
 
@@ -57,6 +61,25 @@ import {Shopdata} from "../../providers/shopdata";
    this.load(locationTracker.lat,locationTracker.lng);
 
     this.showadd();
+
+    this.push.register().then((t: PushToken) => {
+      return this.push.saveToken(t);
+    }).then((t: PushToken) => {
+      console.log('Token saved:', t.token);
+    });
+
+    this.push.rx.notification()
+      .subscribe((msg) => {
+        this.link=JSON.stringify(msg.payload);
+
+        this.jsonn=JSON.parse(this.link);
+         if(this.link!=null){
+           this.goto(this.jsonn.email);
+         }
+
+
+
+      });
 
 
 

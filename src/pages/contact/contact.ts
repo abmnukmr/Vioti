@@ -24,7 +24,7 @@ export class ContactPage {
   favi:any;
   item_price:any;
   showThis:boolean=false;
- name:any;
+ name:string;
   open=false;
   color:any;
 

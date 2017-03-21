@@ -19,6 +19,7 @@ import {ProfilephotoPage} from "../profilephoto/profilephoto";
 import {QrcodePage} from "../qrcode/qrcode";
 import {OnemorePage} from "../onemore/onemore";
 import {LocationeditPage} from "../locationedit/locationedit";
+import {PhoneverPage} from "../phonever/phonever";
 
 /*
   Generated class for the Wallet page.
@@ -42,6 +43,7 @@ export class WalletPage {
   item_no:any;
   item_discription:any;
   icon:any;
+  phonever=PhoneverPage;
   item_price:any;
   showThis:boolean=false;
   loading:Loading;

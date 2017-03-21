@@ -14,8 +14,11 @@ import {FormBuilder, Validators} from "@angular/forms";
 })
 export class ShopopenPage {
   public registerForm;
-
+   phone:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public formBuilder: FormBuilder) {
+
+    this.phone=this.navParams.get("phone");
+
 
     this.registerForm = formBuilder.group({
      // email: ['', Validators.compose([Validators.required])],

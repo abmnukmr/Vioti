@@ -44,6 +44,9 @@ import {AbmnuPage} from "../pages/abmnu/abmnu";
 import {BarcodePage} from "../pages/barcode/barcode";
 import {Shopdata} from "../providers/shopdata";
 import {Favourite} from "../providers/favourite";
+import {PhoneverPage} from "../pages/phonever/phonever";
+import {OtpPage} from "../pages/otp/otp";
+import {TermsPage} from "../pages/terms/terms";
 
 
 export const firebaseConfig = {
@@ -63,12 +66,24 @@ const myFirebaseAuthConfig = {
 
 const cloudSettings: CloudSettings = {
   'core': {
-    'app_id': '6f36a493'
+    'app_id': '5eeb68f0'
   },
   'auth': {
     'google': {
       'webClientId': '414670723734-vodt1lsumg541g82gcbt6qpdfd7hrre7.apps.googleusercontent.com',
       'scope': []
+    }
+  },
+  'push': {
+    'sender_id': '553959685910',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#cb1b58'
+      }
     }
   }
 }
@@ -107,10 +122,12 @@ firebase.initializeApp(firebaseConfig);
     QrcodePage,
     BarcodereadPage,
     OnemorePage,
+    OtpPage,
     LocationeditPage,
     AbmnuPage,
-    BarcodePage
-
+    BarcodePage,
+    PhoneverPage,
+    TermsPage
 
 
 
@@ -184,7 +201,10 @@ firebase.initializeApp(firebaseConfig);
     QrcodePage,
     BarcodereadPage,
     OnemorePage,
-    LocationeditPage
+    OtpPage,
+    LocationeditPage,
+    PhoneverPage,
+    TermsPage
 
 
 
