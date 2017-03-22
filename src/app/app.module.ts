@@ -47,6 +47,8 @@ import {Favourite} from "../providers/favourite";
 import {PhoneverPage} from "../pages/phonever/phonever";
 import {OtpPage} from "../pages/otp/otp";
 import {TermsPage} from "../pages/terms/terms";
+import {ShopdetPage} from "../pages/shopdet/shopdet";
+import {Otp} from "../providers/otp";
 
 
 export const firebaseConfig = {
@@ -127,7 +129,8 @@ firebase.initializeApp(firebaseConfig);
     AbmnuPage,
     BarcodePage,
     PhoneverPage,
-    TermsPage
+    TermsPage,
+    ShopdetPage
 
 
 
@@ -204,12 +207,10 @@ firebase.initializeApp(firebaseConfig);
     OtpPage,
     LocationeditPage,
     PhoneverPage,
-    TermsPage
-
-
-
+    TermsPage,
+    ShopdetPage
   ],
-  providers:[Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth,Favourite],
+  providers:[Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth,Favourite,Otp],
  // directives:[Focuser],
   schemas:     [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -20,6 +20,7 @@ import {QrcodePage} from "../qrcode/qrcode";
 import {OnemorePage} from "../onemore/onemore";
 import {LocationeditPage} from "../locationedit/locationedit";
 import {PhoneverPage} from "../phonever/phonever";
+import {ShopdetPage} from "../shopdet/shopdet";
 
 /*
   Generated class for the Wallet page.
@@ -305,6 +306,14 @@ export class WalletPage {
 
 
   }
+
+
+
+  shopdet(){
+    this.navCtrl.push(ShopdetPage,{"lat":this.wendor.lat,"lng":this.wendor.lat,"shopname":this.wendor.name})
+  }
+
+
 
 
 

@@ -56,7 +56,7 @@ export class TitlediscriptionPage {
     }
 
     this.update = {
-      discription: this.discription,
+      discription: this.discription
       //item_discription: this.discription,
       //item_price: this.itemprice,
       //item_id: this.id

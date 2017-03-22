@@ -20,16 +20,19 @@
 
     <ion-item >
       <ion-label fixed>OTP</ion-label>
-      <ion-input type="number" placeholder="XXXXXX"></ion-input>
+      <ion-input type="text" [(ngModel)]="ottp" placeholder="XXXXXX"></ion-input>
     </ion-item>
 
 
   </ion-list>
-        <button  ion-button icon-right full  (click)="goto()"  >Approve</button>
-         <p style="color: #cb1b58;text-align: center;" (click)="senback()">Resend Verification Code on{{phone}} </p>
+        <button  ion-button icon-right full  (click)="goto()" *ngIf="show" >Approve</button>
+        <p style="color: #cb1b58;text-align: center;">your will recieve OTP on {{phone}}</p>
+        <p style="color: #cb1b58;text-align: center;" (click)="senback()">Resend Verification OTP </p>
 
 
 
-
-
+  <div [hidden]="spinshow" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <p>{{otp}}</p>
 </ion-content>

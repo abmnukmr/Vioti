@@ -126,15 +126,6 @@
 
         </ion-row>
 
-<!--
-        <ion-row style="padding-top: 0px;padding-bottom: 0px;">
-          <button ion-button icon-left clear small>
-            <ion-icon name="logo-whatsapp"></ion-icon>
-            <div>{{wendor.whatsapp}}</div>
-          </button>
-        </ion-row>
-        -->
-
 
     </ion-card-content>
 
@@ -167,6 +158,13 @@
            <ion-icon name="pin"  color="primary"></ion-icon>
          </button>
        </ion-fab>
+
+       <ion-fab right style="margin-right: 90px;">
+         <button ion-button icon-right clear small (click)="shopdet()" >
+           <ion-icon name="settings"  color="primary"></ion-icon>
+         </button>
+       </ion-fab>
+
 
      </ion-row>
    </ion-card-header>

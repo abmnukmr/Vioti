@@ -14,12 +14,16 @@
 
 
 <ion-content  no-padding>
-  <p>{{num}}</p>
-
-    <form [formGroup]="registerForm"    novalidate style="padding-top: 30px;">
 
 
-        <ion-item>
+  <div [hidden]="spinshow" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <form [formGroup]="registerForm"     novalidate style="padding-top: 30px;">
+
+
+        <ion-item *ngIf="spinshow">
 
           <ion-label color="primary" fixed>+91(IN)</ion-label>
           <ion-input #phone formControlName="phone" type="number" (change)="elementChanged(phone)"
@@ -30,12 +34,14 @@
           <p>Your Number should be in 10 digit</p>
         </ion-item>
 
-      <div style="padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 15px;">
-
-        <button ion-button icon-right full (click)="gotonext()" >Verify your Number</button>
-      </div>
 
     </form>
+
+
+  <div style="padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 15px;">
+
+    <button ion-button icon-right full (click)="updatedata()" *ngIf="spinshow" >Verify your Number</button>
+  </div>
 
 
 <!--
