@@ -1,7 +1,7 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import { MyApp } from './app.component';
-import { QRCodeModule } from 'angular2-qrcode';
+import { QRCodeComponent} from '../angular2-qrcode/angular2-qrcode.component.ts';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -96,6 +96,7 @@ firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [
     MyApp,
+    QRCodeComponent,
     AboutPage,
     OrderByPipe,
     ContactPage,
@@ -136,7 +137,6 @@ firebase.initializeApp(firebaseConfig);
 
   ],
   imports: [
-    QRCodeModule,
     DynamicComponentModule,
     DynamicComponentModule.forRoot({
       imports: [CommonModule, IonicModule]}),
@@ -179,6 +179,7 @@ firebase.initializeApp(firebaseConfig);
     MyApp,
     AboutPage,
     WalletPage,
+    QRCodeComponent,
     ContactPage,
     HomePage,
     TabsPage,

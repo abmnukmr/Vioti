@@ -22,7 +22,6 @@
     "@types/angular": "^1.6.3",
     "@types/google-maps": "^3.2.0",
     "@types/googlemaps": "^3.26.2",
-    "angular2-qrcode": "^2.0.0",
     "angular2-text-mask": "2.1.0",
     "angularfire2": "2.0.0-beta.8",
     "cropperjs": "0.7.2",
@@ -35,6 +34,7 @@
     "ionicons": "3.0.0",
     "lodash": "4.17.2",
     "qrcode_js": "1.0.0",
+    "qrious": "^2.2.0",
     "rxjs": "5.0.0-beta.12",
     "typescript": "2.0.10",
     "zone.js": "0.6.26"
