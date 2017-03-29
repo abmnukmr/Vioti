@@ -43,16 +43,22 @@
    <h4 style="color: rgba(203,27,88,0.56);margin-left: 7px;margin-right: 7px;">2. Notification Advertisement</h4>
    <p><b> Note:-  </b> </p>
    <p style="margin-left: 7px;margin-right: 7px;">1. All type of advertisment is paid.</p>
-   <p style="margin-left: 7px;margin-right: 7px;">2. send mail by your shop account's Email address  </p>
-   <p style="margin-left: 7px;margin-right: 7px;">3. include Title of addvertisment </p>
-   <p style="margin-left: 7px;margin-right: 7px;">4. include Text of addvertisment </p>
-   <P style="margin-left: 7px;margin-right: 7px;">5. attach image(4:3) for slider addvertisment and image(1:1) for Notification.</P>
-   <p style="margin-left: 7px;margin-right: 7px;">6. we will provide payment link after recieving your Request mail.</p>
-   <p style="margin-left: 7px;margin-right: 7px;">7. Our team will process your request. so it will take 24 to 48 hours to broadcast.</p>
+   <p style="margin-left: 7px;margin-right: 7px;">2. Send mail by your shop account's Email address.  </p>
+   <p style="margin-left: 7px;margin-right: 7px;">3. Include Title(Max.5 words) of addvertisment. </p>
+   <p style="margin-left: 7px;margin-right: 7px;">4. Include Text(Max. 12 words) of addvertisment </p>
+   <P style="margin-left: 7px;margin-right: 7px;">5. Attach image(4:3) for slider addvertisment and image(1:1) for Notification.</P>
+   <p style="margin-left: 7px;margin-right: 7px;">6. We will provide payment link after recieving your Request mail.</p>
+   <p style="margin-left: 7px;margin-right: 7px;">7. Our team will process your request. So it will take 24 to 48 hours to broadcast.</p>
 
-  <button  style="margin-left: 10%;" ion-button  outline> <a href="mailto:vaiotiservices@gmail.com">Email us for addvertisement</a></button>
+  <button  style="margin-left: 12%;" ion-button  outline *ngIf="butn"> <a href="mailto:vaiotiservices@gmail.com">Email us for addvertisement</a></button>
 
 
-  <button ion-button icon-right style="margin-top: 30%;" full  color="danger" (click)="gotonext()" style="margin-top:20px;">Delete Shop</button>
+  <button ion-button icon-right style="margin-top: 30%;margin-top:20px;" full  color="danger" (click)=" showConfirm()" *ngIf="butn">Delete Shop</button>
+
+
+  <div [hidden]="spinshow" class="spinner-container">
+    <ion-spinner></ion-spinner>
+    <p>Deleting...</p>
+  </div>
 
 </ion-content>

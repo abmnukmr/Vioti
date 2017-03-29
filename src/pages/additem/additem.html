@@ -14,7 +14,7 @@
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button ion-button icon-only  (click)="uploadImage()" >
+      <button ion-button icon-only  (click)="uploadImage()"  *ngIf="show">
         <ion-icon name="cloud-upload" padding-right="8px" ></ion-icon>
       </button>    </ion-buttons>
 
@@ -29,6 +29,13 @@
 
 
 <ion-list>
+
+
+  <div [hidden]="spinshow" class="spinner-container">
+    <p>wait..</p>
+    <ion-spinner></ion-spinner>
+  </div>
+
   <ion-item>
     <ion-input type="text" [(ngModel)]="itemname" placeholder="Item Name"></ion-input>
   </ion-item>

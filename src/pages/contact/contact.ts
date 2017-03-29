@@ -4,6 +4,7 @@ import {NavController, Loading, LoadingController} from 'ionic-angular';
 import * as firebase from "firebase/app";
 import {Favourite} from "../../providers/favourite";
 import {Auth} from "../../providers/auth";
+import {Notification} from "../../providers/notification";
 
 @Component({
   selector: 'page-contact',
@@ -11,6 +12,8 @@ import {Auth} from "../../providers/auth";
 })
 export class ContactPage {
   items:any;
+ spinshow:boolean=false;
+
   loading:Loading;
   data: any;
   finalstatus:string;
@@ -27,9 +30,12 @@ export class ContactPage {
  name:string;
   open=false;
   color:any;
-
-  constructor(public navCtrl: NavController,public loadingCtrl:LoadingController,public _favrouite:Favourite,  public authService: Auth) {
+  noti:any;
+  notice:any;
+  constructor(public getnote:Notification,public navCtrl: NavController,public loadingCtrl:LoadingController,public _favrouite:Favourite,  public authService: Auth) {
     this.randomcokor();
+    this.getnoteee();
+
 
     var user = firebase.auth().currentUser;
     if (user != null) {
@@ -49,6 +55,17 @@ export class ContactPage {
   }
 
 
+  getnoteee(){
+    this.getnote.notification().then((data)=>{
+      console.log(data)
+      this.spinshow=true;
+       this.noti=data;
+       this.notice=this.noti.notification;
+       console.log(data);
 
+    });
+
+
+  }
 
 }

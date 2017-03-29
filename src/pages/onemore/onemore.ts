@@ -27,10 +27,11 @@ export class OnemorePage {
   loading: Loading;
   forupload:any;
   itemprice:any;
+  spinshow:boolean=true;
   itemnumber:any;
   discription:any;
   base64Image;
-
+  show:boolean=true;
   butn:boolean=false;
   email1:string;
   itemname:any;
@@ -191,8 +192,9 @@ export class OnemorePage {
 
 
   public uploadImage() {
+    this.spinshow=false;
     this.loading.present();
-
+    this.show=false;
 
     var user = firebase.auth().currentUser;
     if (user != null) {
@@ -228,12 +230,15 @@ export class OnemorePage {
 
     // Use the FileTransfer to upload the image
     fileTransfer.upload( targetPath,url,options).then(data => {
-      this.loading.dismissAll()
+      this.loading.dismissAll();
       console.log(data);
+      this.spinshow=true;
+
       this.navCtrl.popTo(WalletPage);
-      this.presentToast('Image succesful uploaded.');
+      this.presentToast('Image succesfully uploaded.');
     }, err => {
-      this.loading.dismissAll()
+      this.loading.dismissAll();
+      this.show=true;
       this.presentToast("Failed");
       // console.log(err);
       // this.presentToast('Error while uploading file.');

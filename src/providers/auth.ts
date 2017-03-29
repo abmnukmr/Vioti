@@ -48,6 +48,7 @@ export class Auth {
 
   doLogout(): any {
     return this.fireAuth.signOut();
+
   }
 
 

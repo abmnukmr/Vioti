@@ -26,7 +26,7 @@ export class WendorPage {
   loading: Loading;
   email:string;
   len:any;
-
+  spinshow:boolean=false;
   emailo:string;
   liked:boolean;
   lati:number;
@@ -44,7 +44,7 @@ export class WendorPage {
 
 
 
-
+    this.spinshow=false;
 
     Geolocation.getCurrentPosition().then((resp) => {
       this.lati= resp.coords.latitude
@@ -110,9 +110,12 @@ export class WendorPage {
   load()
   {
 
+
+    this.spinshow=false;
     this.loading.present();
     if(this.connectivityService.isOnline())
     {
+
         this.email =this.navprms.get("email");
     //this.email="abmnukmr@gmail.com";
       var user = firebase.auth().currentUser;
@@ -126,8 +129,10 @@ export class WendorPage {
       this.abmnu.getReviews(this.email).then((data) => {
         console.log(data);
         this.wendor =data;
+
          this.showThis=true;
-        this.loading.dismissAll();
+          this.spinshow=true;
+           this.loading.dismissAll();
 
         this.len=this.wendor.fav.length;
         var i;
@@ -165,6 +170,7 @@ export class WendorPage {
       console.log("error");
     }
     else {
+      this.spinshow=true;
       this.loading.dismissAll();
 
       let alert = this.alertCtrl.create({

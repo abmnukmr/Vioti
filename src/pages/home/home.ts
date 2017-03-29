@@ -1,7 +1,7 @@
-import {Component, Input, NgZone} from '@angular/core';
+import {Component, Input, NgZone, ViewChild} from '@angular/core';
 import {
   NavController, ModalController, MenuController, Platform, Alert, AlertController,
-  ToastController
+  ToastController, Slides
 } from 'ionic-angular';
 import {Abmnu} from "../../providers/abmnu";
 import {TransitionPage} from "../transition/transition";
@@ -24,43 +24,54 @@ import {
   Push,
   PushToken
 } from '@ionic/cloud-angular';
+import {MorelocalPage} from "../morelocal/morelocal";
+import {Adver} from "../../providers/adver";
+import {Http} from "@angular/http";
+import {Notification} from "../../providers/notification";
 
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
- // directives : [AUTOCOMPLETE_DIRECTIVES],
- // providers:[Completeservice]
-
-    })
+})
 
 
   export class HomePage {
   title:string;
+  slidee:boolean=true;
   address:string;
    choosloc=ChooslocPage;
   transitionpage=TransitionPage;
   search=SearchPage;
   loc=LocPage;
+  moreloc=MorelocalPage;
   profile=ProfilePage;
   wendor=WendorPage;
   data:any;
+  locadd:any;
+  _fitadd:any;
   locdata:any;
+  spinshow:boolean=true;
   _fitdata:any;
   show2:any=false;
   lat_val:any;
   lng_val:any;
   link:any;
   jsonn:any;
-  constructor( public push: Push, public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController,public _shopdata:Shopdata) {
+  shopId:number=2;
+  adId:number=3;
+  @ViewChild('mySlider')mySlider:Slides;
 
+  constructor(public http:Http, public push: Push, public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController,public _shopdata:Shopdata) {
 
+// this.setgo();
+//this.setadd();
 
-
-
+  //  this.getadd(locationTracker.lat,locationTracker.lng);
    this.load(locationTracker.lat,locationTracker.lng);
-
-    this.showadd();
+ //  this.getadd(locationTracker.lat,locationTracker.lng);
+  this.getalladd(locationTracker.lat,locationTracker.lng);
+  this.showadd();
 
     this.push.register().then((t: PushToken) => {
       return this.push.saveToken(t);
@@ -145,11 +156,25 @@ scan(){
 
 
 
+//
+  refresh(){
+
+    this.load(this.locationTracker.lat,this.locationTracker.lng);
+    this.getalladd(this.locationTracker.lat,this.locationTracker.lng);
+    this.spinshow=false;
+    setTimeout(() => {
 
 
 
 
+      this.spinshow=true;
+      console.log('Async operation has ended');
+    }, 5000);
 
+
+
+  }
+///// get all advertisement
 
 
 
@@ -161,16 +186,7 @@ scan(){
 
 
   ionViewWillEnter() {
-    /*firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
 
-      }
-      else
-      {
-        this.navCtrl.setRoot(AuthPage);
-      }
-    });
-*/
     this.showadd();
    this.locationTracker.startTracking();
 
@@ -236,6 +252,40 @@ dologout(){
     this.navCtrl.push(WendorPage,{"email":email});
   }
 
+/*
+  setadd(){
+    this.adId=setTimeout(() =>{
+      this.getalladd(this.locationTracker.lat,this.locationTracker.lng);
+    },3000);
+
+  }*/
+/*
+  setgo(){
+
+      this.shopId=setTimeout(() =>{this.load(this.locationTracker.lat,this.locationTracker.lng);
+       },3000);
+
+  }
+*/
+
+  onPageDidLeave(){
+  }
+
+
+//// get all advertismrent
+
+  /*
+  getalladd(lat,lng){
+
+    console.log("getting all advertisment");
+    this._adver.getadd(lat, lng).then((data) => {
+      console.log(data);
+      this.locadd=data;
+      this._fitadd=this.locdata.slice(0,20);
+    });
+
+  }
+*/
 
 
   load(lat,lng) {
@@ -244,15 +294,144 @@ dologout(){
     console.log("gjgjh");
     this._shopdata.load(lat, lng).then((data) => {
       console.log(data);
+
       // console.log(this.items);
       console.log("callback" + JSON.stringify(data));
-       this._fitdata=data;
-      return this._fitdata;
+      this.locdata=data;
+      this._fitdata=this.locdata.slice(0,20);
+      });
+  }
+
+
+
+
+
+  getalladd(lati,lngi)
+  {
+
+    if(this.data) {
+
+      return new Promise(resolve => {
+
+        this.http.get('https://vioti.herokuapp.com/addver/all').map(res => res.json()).subscribe(data => {
+
+          this.data = this.applyHaversine(data.adv,lati,lngi);
+
+          this.data.sort((locationA, locationB) => {
+            return locationA.distance - locationB.distance;
+          });
+
+          resolve(this.data);
+          this.slidee=false;
+          this.locadd=this.data;
+          this._fitadd=this.locadd.slice(0,20);
+
+
+          console.log(data);
+
+          this.mySlider.update();
+          setTimeout(() => {
+
+            this.mySlider.startAutoplay();
+          }, 500);
+
+
+        });
+
+      });
+    }
+
+    return new Promise(resolve => {
+
+      this.http.get('https://vioti.herokuapp.com/addver/all').map(res => res.json()).subscribe(data => {
+
+        this.data = this.applyHaversine(data.adv,lati,lngi);
+
+        this.data.sort((locationA, locationB) => {
+          return locationA.distance - locationB.distance;
+        });
+
+        resolve(this.data);
+
+        this.locadd=this.data;
+        this._fitadd=this.locadd.slice(0,20);
+        console.log(data);
+        this.slidee=false;
+
+
+
+      });
+
     });
 
+  }
+
+  applyHaversine(locations,lati,lngi){
+
+    let usersLocation = {
+      lat:lati,
+      lng: lngi
+    };
+
+    locations.map((location) => {
+
+      let placeLocation = {
+        lat: location.lat,
+        lng: location.lng,
+      };
+
+      location.distance = this.getDistanceBetweenPoints(
+        usersLocation,
+        placeLocation,
+        'km'
+      ).toFixed(2);
+    });
+
+    return locations;
+  }
+
+  getDistanceBetweenPoints(start, end, units){
+
+    let earthRadius = {
+      miles: 3958.8,
+      km: 6371
+    };
+
+    let R = earthRadius[units || 'km'];
+    let lat1 = start.lat;
+    let lon1 = start.lng;
+    let lat2 = end.lat;
+    let lon2 = end.lng;
+
+    let dLat = this.toRad((lat2 - lat1));
+    let dLon = this.toRad((lon2 - lon1));
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.toRad(lat1)) * Math.cos(this.toRad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let d = R * c;
+
+    return d;
+
+  }
+
+  toRad(x){
+    return x * Math.PI / 180;
+
+  }
 
 
-     }
+
+
+
+
+
+
+
+
+
+
 
 
 

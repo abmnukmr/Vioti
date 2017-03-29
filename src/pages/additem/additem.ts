@@ -22,7 +22,9 @@ declare var cordova: any;
   templateUrl: 'additem.html'
 })
 export class AdditemPage {
+  spinshow:boolean=true;
   lastImage=[] ;
+  show:boolean=true;
   loading: Loading;
   forupload:any;
   itemprice:any;
@@ -186,6 +188,8 @@ export class AdditemPage {
 
 
   public uploadImage() {
+    this.show=false;
+    this.spinshow=false;
     this.loading.present();
 
 
@@ -222,12 +226,15 @@ export class AdditemPage {
 
     // Use the FileTransfer to upload the image
     fileTransfer.upload( targetPath,url,options).then(data => {
-      this.loading.dismissAll()
+      this.spinshow=true;
+
+      this.loading.dismissAll();
       console.log(data);
       this.navCtrl.popTo(WalletPage);
-      this.presentToast('Image succesful uploaded.');
+      this.presentToast('Item succesfully uploaded.');
     }, err => {
-      this.loading.dismissAll()
+      this.show=true;
+      this.loading.dismissAll();
       this.presentToast("Failed");
       // console.log(err);
       // this.presentToast('Error while uploading file.');

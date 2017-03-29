@@ -15,7 +15,7 @@
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button ion-button icon-only  (click)="uploadImage()" >
+      <button ion-button icon-only  (click)="uploadImage()" *ngIf="show" >
         <ion-icon name="cloud-upload" padding-right="8px" ></ion-icon>
       </button>    </ion-buttons>
 
@@ -26,6 +26,10 @@
 
 <ion-content padding>
 
+  <div [hidden]="spinshow" class="spinner-container">
+    <p>Wait...</p>
+    <ion-spinner></ion-spinner>
+  </div>
 
   <button ion-button icon-only round block (click) ="openMenu()" [hidden]="butn" >
     <ion-icon name="md-images"></ion-icon>

@@ -18,7 +18,7 @@ export class AboutPage {
   items:any;
   loading:Loading;
  pet:string;
-
+spinshow:boolean=false;
   wendor:any;
   data: any;
   finalstatus:string;
@@ -164,7 +164,6 @@ export class AboutPage {
   load() {
     if (this.connectivityService.isOnline()) {
 
-      this.loading.present();
 
       var user = firebase.auth().currentUser;
       if (user != null) {
@@ -176,12 +175,12 @@ export class AboutPage {
       this._favrouite.load(this.email1).then((data) => {
         console.log(data);
         this.wendor = data;
-
+         this.spinshow=true;
         this.favouritedata = this.wendor.fav;
         this.favi = this.wendor.scan;
         // this.favi = JSON.stringify(this.wendor);
         //console.log(this.wendor.fav);
-        this.loading.dismissAll();
+      //  this.loading.dismissAll();
         // console.log(this.items);
         //console.log("callback" + JSON.stringify(data));
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NavController, NavParams, ViewController, LoadingController, Loading} from 'ionic-angular';
 import {RequestOptions, Headers, Http} from "@angular/http";
 import * as firebase from "firebase/app";
+import {WalletPage} from "../wallet/wallet";
 
 /*
   Generated class for the Titlecontact page.
@@ -17,18 +18,16 @@ export class TitlecontactPage {
 
   email1:string;
   update:any;
+  wait:boolean=false;
   loading:any;
   phone:any;
   email:string
   whatsapp:string
   constructor(public navCtrl: NavController,public http:Http,public navParams: NavParams,public victrl:ViewController,public loadingCtrl:LoadingController ) {
 
+    this.phone=this.navParams.get("phone");
 
-    this.phone=this.navParams.get("shopcontactphone");
 
-    this.email=this.navParams.get("shopcontactemail");
-
-    this.whatsapp=this.navParams.get("shopcontactwhatsapp");
     this.loading = this.loadingCtrl.create({
       content:"Saving..."
     });
@@ -70,23 +69,28 @@ export class TitlecontactPage {
     this.http.post('https://vioti.herokuapp.com/profile/email/update/contact/' + this.email1, JSON.stringify(this.update), options)
       .map(res => res.json()).subscribe(data => {
       console.log(data)
+      this.wait=true;
       this.loading.dismissAll();
-      this.Dismiss();
-      //this.navCtrl.push(WalletPage);
+      this.navCtrl.pop(WalletPage);
     }, err => {
       console.log("Error!:", err.json());
       this.loading.dismissAll();
     });
 
-    this.loading.dismissAll();
-    this.Dismiss();
+    console.log("dwrwe ooooops");
+    setTimeout(() => {
+      this.wait=true;
+      this.loading.dismissAll();
+      this.navCtrl.pop();
+
+
+      console.log('Async operation has ended');
+    }, 8000);
+
+
 
   }
 
-  Dismiss(){
-    this.victrl.dismiss();
-
-  }
 
 
 }

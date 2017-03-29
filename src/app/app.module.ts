@@ -49,6 +49,12 @@ import {OtpPage} from "../pages/otp/otp";
 import {TermsPage} from "../pages/terms/terms";
 import {ShopdetPage} from "../pages/shopdet/shopdet";
 import {Otp} from "../providers/otp";
+import {AphoneverPage} from "../pages/aphonever/aphonever";
+import {AotpPage} from "../pages/aotp/aotp";
+import {MorelocalPage} from "../pages/morelocal/morelocal";
+import {MorecurPage} from "../pages/morecur/morecur";
+import {Adver} from "../providers/adver";
+import {Notification} from "../providers/notification";
 
 
 export const firebaseConfig = {
@@ -96,6 +102,10 @@ firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [
     MyApp,
+    MorelocalPage,
+    MorecurPage,
+    AphoneverPage,
+    AotpPage,
     QRCodeComponent,
     AboutPage,
     OrderByPipe,
@@ -177,6 +187,10 @@ firebase.initializeApp(firebaseConfig);
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    MorelocalPage,
+    MorecurPage,
+    AphoneverPage,
+    AotpPage,
     AboutPage,
     WalletPage,
     QRCodeComponent,
@@ -211,7 +225,7 @@ firebase.initializeApp(firebaseConfig);
     TermsPage,
     ShopdetPage
   ],
-  providers:[Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth,Favourite,Otp],
+  providers:[Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth,Favourite,Otp,Notification],
  // directives:[Focuser],
   schemas:     [CUSTOM_ELEMENTS_SCHEMA]
 })

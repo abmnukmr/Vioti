@@ -38,7 +38,10 @@
 <!--
   <img style="width:70px;height:70px;border-radius:70px;position: absolute; margin-top:20%;left:40%;background-color:#862734;box-shadow: #862734; " [src]="wendor.profileimage" />
 -->
+
+
   <ion-toggle color="primary" color="energized" style="padding-top:20px;padding-left:20px;position: absolute;" [checked]="wendor.status" (ionChange)="togglechage()"></ion-toggle>
+
   <ion-buttons  style="padding-top:30px;" end>
 
       <button ion-button icon-right="" clear small  (click)=" profilepc()" >
@@ -100,7 +103,7 @@
 
           <button ion-button icon-left clear small>
             <ion-icon name="ios-mail-outline"></ion-icon>
-            <p>{{wendor.email}}</p>
+            <p style="font-size:12px;">{{wendor.email}}</p>
           </button>
       </ion-row>
         <ion-row style="padding-top: 0px;padding-bottom: 0px;">
@@ -201,7 +204,7 @@
     </ion-card-header>
 
     <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
-    <ion-slides   style="width: 100%;height: 100%;padding: 0px;"  loop="true" paginationType="fraction" pager="true" autoplay="2000" loop="true" zoom="true" >
+    <ion-slides   style="width: 100%;height:300px;padding: 0px;"  loop="true" paginationType="fraction" pager="true" autoplay="2000" loop="true" zoom="true" >
       <ion-slide *ngFor="let imgi of itemo.image; let i=index">
         <img [src]="imgi.location"/>
 

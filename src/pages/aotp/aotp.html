@@ -1,0 +1,37 @@
+<!--
+  Generated template for the Otp page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>OTP</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  >
+
+
+  <ion-list padding-top="260px;">
+
+    <ion-item >
+      <ion-label fixed>OTP</ion-label>
+      <ion-input type="number" [(ngModel)]="ottp" placeholder="XXXXXX"></ion-input>
+    </ion-item>
+
+
+  </ion-list>
+  <button  ion-button icon-right full  (click)="goto()" *ngIf="show" >Approve</button>
+  <p style="color: #cb1b58;text-align: center;">your will recieve OTP on {{phone}}</p>
+  <p style="color: #cb1b58;text-align: center;" (click)="senback()">Resend Verification OTP </p>
+
+
+
+  <div [hidden]="spinshow" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+</ion-content>

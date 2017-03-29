@@ -23,8 +23,10 @@ declare var cordova: any;
 })
 export class ProfilephotoPage {
   lastImage=[] ;
+  spinshow:boolean=true;
   loading: Loading;
   forupload:any;
+  show:boolean=true;
   itemprice:any;
   butn:boolean=false;
   itemnumber:any;
@@ -186,7 +188,8 @@ export class ProfilephotoPage {
 
 
   public uploadImage() {
-
+    this.show=false;
+   this.spinshow=false;
     this.loading.present();
 
     var user = firebase.auth().currentUser;
@@ -224,9 +227,11 @@ export class ProfilephotoPage {
     fileTransfer.upload( targetPath,url,options).then(data => {
       this.loading.dismissAll()
       console.log(data);
+      this.spinshow=true;
       this.navCtrl.popTo(WalletPage);
-      this.presentToast('Image succesful uploaded.');
+      this.presentToast('Image succesfully uploaded.');
     }, err => {
+      this.show=true;
       this.loading.dismissAll()
       this.presentToast("Failed");
       // console.log(err);

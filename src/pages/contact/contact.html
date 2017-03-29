@@ -22,20 +22,23 @@
 </ion-header>
 
 <ion-content padding="1px;" >
-  <ion-card style="border-left: 4px solid rgba(203,27,88,0.89);">
 
 
-    <ion-card-content>
-    <p>fhfhgfh</p>  <!-- Add card content here! -->
-    </ion-card-content>
-
-  </ion-card>
-
-  <ion-card style="border-left: 4px solid rgba(203,27,88,0.89);">
 
 
-    <ion-card-content>
-      <p>fhfhgfh</p>  <!-- Add card content here! -->
+  <div [hidden]="spinshow" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+
+
+
+
+  <ion-card style="border-left: 4px solid rgba(203,27,88,0.89);" *ngFor="let note of notice">
+  <ion-card-content>
+    <p>{{note.text}}</p>  <!-- Add card content here! -->
+      <a href="{{note.link}}">{{note.click}}</a>
+
     </ion-card-content>
 
   </ion-card>

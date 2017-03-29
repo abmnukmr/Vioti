@@ -13,11 +13,10 @@
 
 <ion-content  style="min-width: 100%;padding: 0px;padding-top: 0px;" class="slide-zoom" >
 
+<div class="card-titlees">
+  <ion-item no-lines style="margin-top: 20%;">
+      <img  src="assets/icon/vaioti_32_pink.svg" width="60" height="60" style="margin-left: 40%;">
 
-  <ion-item no-lines>
-    <ion-avatar >
-      <img [src]="profilePicture">
-    </ion-avatar>
   </ion-item>
 
   <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
@@ -38,14 +37,14 @@
       <p style="color: #ff2553;">Your password needs more than 6 characters.</p>
     </ion-item>
     <div style="padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 15px;">
-      <button  [navPush]="tabpage" ion-button icon-right outline  block  >Log In </button>
+      <button  [navPush]="tabpage" ion-button icon-right full  block  >Log In </button>
     </div>
   </form>
 
   <ion-row style="margin-left:9px;color: #a82151" >
     <ion-col><p (click)="resetPwd()" style="font-size: 15px;">  Forgot Password?</p></ion-col>
     <ion-col width-10><p style="font-size: 15px;">|</p></ion-col>
-    <ion-col><p  (click)="register()" style="font-size:15px;margin-right: 40px;">SignUp</p></ion-col>
+    <ion-col><p (click)="register()" style="font-size:15px;margin-right: 40px;">SignUp</p></ion-col>
 
   </ion-row>
 
@@ -63,5 +62,5 @@
       </div>
   -->
 
-
+</div>
 </ion-content>

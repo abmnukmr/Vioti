@@ -20,7 +20,7 @@
 
     <ion-item >
       <ion-label fixed>OTP</ion-label>
-      <ion-input type="text" [(ngModel)]="ottp" placeholder="XXXXXX"></ion-input>
+      <ion-input type="number" [(ngModel)]="ottp" placeholder="XXXXXX"></ion-input>
     </ion-item>
 
 
@@ -34,5 +34,4 @@
   <div [hidden]="spinshow" class="spinner-container">
     <ion-spinner></ion-spinner>
   </div>
-  <p>{{otp}}</p>
 </ion-content>

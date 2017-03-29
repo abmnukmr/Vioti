@@ -45,40 +45,40 @@
 
 
 
+<div>
 
+    <ion-slides  style="width: 100%;height:200px;padding:0px;"  #mySlider autoplay="2000" loop="true" paginationType="progress">
 
-    <ion-slides no-padding loop="true" autoplay="2000" loop="true" parallax="true" paginationType="bullets" pager="true" spaceBetween="2px" initialSlide="2"  >
-      <ion-slide style="width: 100%;">
-        <img src="assets/img/abmnu.jpg"   [navPush]="wendor"/>
-        <h1 [hidden]="true">Slide 1</h1>
+      <ion-slide     *ngFor="let items of _fitadd let i=index" (click)="goto(items.email)" >
+        <img [src]="items.profileimage"  style="width: 100%;height: 73%;"  />
+        <div style="width: 100%;height: 30%;background-color: rgba(3,0,3,0.41);margin-top:0%;" class="card-titlee"></div>
+        <p class="card-titlee">{{items.name}}</p>
+        <p class="card-subtitlee">{{items.catagory}}</p>
+      </ion-slide>
+      <ion-slide    *ngIf="slidee">
+
+        <img src="assets/icon/vaioti_32_pink.svg"  style="height:60px; width:60px;"/>
+          <h1>VAIOTI</h1>
       </ion-slide>
 
-      <ion-slide>
-          <img src="assets/img/abmnu.jpg"  [navPush]="wendor"/>
-        <h1 [hidden]="true">Slide 1</h1>
-      </ion-slide>
-
-      <ion-slide>
-          <img src="assets/img/abmnu.jpg" [navPush]="wendor"/>
-
-        <h1 [hidden]="true">Slide 1</h1>
-      </ion-slide>
     </ion-slides>
-
-
+</div>
 
 <div style="width: 100%;background-color: #cb1b58;height: 160px;position: relative;text-align: center;margin-top: 2px;">
 
 
   <p  class="card-titlees"   >{{address}}</p>
-    <p  class="card-subtitlees"   >{{locationTracker.lat}},{{locationTracker.lng}}</p>
-    <img src="assets/icon/loc.svg" (click)="load(locationTracker.lat,locationTracker.lng)"   style="height:40px; width:40px;margin-left:3%; margin-top:25%;" end/>
+    <p  class="card-subtitlees"  style="margin-top: 10px;" >{{locationTracker.lat}},{{locationTracker.lng}}</p>
 
+    <img src="assets/icon/loc.svg" (click)="refresh()"  *ngIf="spinshow"    style="height:40px; width:40px;margin-left:3%; margin-top:25%; z-index: -1;" end/>
+
+
+  <p style="color: rgba(255,243,252,1);" [hidden]="spinshow">Refreshing...</p>
 </div>
 
     <ion-buttons right>
 
-      <button ion-button round  outline style="height:20px;width:40px; "> More</button>
+      <button ion-button round  outline style="height:20px;width:40px; " [navPush]="moreloc"> More</button>
     </ion-buttons>
 
 
@@ -88,7 +88,7 @@
       <ion-row wrap  style="padding-right: 1px;">
 
 
-        <ion-col width-50   (click)="goto(item.email)"   *ngFor="let item of _fitdata" style="height:175px;width: 100px;background: #f0f0f0; position: relative;text-align: center;" >
+        <ion-col width-50    (click)="goto(item.email)"  *ngFor="let item of _fitdata" style="height:180px;width: 100px;background: #f0f0f0; position: relative;text-align: center;" >
 
           <img [src]="item.profileimage" style="height:100%;width: 100%;z-index: -2;"/>
 

@@ -21,6 +21,7 @@ import {OnemorePage} from "../onemore/onemore";
 import {LocationeditPage} from "../locationedit/locationedit";
 import {PhoneverPage} from "../phonever/phonever";
 import {ShopdetPage} from "../shopdet/shopdet";
+import {AphoneverPage} from "../aphonever/aphonever";
 
 /*
   Generated class for the Wallet page.
@@ -38,12 +39,14 @@ export class WalletPage {
   finalstatus:string;
   finalstatuss:string;
   email1:any;
-
+  sttatus:any;
+  tog:boolean;
   wendor:any;
   item_name:any;
   item_no:any;
   item_discription:any;
   icon:any;
+  spinshow:boolean=false;
   phonever=PhoneverPage;
   item_price:any;
   showThis:boolean=false;
@@ -61,10 +64,9 @@ export class WalletPage {
 
     console.log('wallet init');
 
-
+    this.loading.present();
    // console.log(this.abmnu.errror);
 
-    this.loading.present();
     this.getReviews();
 
   }
@@ -174,16 +176,18 @@ export class WalletPage {
         subTitle: 'No Internet Connectivity..',
         buttons: [
           {
-          text:'Try Again',
-           handler:()=>{
-             this.getReviews();
-           }
+            text:'Try Again',
+            handler:()=>{
+              this.getReviews();
+            }
           }
         ]
       });
       alert.present();
     }
   }
+
+
 
 
 
@@ -356,9 +360,8 @@ export class WalletPage {
   }
 
 
-
   togglechage(){
-
+   console.log("khkhkhk");
 
     var user = firebase.auth().currentUser;
     if (user != null) {
@@ -390,54 +393,6 @@ export class WalletPage {
     this.http.post('https://vioti.herokuapp.com/profile/upload/email/status/' + this.email1, JSON.stringify(sttatus), options)
       .map(res => res.json()).subscribe(data => {
       console.log(data)
-        }, err => {
-      console.log("Error!:", err.json());
-
-    });
-
-
-    this.getReviews();
-
-  }
-
-
-
-
-
-  togglechagephone(){
-    this.presentToast("wait..")
-
-    var user = firebase.auth().currentUser;
-    if (user != null) {
-      var  name = user.displayName;
-      this.email1 = user.email;
-      var  photoUrl = user.photoURL;
-    }
-
-    var statuss=this.wendor.status_phone;
-
-    if(statuss=="true")
-    {
-
-       this.finalstatuss="false";
-    }
-    else {
-      this.finalstatuss="true";
-    }
-
-    console.log("gjgjhgj"+ this.finalstatuss);
-
-    var stttatus={
-      statuss:this.finalstatuss
-    }
-    var headers = new Headers();
-    headers.append('content-type', 'application/json;charset=UTF-8');
-    headers.append('Access-Control-Allow-Origin', '*');
-    let options = new RequestOptions({headers: headers});
-
-    this.http.post('https://vioti.herokuapp.com/profile/upload/email/status/phonevisible/' + this.email1, JSON.stringify(stttatus), options)
-      .map(res => res.json()).subscribe(data => {
-      console.log(data)
     }, err => {
       console.log("Error!:", err.json());
 
@@ -453,16 +408,10 @@ export class WalletPage {
 
 
 
-
   openbarcode(){
 
   let modal = this.modalCtrl.create(QrcodePage,{shopname:this.wendor.name,shopimage:this.wendor.profileimage,shopcata:this.wendor.catagory});
   modal.present();
-  modal.onDidDismiss(() => {
-    this.getReviews();
-
-
-  });
 
 
 }
@@ -481,14 +430,9 @@ export class WalletPage {
   }
 
   opencontact(){
-    let modal = this.modalCtrl.create(TitlecontactPage,{shopcontactemail:this.wendor.email,shopcontactphone:this.wendor.phone,shopcontactwhatsapp:this.wendor.whatsapp});
+    let modal = this.modalCtrl.create(AphoneverPage);
     modal.present();
 
-    modal.onDidDismiss(() => {
-      this.getReviews();
-
-
-    });
 
   }
 
@@ -529,19 +473,50 @@ export class WalletPage {
 
   }
 
+  ////visiblity of phone no
+  togglechagephone(){
+    this.presentToast("wait..")
+
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      var  name = user.displayName;
+      this.email1 = user.email;
+      var  photoUrl = user.photoURL;
+    }
+
+    var statuss=this.wendor.status_phone;
+
+    if(statuss=="true")
+    {
+
+      this.finalstatuss="false";
+    }
+    else {
+      this.finalstatuss="true";
+    }
+
+    console.log("gjgjhgj"+ this.finalstatuss);
+
+    var stttatus={
+      statuss:this.finalstatuss
+    }
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers: headers});
+
+    this.http.post('https://vioti.herokuapp.com/profile/upload/email/status/phonevisible/' + this.email1, JSON.stringify(stttatus), options)
+      .map(res => res.json()).subscribe(data => {
+      console.log(data)
+    }, err => {
+      console.log("Error!:", err.json());
+
+    });
 
 
+    this.getReviews();
 
-
-
-
-
-
-
-
-
-
-
+  }
 
 
 }

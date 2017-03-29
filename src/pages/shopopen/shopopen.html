@@ -18,7 +18,7 @@
 
 
 
-  <form [formGroup]="registerForm" (submit)="doRegister()" novalidate style="padding-top: 30px;">
+  <form [formGroup]="registerForm" (submit)="openshop()" novalidate style="padding-top: 30px;">
 
     <ion-item>
 
@@ -50,8 +50,8 @@
     <ion-item>
 
       <ion-textarea #address formControlName="address" type="text" (change)="elementChanged(address)"
-                 placeholder="Address" rows="4"
-                 [class.invalid]="!registerForm.controls.address.valid && (addressChanged || submitAttempt)"></ion-textarea>
+                    placeholder="Address" rows="4"
+                    [class.invalid]="!registerForm.controls.address.valid && (addressChanged || submitAttempt)"></ion-textarea>
     </ion-item>
 
     <ion-item no-lines class="error-message" *ngIf="!registerForm.controls.address.valid  && (addressChanged || submitAttempt)">
@@ -61,9 +61,9 @@
 
 
     <ion-item>
-    <ion-textarea #fullname formControlName="discription" type="text" (change)="elementChanged(discription)"
-              placeholder="Discription of your shop" rows="4"
-              [class.invalid]="!registerForm.controls.discription.valid && (discriptionChanged || submitAttempt)"></ion-textarea>
+      <ion-textarea #fullname formControlName="discription" type="text" (change)="elementChanged(discription)"
+                    placeholder="Discription of your shop" rows="4"
+                    [class.invalid]="!registerForm.controls.discription.valid && (discriptionChanged || submitAttempt)"></ion-textarea>
     </ion-item>
 
     <ion-item no-lines class="error-message" *ngIf="!registerForm.controls.discription.valid  && (discriptionChanged || submitAttempt)">
@@ -72,8 +72,8 @@
 
     <ion-item>
       <ion-row>
-       <p>Phone No:- +91 </p>
-     <p>{{phone}}</p>
+        <p>Phone No:- (+91) </p>
+        <p>{{phone}}</p>
       </ion-row>
     </ion-item>
 
@@ -84,5 +84,9 @@
   </form>
 
 
+  <div [hidden]="spinshow" class="spinner-container">
+    <ion-spinner></ion-spinner>
+    <p>Your request is processing...</p>
+  </div>
 
 </ion-content>

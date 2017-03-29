@@ -4,6 +4,9 @@
 
 
 
+
+
+
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="pet" mode="ios"  style="width:75%; margin-left:17%; "  >
 
@@ -21,6 +24,15 @@
     </ion-buttons>
 
   </ion-toolbar>
+
+
+
+
+  <div [hidden]="spinshow" class="spinner-container">
+    <p>wait..</p>
+    <ion-spinner></ion-spinner>
+  </div>
+
 
   <div [ngSwitch]="pet">
     <ion-list

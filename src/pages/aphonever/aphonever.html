@@ -1,0 +1,57 @@
+<!--
+  Generated template for the Phonever page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-buttons left>
+      <button ion-button icon-only (click)="Dismiss()">
+
+        <ion-icon name="close" padding-right="8px" ></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Verification</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  no-padding>
+
+
+  <div [hidden]="spinshow" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <form [formGroup]="registerForm"     novalidate style="padding-top: 30px;">
+
+
+    <ion-item *ngIf="spinshow">
+
+      <ion-label color="primary" fixed>+91(IN)</ion-label>
+      <ion-input #phone formControlName="phone" type="number" (change)="elementChanged(phone)"
+                 placeholder=" New Phone No."
+                 [class.invalid]="!registerForm.controls.phone.valid && (phoneChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item no-lines class="error-message" *ngIf="!registerForm.controls.phone.valid  && (phoneChanged || submitAttempt)">
+      <p>Your Number should be in 10 digit</p>
+    </ion-item>
+
+
+  </form>
+
+
+  <div style="padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 15px;">
+
+    <button ion-button icon-right full (click)="updatedata()" *ngIf="spinshow" >Verify your Number</button>
+  </div>
+
+
+  <!--
+    <button  ion-button icon-right  block full  >Verify your Number </button>
+  -->
+</ion-content>

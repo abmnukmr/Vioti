@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Geolocation } from 'ionic-native';
 import {LocationTracker} from "./location-tracker";
+import {Observable} from "rxjs";
 /*
   Generated class for the Shopdata provider.
 
@@ -12,7 +13,6 @@ import {LocationTracker} from "./location-tracker";
 @Injectable()
 export class Shopdata {
   data:any;
-
   _lat:any;
   _lng:any;
   constructor(public http: Http,public locationTracker: LocationTracker) {
@@ -28,7 +28,8 @@ export class Shopdata {
   load(lati,lngi)
   {
 
-    if(this.data){
+    if(this.data) {
+
       return new Promise(resolve => {
 
         this.http.get('https://vioti.herokuapp.com/search/all/shop').map(res => res.json()).subscribe(data => {
@@ -43,8 +44,6 @@ export class Shopdata {
         });
 
       });
-
-
     }
 
     return new Promise(resolve => {
@@ -116,6 +115,10 @@ export class Shopdata {
 
   toRad(x){
     return x * Math.PI / 180;
+
   }
+
+
+
 
 }
