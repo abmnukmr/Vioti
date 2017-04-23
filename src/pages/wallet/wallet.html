@@ -60,7 +60,19 @@
     </ion-fab>
 
 
-    <p class="card-title">{{wendor.name}}</p>
+
+    <ion-row>
+      <ion-col width-90>
+        <p class="card-title">{{wendor.name}}</p>
+      </ion-col>
+      <ion-col width-10>
+
+        <ion-icon name="star" color="{{wendor.rate}}" *ngIf="wendor.rate==null?false:true" ></ion-icon>
+      </ion-col>
+
+    </ion-row>
+
+
     <p class="card-subtitle">{{wendor.address}}</p>
 
     <ion-row>
@@ -142,7 +154,7 @@
    <ion-card-header style=" padding-top: 0px" >
      <ion-row>
      <ion-col width-50>
-     <h2 style="color:#cb1b58;">Discription</h2>
+     <h2 style="color:#cb1b58;">Description</h2>
      </ion-col>
 
     <ion-fab right>

@@ -100,7 +100,8 @@ import {Notification} from "../../providers/notification";
 
     firebase.auth().onAuthStateChanged((user)=> {
       if (user) {
-        if(user.emailVerified)
+        if(user.emailVerified ||  new firebase.auth.GoogleAuthProvider()
+        || new firebase.auth.FacebookAuthProvider())
         {
 
         }

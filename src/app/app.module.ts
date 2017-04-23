@@ -55,6 +55,7 @@ import {MorelocalPage} from "../pages/morelocal/morelocal";
 import {MorecurPage} from "../pages/morecur/morecur";
 import {Adver} from "../providers/adver";
 import {Notification} from "../providers/notification";
+import {AuthProvider} from "../providers/auth-provider";
 
 
 export const firebaseConfig = {
@@ -225,7 +226,7 @@ firebase.initializeApp(firebaseConfig);
     TermsPage,
     ShopdetPage
   ],
-  providers:[Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth,Favourite,Otp,Notification],
+  providers:[Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth,Favourite,Otp,Notification,AuthProvider],
  // directives:[Focuser],
   schemas:     [CUSTOM_ELEMENTS_SCHEMA]
 })

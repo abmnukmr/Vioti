@@ -22,6 +22,7 @@ import {LocationeditPage} from "../locationedit/locationedit";
 import {PhoneverPage} from "../phonever/phonever";
 import {ShopdetPage} from "../shopdet/shopdet";
 import {AphoneverPage} from "../aphonever/aphonever";
+import {LocationTracker} from "../../providers/location-tracker";
 
 /*
   Generated class for the Wallet page.
@@ -40,6 +41,7 @@ export class WalletPage {
   finalstatuss:string;
   email1:any;
   sttatus:any;
+  update2:any;
   tog:boolean;
   wendor:any;
   item_name:any;
@@ -53,7 +55,7 @@ export class WalletPage {
   loading:Loading;
   open=false;
   shopopen=ShopopenPage;
-  constructor(public loadingCtrl:LoadingController,public http:Http,public toastCtrl: ToastController,public alertCtrl: AlertController,public connectivityService:ConnectivityService, public navCtrl: NavController,public abmnu:Abmnu,public actionsheetCtrl: ActionSheetController,public platform:Platform,public modalCtrl:ModalController) {
+  constructor(public loadingCtrl:LoadingController,public location:LocationTracker,public http:Http,public toastCtrl: ToastController,public alertCtrl: AlertController,public connectivityService:ConnectivityService, public navCtrl: NavController,public abmnu:Abmnu,public actionsheetCtrl: ActionSheetController,public platform:Platform,public modalCtrl:ModalController) {
     this.loading = this.loadingCtrl.create({
       content:"wait..."
     });
@@ -70,6 +72,54 @@ export class WalletPage {
     this.getReviews();
 
   }
+
+
+  locationedit(){
+
+    console.log("updated start");
+      var user = firebase.auth().currentUser;
+      if (user != null) {
+        var name = user.displayName;
+        this.email1 = user.email;
+        var photoUrl = user.photoURL;
+      }
+
+      this.update2 = {
+        lat: this.location.lat,
+        lng:this.location.lng
+      }
+      console.log("updated start");
+      var headers = new Headers();
+      headers.append('content-type', 'application/json;charset=UTF-8');
+      headers.append('Access-Control-Allow-Origin', '*');
+      let options = new RequestOptions({headers: headers});
+
+      this.http.post('https://vioti.herokuapp.com/profile/upload/email/location/' + this.email1, JSON.stringify(this.update2), options)
+        .map(res => res.json()).subscribe(data => {
+        console.log(data)
+        this.loading.dismissAll();
+        //this.Dismiss();
+        //this.navCtrl.push(WalletPage);
+      }, err => {
+        console.log("Error!:", err.json());
+        this.loading.dismissAll();
+      });
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   getReviews(){
 

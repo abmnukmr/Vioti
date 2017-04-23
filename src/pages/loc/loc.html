@@ -84,7 +84,8 @@
 
         <div style="width: 100%;height: 30%;background-color: rgba(3,0,3,0.41);margin-top:0%;" class="card-titlee"></div>
 
-        <div [hidden]="item.status==='true'?false:true" style="width:8px; height:8px;border-radius:8px;background: #39ff82;margin-top:2%;margin-left:90%; " class="card-titlee" end></div>
+        <ion-icon name="star" color={{item.rate}}  class="card-titleee" style="margin-right: 12px;" *ngIf="item.rate ==null?false:true" ></ion-icon>
+        <div [hidden]="item.status==='true'?false:true" style="width:8px; height:8px;border-radius:8px;background: #39ff82;margin-top:2%;margin-left:85%; " class="card-titlee" end></div>
 
         <p class="card-titlee"> {{item.name}} </p>
         <p class="card-subtitlee">{{item.catagory}}</p>

@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "553959685910",
+    "firebase_url": "https://viotiservices.firebaseio.com",
+    "project_id": "viotiservices",
+    "storage_bucket": "viotiservices.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553959685910:android:2297e52d61e1154b",
+        "android_client_info": {
+          "package_name": "com.ionicframework.ionicc416717"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL0-6tZFBQ6xM4SUL8EQaT1YopU8KiNjw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553959685910:android:36f13f55e18472ce",
+        "android_client_info": {
+          "package_name": "com.vaioti"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL0-6tZFBQ6xM4SUL8EQaT1YopU8KiNjw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

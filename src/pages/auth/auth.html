@@ -47,20 +47,26 @@
     <ion-col><p (click)="register()" style="font-size:15px;margin-right: 40px;">SignUp</p></ion-col>
 
   </ion-row>
+  <ion-row style="color: #a82151" >
+    <ion-col width-30><div style="width: 100%;height:1px;background: #a82151; margin-top: 20%;"></div></ion-col>
+    <ion-col width-40><button ion-button clear><p style="font-size: 10px">Or SignIn with</p></button></ion-col>
+    <ion-col width-30><div style="width: 100%;height:1px;background: #a82151; margin-top: 20%; "></div></ion-col>
 
-  <!--
-      <div style="padding-top:20px;margin-top: 60px;">
-        <p center text-center >Or SignIn With</p>
-        <ion-row>
+  </ion-row>
+  <div style="padding-top:20px;margin-top: 10px;">
+         <ion-row style="text-align: center;margin-left:7%;">
+
             <ion-buttons left>
-              <button ion-button icon-right color="facebook"  style="width:140px; padding-right:60px;"> <ion-icon style="width: 20px;height: 20px; color:#fff;  background:rgba(251,244,251,0);margin-left: 15px;" name="logo-facebook"></ion-icon><p  style="margin-left: 20px;">Facebook</p></button>
+              <button ion-button icon-right color="facebook"  (click)="loginWithFacebook()" style="width:140px; padding-right:60px;"> <ion-icon style="width: 20px;height: 20px; color:#fff;  background:rgba(251,244,251,0);margin-left: 15px;" name="logo-facebook"></ion-icon><p  style="margin-left: 20px;">Facebook</p></button>
             </ion-buttons>
                     <ion-buttons right style="margin-left: 20px;">
-              <button  ion-button icon-right (click)="googlePlusLogin()"  color="google"  style="width:135px;padding-right:70px;"><ion-icon  style="width: 20px;height: 20px; color:#fff;  background:rgba(251,244,251,0);margin-left: 15px;" name="logo-google"> </ion-icon><p  style="margin-left: 20px;"> Google</p></button>
+              <button  ion-button icon-right outline (click)="googlelog()"    style="width:135px;padding-right:78px;">
+                <img src="assets/img/Google.png" height="20" width="20" style="margin-left: 45px;" />
+                <p style="margin-left: 15px;"> Google</p></button>
             </ion-buttons>
         </ion-row>
       </div>
-  -->
+
 
 </div>
 </ion-content>

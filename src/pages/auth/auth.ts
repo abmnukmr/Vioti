@@ -16,6 +16,8 @@ import { AngularFire, FirebaseAuthState,  } from 'angularfire2';
 import {GooglePlus} from 'ionic-native';
 import firebase from 'firebase'
 import {HomePage} from "../home/home";
+import {AuthProvider} from "../../providers/auth-provider";
+import {RequestOptions, Headers, Http} from "@angular/http";
 
 /*
  Generated class for the Auth page.
@@ -34,7 +36,10 @@ export class AuthPage {
   submitAttempt: boolean = false;
   loading: any;
   tabBarElement: any;
-
+  update:any;
+  email1:any;
+  name:any;
+  photoUrl:any;
   verified:boolean;
   forgot=ForgotPage;
   signup=SignupPage;
@@ -43,8 +48,10 @@ export class AuthPage {
   public fireAuth: any;
   public userData: any;
 
-  constructor(public googleAuth: GoogleAuth, public navCtrl: NavController,public modalCtrl: ModalController,
+  constructor(public googleAuth: GoogleAuth, public navCtrl: NavController,public modalCtrl: ModalController,public _provider:AuthProvider,
               public af: AngularFire,public toastCtrl: ToastController,
+              public locationTracker: LocationTracker,
+              public http:Http,
               public alertController : AlertController,
               private platform: Platform  ,   public authService: Auth, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
 
@@ -146,13 +153,71 @@ export class AuthPage {
 
   }
 
+logg(){
+  this._provider.googlePlusLogin();
+}
 
 
 
+googlelog(){
+  this._provider.loginWithGoogle().subscribe((success) => {
+      console.log(success);
+     // alert("success");
 
 
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      this.name = user.displayName;
+      this.email1 = user.email;
+      this.photoUrl = user.photoURL;
+    }
 
 
+    if(this.email1 != null)
+    {
+      this.updatedata(this.name,this.email1);
+      this.navCtrl.setRoot(TabsPage);
+
+    }
+    else{
+      alert(
+        "We don't have access of your emailId."
+      );
+    }
+
+
+    }, err => {
+    alert(err);
+      console.log(err);
+    });
+}
+
+  loginWithFacebook(): void{
+    this._provider.loginWithFacebook().subscribe((success) => {
+
+      var user = firebase.auth().currentUser;
+      if (user != null) {
+        this.name = user.displayName;
+        this.email1 = user.email;
+        this.photoUrl = user.photoURL;
+      }
+
+      if(this.email1 != null)
+      {
+       this.updatedata(this.name,this.email1);
+        this.navCtrl.setRoot(TabsPage);
+
+      }
+      else{
+        alert(
+          "We don't have access of your emailId."
+           );
+      }
+    console.log(success);
+  }, err => {
+    console.log(err);
+  });
+}
 
 
 
@@ -218,6 +283,48 @@ export class AuthPage {
 
 
 
+  updatedata( name,email) {
+
+    this.update = {
+      name:name,
+      phone:"99999999999",
+      lat:this.locationTracker.lat,
+      lng:this.locationTracker.lng,
+      email:email,
+      otp:"123456"
+    }
+    console.log("updated start");
+    var headers = new Headers();
+    headers.append('content-type', 'application/json;charset=UTF-8');
+    headers.append('Access-Control-Allow-Origin', '*');
+    let options = new RequestOptions({headers: headers});
+
+    this.http.post('https://vioti.herokuapp.com/user/create/new', JSON.stringify(this.update), options)
+      .map(res => res.json()).subscribe(data => {
+      console.log(data)
+      //this.navCtrl.push(WalletPage);
+    }, err => {
+
+      console.log("user  Not  inseted in mongo db");
+
+    });
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   loginUser(){
@@ -240,6 +347,10 @@ export class AuthPage {
             }
             else {
               this.verified=false;
+              firebase.auth().onAuthStateChanged(function(user) {
+                user.sendEmailVerification();
+              });
+
               this.presentToast("Please verify your account by sent verfication link to your email");
               console.log('Email is not verified');
             }
@@ -270,6 +381,9 @@ export class AuthPage {
       }
 
     }
+
+
+
 
 
 

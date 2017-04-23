@@ -116,7 +116,7 @@ export class WendorPage {
     if(this.connectivityService.isOnline())
     {
 
-        this.email =this.navprms.get("email");
+      this.email =this.navprms.get("email");
     //this.email="abmnukmr@gmail.com";
       var user = firebase.auth().currentUser;
       if (user != null) {
@@ -151,13 +151,6 @@ export class WendorPage {
           this.fav='ios-heart-outline';
         }
 
-
-
-
-
-
-
-
       if(this.wendor.status=="true"){
          this.col1=false;
         console.log("gettttttt");
@@ -168,6 +161,9 @@ export class WendorPage {
       });
 
       console.log("error");
+      this.spinshow=true;
+      this.loading.dismissAll();
+
     }
     else {
       this.spinshow=true;

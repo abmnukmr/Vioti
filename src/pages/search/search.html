@@ -74,7 +74,15 @@
       <h2 >{{item.name}}</h2>
       <p>{{item.catagory}}</p>
       <div item-right>
-        <div  style="width:8px; height:8px;border-radius:8px;background: #39ff82;"  [hidden]="item.status==='true'?false:true" end></div>
+
+
+        <ion-row>
+          <div  style="width:8px; height:8px;border-radius:8px;background: #39ff82; margin-top: 5px;"  [hidden]="item.status==='true'?false:true" end></div>
+          <ion-icon name="star" color="{{item.rate}}" *ngIf="item.rate ==null?false:true" ></ion-icon>
+
+
+        </ion-row>
+
         <ion-row >
           <ion-icon name="ios-pin-outline"  color="primary" ></ion-icon>
           <p item-right style="font-size: 10px;">{{item.distance}}+km</p>
