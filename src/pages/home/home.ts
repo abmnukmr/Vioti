@@ -329,12 +329,22 @@ dologout(){
 
 
           console.log(data);
+          this.mySlider.startAutoplay();
+          this.mySlider.loop=true;
+          this.mySlider.autoplay=800;
+          this.mySlider.pager=true;
+
+
+
+
+
 
           this.mySlider.update();
           setTimeout(() => {
 
             this.mySlider.startAutoplay();
-          }, 500);
+
+          }, 700);
 
 
         });

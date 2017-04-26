@@ -162,7 +162,6 @@ export class WendorPage {
 
       console.log("error");
       this.spinshow=true;
-      this.loading.dismissAll();
 
     }
     else {

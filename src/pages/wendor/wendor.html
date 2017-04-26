@@ -111,28 +111,27 @@
 
       <ion-row style="padding-top: 0px;padding-bottom: 0px;">
 
-        <button ion-button icon-left clear small>
-          <ion-icon name="mail"></ion-icon>
-          <a href="mailto:{{wendor.email}}">{{wendor.email}}</a>
 
-        </button>
+          <ion-icon name="mail" color="primary" ></ion-icon>
+          <a href="mailto:{{wendor.email}}" style="margin-left: 4px;" >{{wendor.email}}</a>
+
+
       </ion-row>
       <ion-row style="padding-top: 0px;padding-bottom: 0px;">
-        <button ion-button icon-left clear small *ngIf="wendor.status_phone==='true'? true:false">
-          <ion-icon name="call"></ion-icon>
+          <ion-icon name="call" color="primary"></ion-icon>
 
-          <a href="tel:{{wendor.phone}}">{{wendor.phone}}</a>
+          <a href="tel:{{wendor.phone}}" style="margin-left: 4px;">{{wendor.phone}}</a>
+       </ion-row>
 
-        </button>
-      </ion-row>
-      <!--
+
       <ion-row style="padding-top: 0px;padding-bottom: 0px;">
-        <button ion-button icon-left clear small>
-          <ion-icon name="logo-whatsapp"></ion-icon>
-          <div>{{wendor.whatsapp}}</div>
-        </button>
+          <ion-icon name="link" color="primary" [hidden]="wendor.link==null?true:false"></ion-icon>
+
+          <a href="{{wendor.link}}" style="margin-left: 4px;">{{wendor.link}}</a>
+
       </ion-row>
-    -->
+
+
 
     </ion-card-content>
 

@@ -94,10 +94,46 @@
 
 </ion-card>
 
+  <!---- ion card for url and  live tracking--->
+ <ion-card no-padding>
+  <ion-card-content>
+
+    <button ion-button icon-right clear small >
+          <ion-icon name="link"></ion-icon>
+    </button>
+          <a href="{{wendor.link}}">{{wendor.link}}</a>
+
+
+
+
+          <ion-row>
+
+<!--
+            <ion-checkbox #locationn (ionChange)="chnge()" style="margin-top: 15px;"></ion-checkbox>
+-->
+
+            <button ion-button icon-right clear small  (click)="chnge()" style="margin-top: 5px;">
+
+              <ion-icon name="{{locc}}" color="{{collor}}"></ion-icon>
+
+            </button>
+
+
+
+
+            <ion-label style="color: #a59caa;font-size: 13px;margin-left: 10px;">{{location_alert}}</ion-label>
+
+          </ion-row>
+
+
+  </ion-card-content>
+
+ </ion-card>
+
   <!--- contacts card -->
 
 
-  <ion-card >
+  <ion-card  no-padding>
 
 
 
@@ -114,14 +150,14 @@
       <ion-row style="padding-top: 0px;padding-bottom: 0px;">
 
           <button ion-button icon-left clear small>
-            <ion-icon name="ios-mail-outline"></ion-icon>
+            <ion-icon name="ios-mail-outline" color="primary"></ion-icon>
             <p style="font-size:12px;">{{wendor.email}}</p>
           </button>
       </ion-row>
         <ion-row style="padding-top: 0px;padding-bottom: 0px;">
           <ion-col width-75>
           <button ion-button icon-left clear small >
-            <ion-icon name="call"></ion-icon>
+            <ion-icon name="call" color="primary"></ion-icon>
             <div>{{wendor.phone}}</div>
           </button>
           </ion-col>
@@ -251,9 +287,6 @@
 
     </ion-card-content>
   </ion-card>
-
-
-
 
 
   <ion-fab right bottom >

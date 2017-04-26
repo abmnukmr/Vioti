@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {
   NavController, ActionSheetController, Platform, ToolbarItem, ModalController, Loading,
-  LoadingController, Alert, AlertController, ToastController
+  LoadingController, Alert, AlertController, ToastController, Toggle
 } from 'ionic-angular';
 import {TitleeditorPage} from "../titleeditor/titleeditor";
 import {TitlecontactPage} from "../titlecontact/titlecontact";
@@ -37,6 +37,7 @@ import {LocationTracker} from "../../providers/location-tracker";
 export class WalletPage {
 
   data: any;
+  refreshIntervalId:any;
   finalstatus:string;
   finalstatuss:string;
   email1:any;
@@ -54,7 +55,12 @@ export class WalletPage {
   showThis:boolean=false;
   loading:Loading;
   open=false;
+  locc:string="ios-locate-outline";
   shopopen=ShopopenPage;
+  collor:string="primary";
+  location_alert:string="Current Location Access(OFF)";
+  @ViewChild('locationn')locationn:Toggle;
+
   constructor(public loadingCtrl:LoadingController,public location:LocationTracker,public http:Http,public toastCtrl: ToastController,public alertCtrl: AlertController,public connectivityService:ConnectivityService, public navCtrl: NavController,public abmnu:Abmnu,public actionsheetCtrl: ActionSheetController,public platform:Platform,public modalCtrl:ModalController) {
     this.loading = this.loadingCtrl.create({
       content:"wait..."
@@ -396,10 +402,28 @@ export class WalletPage {
   }
 
 
+  chnge(){
+
+    if(this.locc=="ios-locate-outline") {
+      this.refreshIntervalId = window.setInterval(() => {
+        this.locationedit()
+      }, 1700);
+      this.locc="ios-locate";
+       this.collor="four";
+      this.location_alert="Current Location Access(ON)";
+    }
+    else {
+      window.clearInterval(this.refreshIntervalId);
+      this.locc="ios-locate-outline";
+      this.collor="primary";
+      this.location_alert="Current Location Access(OFF)";
+    }
+    }
+
 
     openeditor(){
 
-    let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.wendor.name,shoplocation:this.wendor.address,shopcata:this.wendor.catagory});
+    let modal = this.modalCtrl.create(TitleeditorPage,{shopname:this.wendor.name,shoplocation:this.wendor.address,shopcata:this.wendor.catagory,shoplink:this.wendor.link});
     modal.present();
       modal.onDidDismiss(() => {
         this.getReviews();
@@ -464,7 +488,7 @@ export class WalletPage {
   modal.present();
 
 
-}
+  }
 
 
   profilepc(){

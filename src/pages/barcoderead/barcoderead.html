@@ -64,10 +64,18 @@
   <div style="padding-right: 10px;padding-left:10px;margin-top: 160px; ">
     <ion-card style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;opacity: 1;margin-top:77px;margin-bottom: 1px !important;"  no-padding>
       <ion-card-content>
+        <ion-row>
+          <ion-col width-90>
+            <p class="card-title">{{wendor.name}}</p>
+          </ion-col>
+          <ion-col width-10>
+
+            <ion-icon name="star" color="{{wendor.rate}}" [hidden]="wendor.rate == null?true:false"></ion-icon>
+          </ion-col>
+
+        </ion-row>
 
 
-
-        <p class="card-title">{{wendor.name}}</p>
         <p class="card-subtitle">{{wendor.address}}</p>
 
         <ion-row>

@@ -20,12 +20,14 @@ export class TitleeditorPage {
   catagoory:any;
   email1:any;
   update:any;
+  link:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public victrl:ViewController,public loadingCtrl:LoadingController,public http:Http) {
 
     this.shopname=this.navParams.get("shopname");
     this.shoplocation=this.navParams.get("shoplocation");
      this.catagoory=this.navParams.get("shopcata");
+    this.link=this.navParams.get("shoplink");
     this.loading = this.loadingCtrl.create({
       content:"Saving..."
     });
@@ -50,7 +52,8 @@ export class TitleeditorPage {
     this.update = {
       shopname: this.shopname,
       shoplocation: this.shoplocation,
-      shopcata:this.catagoory
+      shopcata:this.catagoory,
+      link:this.link
       //item_discription: this.discription,
       //item_price: this.itemprice,
       //item_id: this.id
