@@ -28,6 +28,7 @@ import {MorelocalPage} from "../morelocal/morelocal";
 import {Adver} from "../../providers/adver";
 import {Http} from "@angular/http";
 import {Notification} from "../../providers/notification";
+//import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -60,16 +61,33 @@ import {Notification} from "../../providers/notification";
   jsonn:any;
   shopId:number=2;
   adId:number=3;
+  saved_lat:any;
+  saved_lng:any;
   @ViewChild('mySlider')mySlider:Slides;
 
   constructor(public http:Http, public push: Push, public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController,public _shopdata:Shopdata) {
 
 // this.setgo();
 //this.setadd();
+/*
+    if(this.saved_lat=0){
+      while(locationTracker.lat ==0&& locationTracker.lng ==0)
+    {
 
-  //  this.getadd(locationTracker.lat,locationTracker.lng);
+    }
+     this.storage.set(this.saved_lat,this.locationTracker.lat);
+     this.storage.set(this.saved_lng,this.locationTracker.lng);
+      this.load(this.storage.get(this.saved_lat),this.storage.get(this.saved_lng));
+      this.getalladd(this.storage.get(this.saved_lat),this.storage.get(this.saved_lng));
+
+    }
+    else {
+      this.load(this.storage.get(this.saved_lat),this.storage.get(this.saved_lng));
+      this.getalladd(this.storage.get(this.saved_lat),this.storage.get(this.saved_lng));
+    }
+
+*/
    this.load(locationTracker.lat,locationTracker.lng);
- //  this.getadd(locationTracker.lat,locationTracker.lng);
   this.getalladd(locationTracker.lat,locationTracker.lng);
   this.showadd();
 

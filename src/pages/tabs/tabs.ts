@@ -3,6 +3,7 @@ import { HomePage } from '../home/home';
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
 import {WalletPage} from "../wallet/wallet";
+import {ChatlistPagePage} from "../chatlist/chatlist";
 
 
 @Component({
@@ -16,7 +17,9 @@ export class TabsPage {
   tab1Root: any = HomePage;
   tab2Root: any = AboutPage;
   tab3Root: any = ContactPage;
-  tab4Root: any = WalletPage;
+  tab4Root: any = WalletPage
+  tab5Root: any = ChatlistPagePage;
+
   tabBarElement:any;
 
   constructor() {

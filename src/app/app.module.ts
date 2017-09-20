@@ -56,7 +56,9 @@ import {MorecurPage} from "../pages/morecur/morecur";
 import {Adver} from "../providers/adver";
 import {Notification} from "../providers/notification";
 import {AuthProvider} from "../providers/auth-provider";
-
+import {ChatbotPagePage} from "../pages/chatbot/chatbot";
+import {ChatlistPagePage} from "../pages/chatlist/chatlist";
+//import {IonicStorageModule } from '@ionic/storage/es2015/storage.d.ts';
 
 export const firebaseConfig = {
 
@@ -142,7 +144,9 @@ firebase.initializeApp(firebaseConfig);
     BarcodePage,
     PhoneverPage,
     TermsPage,
-    ShopdetPage
+    ShopdetPage,
+    ChatlistPagePage,
+    ChatbotPagePage
 
 
 
@@ -152,6 +156,7 @@ firebase.initializeApp(firebaseConfig);
     DynamicComponentModule.forRoot({
       imports: [CommonModule, IonicModule]}),
     CloudModule.forRoot(cloudSettings),
+//    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     IonicModule.forRoot(MyApp, {
       tabsPlacement: 'bottom',
@@ -224,7 +229,10 @@ firebase.initializeApp(firebaseConfig);
     LocationeditPage,
     PhoneverPage,
     TermsPage,
-    ShopdetPage
+    ShopdetPage,
+    ChatlistPagePage,
+    ChatbotPagePage
+
   ],
   providers:[Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth,Favourite,Otp,Notification,AuthProvider],
  // directives:[Focuser],

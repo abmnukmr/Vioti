@@ -16,12 +16,8 @@
 <ion-content >
 
 
-
-
   <form [formGroup]="registerForm" (submit)="openshop()" novalidate style="padding-top: 30px;">
-
     <ion-item>
-
       <ion-input #fullname formControlName="fullname" type="text" (change)="elementChanged(fullname)"
                  placeholder="Shopname"
                  [class.invalid]="!registerForm.controls.fullname.valid && (fullnameChanged || submitAttempt)"></ion-input>
