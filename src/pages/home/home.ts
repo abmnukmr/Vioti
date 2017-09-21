@@ -39,6 +39,7 @@ import {Notification} from "../../providers/notification";
 
   export class HomePage {
   title:string;
+  trio:any;
   slidee:boolean=true;
   address:string;
    choosloc=ChooslocPage;
@@ -160,23 +161,24 @@ import {Notification} from "../../providers/notification";
   getpo(){
     this.zone.run(()=>{
 
-    let trio=  setInterval(()=>{
+    this.trio=  setInterval(()=>{
+      console.log("cercular");
       this.load(this.locationTracker.lat,this.locationTracker.lng);
         this.getalladd(this.locationTracker.lat,this.locationTracker.lng);
-    },100)
+    },900)
     })
 
     setInterval(()=>{
-      clearInterval(trio);
-    },60000)
-
-
-  })
-
-
+      clearInterval(this.trio);
+    },30000)
 
 
   }
+
+
+
+
+
 
 
 

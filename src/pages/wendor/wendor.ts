@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import {NavController, LoadingController, Loading, AlertController, ToastController, NavParams} from 'ionic-angular';
+import {
+  NavController, LoadingController, Loading, AlertController, ToastController, NavParams,
+  ModalController
+} from 'ionic-angular';
 import {Abmnu} from "../../providers/abmnu";
 import {ConnectivityService} from "../../providers/connectivity-service";
 import * as firebase from "firebase";
@@ -8,6 +11,7 @@ import { LaunchNavigator, LaunchNavigatorOptions } from 'ionic-native';
 import {CallNumber} from 'ionic-native';
 import {RequestOptions, Headers, Http} from "@angular/http";
 import {LocationTracker} from "../../providers/location-tracker";
+import {ChatbotPagePage} from "../chatbot/chatbot";
 /*
   Generated class for the Wendor page.
 
@@ -40,7 +44,7 @@ export class WendorPage {
   col1:boolean=false;
   admobId:any;
   searching:boolean=false;
-  constructor(public navprms: NavParams,public locationTracker:LocationTracker,public http:Http, public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
+  constructor(public modalCtrl: ModalController, public navprms: NavParams,public locationTracker:LocationTracker,public http:Http, public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
 
 
 
@@ -290,12 +294,9 @@ export class WendorPage {
      this.http.post('https://vioti.herokuapp.com/profile/dislike/shop/' + this.emailo, JSON.stringify(this.update), options)
        .map(res => res.json()).subscribe(data => {
        console.log(data)
-       //  this.loading.dismissAll();
-       // this.Dismiss();
-       //this.navCtrl.push(WalletPage);
      }, err => {
        console.log("Error!:", err.json());
-       // this.loading.dismissAll();
+
      });
 
 
@@ -303,6 +304,16 @@ export class WendorPage {
 
    }
 
+
+
+
+   gotochat(){
+
+    let mdl= this.modalCtrl.create(ChatbotPagePage,{"name":this.wendor.name, "email":this.wendor.email, "profilimg":this.wendor.profileimage});
+   mdl.present()
+
+
+   }
 
 
 
