@@ -1,18 +1,147 @@
 <!--
   Generated template for the ChatbotPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header >
+  <ion-toolbar no-padding>
+    <ion-row  no-padding style="height:1%;">
+      <button ion-button icon-only clear style="width:7%; " (click)="oncan()">
+        <ion-icon name="arrow-back" color="primary"></ion-icon>
+      </button>
+      <img [src]="this.image" style="width: 10%;height: 10%;border-radius: 50% 50% 50% 50%;margin-top:2%;">
+      <ion-col style="height: 10%; padding: 0%;">
 
-  <ion-navbar>
-    <ion-title>Chatbot</ion-title>
-  </ion-navbar>
+        <p style="color: #cb1b58;margin-top:8%;margin-left: 3%;padding: 0%;font-size: 12px; position:absolute"> Online {{type}} </p>
+        <p style="color: #cb1b58;margin-top:2%;margin-left: 3%;padding: 0%; "><b>{{name}}</b></p>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content  style="padding-bottom:20%; height: 90%; background-color:rgb(226,226,226); display: flex;
+    flex-flow: column-reverse wrap;" [scrollDownOnLoad]="true"  >
+  <div  *ngFor="let  chat of chats |orderBy :['+tid'] " style="margin-top: 0%;margin-bottom: 0%;padding-top: 0%;padding-bottom: 0%;">
 
+    <ion-chip  style="margin-right: 20%;"  *ngIf="false" >
+
+      <ion-label color="secondary">Start Conversation</ion-label>
+
+    </ion-chip>
+
+    <!--- message part-->
+
+
+    <!-- itration module -->
+
+
+    <div  style="direction:rtl; width: auto; padding-bottom:1%;"  [hidden]="chat.email==user_name? false:true">
+      <ion-row>
+        <div class="rightalign">
+          <p style="margin-top:1%;margin-bottom:1%; padding-right: 1%; font-size: 17px; padding-left: 1%; direction: ltr; width:auto; white-space:pre; height: auto;  color: #3d3d3d;text-align:left; display: inline-block" [innerHTML]="chat.message|linkify">  </p>
+        </div>
+        <p  style="margin-top:3%;margin-bottom: 0%;  font-size:7px; text-align:left; direction: ltr;">{{chat.time}}</p>
+        <ion-icon name="ios-eye-outline"  color="primary" style="float:right;margin-top:3%;margin-bottom: 0%; margin-right:0%; font-size: 9px;"></ion-icon>
+      </ion-row>
+    </div>
+
+
+
+    <!-- left side module start -->
+    <div style="text-align:end;width: auto; padding-bottom:1%; " [hidden]="chat.email==user_name? true:false">
+      <ion-row>
+        <div class="leftalign">
+          <p   style="margin-top:1%;margin-bottom:1%;height:auto;font-size: 17px; width:auto;overflow:auto; padding-right: 1%; padding-left: 1%;white-space:pre ; color:#3d3d3d ; display: block; text-align: left;" [innerHTML]="chat.message|linkify"> </p>
+        </div>
+
+        <p  style="margin-top:3%;margin-bottom: 0%;  font-size:7px; text-align:left">{{chat.time}}</p>
+        <ion-icon name="ios-eye-outline"  color="primary" style="float:right;margin-top:3%;margin-bottom: 0%; margin-right:1%; font-size: 9px;"></ion-icon>
+
+      </ion-row>
+    </div>
+
+    <!-- left side module start -->
+
+
+
+    <!-- left side image module start -->
+    <div style="direction: ltr;" [hidden]="clint_image">
+      <ion-row>
+        <div class="leftalign_imgae">
+
+
+          <img src="../../assets/image/chat_image.jpeg"  height="100%" width="100%;" />
+        </div>
+
+        <pre  style="margin-top:1%;margin-bottom: 0%;  font-size:7px; text-align:left">12:38</pre>
+        <ion-icon name="ios-eye-outline"  color="primary" style="float:right;margin-top:3%;margin-bottom: 0%; margin-right:1%; font-size: 9px;"></ion-icon>
+        <ion-icon name="ios-download-outline"  style="margin-top: 20%;"></ion-icon>
+
+      </ion-row>
+    </div>
+
+    <!-- left side module  image start -->
+
+
+
+
+
+    <!-- right side image module start -->
+    <div  style="direction:rtl;" [hidden]="self_image" >
+      <ion-row>
+        <div class="rightalign_image">
+          <img src="../../assets/image/chat_image.jpeg"  height="100%" width="100%;" />
+        </div>
+        <pre  style="margin-top:1%;margin-bottom: 0%;  font-size:7px; text-align:left">12:38</pre>
+        <ion-icon name="ios-eye-outline"  color="primary" style="float:right;margin-top:3%;margin-bottom: 0%; margin-right:0%; font-size: 9px;"></ion-icon>
+        <ion-icon name="ios-download-outline"  style="margin-top: 20%;"></ion-icon>
+      </ion-row>
+    </div>
+    <!-- right side module  image start -->
+
+
+
+
+
+
+
+
+
+    <!-- message end-->
+
+
+  </div>
+
+
+  <ion-chip  style="margin-left: 40%;margin-top: 2%;" [hidden]="true">
+    <ion-label>08 July,2017</ion-label>
+  </ion-chip><br>
 </ion-content>
+
+<ion-row style="background-color:#b6bab7; ">
+
+  <div  class="sendtext"  >
+    <ion-row (click)="setfo()" style="padding-top:0%; ">
+      <ion-textarea   placeholder="Type here..." rows="1" #textarea  cols="20" fz-elastic   style="font-size:17px; overflow: scroll; word-break: break-all; margin-bottom:4%; margin-top:4%; white-space:pre-wrap; bottom:0%;padding-left:4%;padding-right:6%; height:100%; width:93%;"   type="text"  [(ngModel)]="message" (keyup)="typing()"  >
+
+      </ion-textarea>
+
+      <ion-fab right  style="bottom:13%; right:3%;" >
+        <button ion-button icon-only clear>
+          <ion-icon name="ios-attach" color="primary" style="margin-top:10px;margin-right: 3%;height: 20px;width: 20px;  " > </ion-icon>
+        </button>
+      </ion-fab>
+
+    </ion-row>
+  </div>
+
+  <div style="background-color:#b6bab7; ">
+    <ion-fab right  style="bottom:0.5%; right: 0%;" >
+      <button ion-fab mini  (click)="send()" > <ion-icon name="send" ></ion-icon></button>
+    </ion-fab>
+  </div>
+</ion-row>
+

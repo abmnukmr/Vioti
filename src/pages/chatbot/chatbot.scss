@@ -1,3 +1,125 @@
 page-chatbot {
+  background-color: #e2e2e2;
+
+  .sendtext{
+    height: auto;
+    border: 1px solid #cb1b58;
+    position: absolute;
+    width: 80%;
+    bottom:1%;
+    margin-left:3%;
+    background-color: rgba(255,246,254,0.99);
+    z-index:999;
+    padding-top:1%;
+    padding-bottom: 1%;
+    word-wrap: break-word;
+    //bottom: 17%;
+    //padding-bottom: 6%;
+    border-radius: 25px 25px 25px 25px;
+  }
+
+
+  .text-input-md{
+    margin-bottom:0px;
+    margin-top:0px;
+
+  }
+
+  .sendbutton{
+
+    height: 48px;
+    width: 48px;
+    z-index: 3;
+    background-color: #cb1b58;
+    border: 1px solid #cb1b58;
+    position: absolute;
+    //margin-left: 1%;
+    top: 5%;
+    right: 2.5%;
+    padding-left:1%;
+    padding-bottom: 8%;
+    border-radius: 25px 25px 25px 25px;
+  }
+  ion-footer{
+
+    background-color: rgba(203, 27, 88, 0.04);
+  }
+
+
+  .rightalign{
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-top: 1%;
+    margin-right: 4%;
+    max-width: 80%;
+
+
+
+    display:inline-block;
+    padding-top: 1.5%;
+    height:auto;
+    padding-bottom: 1.5%;
+    background-color: rgba(255, 220, 230, 1);
+    border-radius: 10px 0px 10px 10px;
+  }
+
+
+
+
+  .rightalign_image{
+    margin-top: 1%;
+    //margin-bottom: 1%;
+
+    //display:inline-block;
+    height:auto;
+    max-width:80%;
+
+    overflow: hidden;
+
+    margin-right: 4%;
+    border: 1px solid #cb1b58;
+    background-color: #fbfbfb;
+
+
+    border-radius: 10px 0px 10px 10px;
+  }
+
+  .as{
+    order: -1;
+  }
+
+  .leftalign{
+    margin-top: 1%;
+    //display:inline-block;
+    height:auto;
+    max-width:80%;
+    overflow: hidden;
+
+    margin-left: 4%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    border: 1px solid #cb1b58;
+    background-color: #fbfbfb;
+    border-radius: 0px 15px 15px 15px;
+
+  }
+
+  .leftalign_imgae{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    display:inline-block;
+    height:auto;
+    max-width:80%;
+    overflow: hidden;
+
+    margin-left: 4%;
+    border: 1px solid #cb1b58;
+    background-color: #fbfbfb;
+    border-radius: 0px 15px 15px 15px;
+
+  }
+
 
 }

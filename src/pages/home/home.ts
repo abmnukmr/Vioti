@@ -160,19 +160,22 @@ import {Notification} from "../../providers/notification";
   getpo(){
     this.zone.run(()=>{
 
-      setInterval(()=>{
-
-        if(this.locationTracker.lat==0){
-
-        this.load(this.locationTracker.lat,this.locationTracker.lng);
+    let trio=  setInterval(()=>{
+      this.load(this.locationTracker.lat,this.locationTracker.lng);
         this.getalladd(this.locationTracker.lat,this.locationTracker.lng);
-
-        }
-
-      },1000)
-
-
+    },100)
     })
+
+    setInterval(()=>{
+      clearInterval(trio);
+    },60000)
+
+
+  })
+
+
+
+
   }
 
 

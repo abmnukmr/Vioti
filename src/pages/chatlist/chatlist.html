@@ -15,4 +15,21 @@
 
 <ion-content padding>
 
+
+  <ion-list>
+    <ion-item *ngFor="let item of Lastarray |orderBy :['-tid'] let i=index " (click)="gotochatbot(item.user,item.image,item.email)">
+      <ion-avatar item-start>
+        <img [src]='item.image'>
+      </ion-avatar>
+
+      <h2>{{item.user}}</h2>
+      <p *ngIf="type==''?true:false">{{item.message}}</p> <p *ngIf="item.email==recmail?true:false" style="color: #cb1b58">{{type}}</p>
+      <p item-end style="font-size:7px;">{{item.time}}</p>
+    </ion-item>
+  </ion-list>
+
+
 </ion-content>
+<ion-footer>
+
+</ion-footer>

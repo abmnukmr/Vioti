@@ -58,6 +58,7 @@ import {Notification} from "../providers/notification";
 import {AuthProvider} from "../providers/auth-provider";
 import {ChatbotPagePage} from "../pages/chatbot/chatbot";
 import {ChatlistPagePage} from "../pages/chatlist/chatlist";
+import { LinkifyPipe } from '../pipes/linkify/linkify';
 //import {IonicStorageModule } from '@ionic/storage/es2015/storage.d.ts';
 
 export const firebaseConfig = {
@@ -146,7 +147,8 @@ firebase.initializeApp(firebaseConfig);
     TermsPage,
     ShopdetPage,
     ChatlistPagePage,
-    ChatbotPagePage
+    ChatbotPagePage,
+    LinkifyPipe
 
 
 
