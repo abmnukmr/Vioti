@@ -87,6 +87,7 @@ import {Notification} from "../../providers/notification";
     }
 
 */
+   this.getpo();
    this.load(locationTracker.lat,locationTracker.lng);
   this.getalladd(locationTracker.lat,locationTracker.lng);
   this.showadd();
@@ -149,12 +150,52 @@ import {Notification} from "../../providers/notification";
     let toast = this.toastCtrl.create({
       message: text,
       duration: 6000,
+
       position: 'top'
     });
     toast.present();
   }
 
-scan(){
+
+  getpo(){
+    this.zone.run(()=>{
+
+      setInterval(()=>{
+
+        if(this.locationTracker.lat==0){
+
+        this.load(this.locationTracker.lat,this.locationTracker.lng);
+        this.getalladd(this.locationTracker.lat,this.locationTracker.lng);
+
+        }
+
+      },1000)
+
+
+    })
+  }
+
+
+
+ private presentAlert() {
+    let alert = this.alertCtrl.create({
+      subTitle: 'Gps is detecting your location',
+      //subTitle: '10% of battery remaining',
+      buttons: [
+        {
+          text: 'ok',
+          role: 'OK',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }]
+    });
+    alert.present();
+  }
+
+
+
+  scan(){
 
  // BarcodeScanner.scan().then((barcodeData) => {
 
