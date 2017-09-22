@@ -46,6 +46,11 @@ export class ChatbotPagePage {
   @ViewChild('textarea')textarea;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public vctRl:ViewController,public zone:NgZone) {
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      this.email1 = user.email;
+
+    }
 
 
     this.getchatdata();
@@ -89,7 +94,12 @@ export class ChatbotPagePage {
 
 
 
-  ionviewWillEnter(){
+  ionViewDidEnter(){
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      this.email1 = user.email;
+
+    }
 
     // this.getdata();
   }
