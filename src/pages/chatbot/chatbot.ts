@@ -35,7 +35,7 @@ export class ChatbotPagePage {
   chatbox:any;
   count:any=0;
   email1:any;
-
+ dbb:any;
   scrollAmount:any=0;
 
   type:any;
@@ -164,18 +164,73 @@ export class ChatbotPagePage {
       this.email1 = user.email;
 
     }
-
     this.msg={
       "user":this.name,
       "email":this.email2,
-       "sender_mail":this.email1,
+      "sender_mail":this.email1,
       "message":this.message +" ",
-      "image":"http://www.iconsfind.com/wp-content/uploads/2016/10/20161014_58006bff8b1de.png",
+      "image":this.image,
+      "docimage":"",
       "docs":"",
       "notification_token":"",
       "time":moment().format('LT'),
       "tid":Date.now()
     }
+
+
+    this.db.allDocs({include_docs:true},(err,result)=>{
+      if(!err){
+
+
+
+        let  rows=result.rows;
+        if(rows.length ==0){
+          console.log("fdr");
+
+          this.setupdbb();
+
+
+          var item=[ {"user":this.name,
+            "email":this.email2,
+           // "sender_mail":this.email1,
+           // "message":this.message +" ",
+            "image":this.image,
+            "docimage":"",
+            "docs":"",
+            "notification_token":"",
+            "time":moment().format('LT'),
+            "tid":Date.now()}]
+
+          this.dbb.bulkDocs( {"docs":item}, (err, result) => {
+            if (!err) {
+
+
+
+             // this.ScrollToBottom();
+              console.log("Successfully Added to chatlist");
+
+              console.log(result);
+              return null;
+            }
+            else {
+              console.log(err)
+            }
+
+          })
+
+
+        }
+
+          //for(let i=0;i<rows.length;i++){
+         // this.chats.push(rows[i].doc)
+        }
+        //console.log(this.chats);
+
+    })
+
+
+
+
     if(this.message != ''  ){
       this.socket.emit('gettomessage', this.msg);
     }
@@ -228,7 +283,9 @@ export class ChatbotPagePage {
     this.db = new PouchDB(db);
   }
 
-
+  setupdbb(){
+    this.dbb = new PouchDB("chatlist")
+  }
 
 
   getdata(){
@@ -236,7 +293,7 @@ export class ChatbotPagePage {
     this.db.allDocs({include_docs:true},(err,result)=>{
       if(!err){
         let  rows=result.rows;
-        for(let i=0;i<rows.length;i++){
+          for(let i=0;i<rows.length;i++){
           this.chats.push(rows[i].doc)
         }
         console.log(this.chats);
@@ -256,6 +313,8 @@ export class ChatbotPagePage {
     var item=[msg]
     this.db.bulkDocs( {"docs":item}, (err, result) => {
       if (!err) {
+
+
 
         this.ScrollToBottom();
         console.log("Successfully Added");

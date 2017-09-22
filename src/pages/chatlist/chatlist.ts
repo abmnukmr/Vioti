@@ -17,30 +17,30 @@ import {ChatbotPagePage} from "../chatbot/chatbot";
 export class ChatlistPagePage {
 
   db:any;
+  dbb:any;
   rowss:any;
   lastmessage:string="";
   Lastarray=[];
   val:any;
+  index:any;
   socket:any;
   recmail:any="";
   type:any="";
-  user:any=[{"name":"ABhimanyu","image":"assets/image/abmnu.jpg","email":"abmnukmr@gmail.com"},{"name":"Davis Deep","image":"assets/image/dp.png","email":"davis_deep@gmail.com"},{"name":"Rohit Nandan","image":"assets/image/dp.png","email":"nandan_rohit@gmail.com"},{"name":"Sumit Singh","image":"assets/image/dp.png","email":"sumit007@gmail.com"}]
-  constructor(public navCtrl: NavController,public Mdl:ModalController) {
-    this.socket = io('https://vioti.herokuapp.com/');
+  user=[];
+    constructor(public navCtrl: NavController,public Mdl:ModalController) {
 
-    this.join();
-    this.refresh();
+      this.socket = io('https://vioti.herokuapp.com/');
 
 
-
-
+   /*
     this.socket.on('gettomessage', (msg) => {
       if(msg!= null) {
-        var index =this.user.findIndex(function(item, i){
+
+        this.index =this.user.findIndex((item, i)=>{
           return item.email === msg.email
         })
 
-        this.user[index].message
+        this.user[this.index].message
         this.socket.emit('socketjoined',msg.email)
 
         console.log("message", msg.email);
@@ -49,7 +49,7 @@ export class ChatlistPagePage {
 
 
       }
-    });
+    });*/
 
 
 
@@ -60,6 +60,60 @@ export class ChatlistPagePage {
     });
 
 
+
+  }
+
+
+  ionViewDidEnter(){
+
+   console.log("Enter")
+    this.setupdbb()
+
+    this.dbb.allDocs({include_docs:true},(err,result)=>{
+      console.log("check")
+
+      if(!err){
+
+        let  rows=result.rows;
+        console.log(" check i  fetch"+rows.length)
+
+        for(let i=0; i< rows.length; i++){
+          console.log(rows[i].doc);
+
+          this.user.push(rows[i].doc)
+          // console.log(rows[i].doc);
+
+        }
+        this.refresh();
+        this.join();
+        console.log(" check i  fetch")
+
+        // console.log(this.chats);
+      }
+      else {
+        console.log(" check i can't fetch")
+
+      }
+
+    })
+
+
+
+
+    // this.getdata();
+  }
+
+
+
+
+  ionViewWillLeave(){
+    this.user=[];
+    this.Lastarray=[];
+
+    this.refresh();
+    this.join();
+
+    console.log("jjgsjhagjhags")
 
   }
 
@@ -103,7 +157,7 @@ export class ChatlistPagePage {
   gotochatbot(name,image,email){
 
 
-    let profileModal = this.Mdl.create(ChatbotPagePage,{"name":name,"image":image,"email":email});
+    let profileModal = this.Mdl.create(ChatbotPagePage,{"name":name,"profilimg":image,"email":email});
     profileModal.onDidDismiss(data => {
       this.dore();
       console.log("hiiii");
@@ -112,9 +166,16 @@ export class ChatlistPagePage {
   }
 
 
+
   setupdb(db){
     this.db = new PouchDB(db);
   }
+
+  setupdbb(){
+    console.log("Attribute")
+    this.dbb = new PouchDB("chatlist")
+  }
+
 
   sortByAttribue(arr, attribute) {
     return arr.sort(function(a,b) {
@@ -130,6 +191,9 @@ export class ChatlistPagePage {
   }
 
 
+
+
+
   getdata(db){
     this.setupdb(db);
     var as;
@@ -138,7 +202,7 @@ export class ChatlistPagePage {
         this.rowss=result.rows;
 
         this.rowss.sort((a, b)=> {
-          return a.doc.tid -b.doc.tid ;
+          return a.doc.tid -b.doc.tid;
         });
         let gi=this.rowss[this.rowss.length -1]
 
@@ -152,4 +216,5 @@ export class ChatlistPagePage {
     })
 
   }
+
 }

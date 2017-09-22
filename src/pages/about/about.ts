@@ -65,6 +65,7 @@ spinshow:boolean=false;
 
   ionViewDidEnter() {
     this.pet='puppies'
+    console.log("checkin")
 
     this.load();
   }

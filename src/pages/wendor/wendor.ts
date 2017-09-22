@@ -12,6 +12,9 @@ import {CallNumber} from 'ionic-native';
 import {RequestOptions, Headers, Http} from "@angular/http";
 import {LocationTracker} from "../../providers/location-tracker";
 import {ChatbotPagePage} from "../chatbot/chatbot";
+
+import PouchDB from 'pouchdb';
+
 /*
   Generated class for the Wendor page.
 
@@ -26,6 +29,8 @@ export class WendorPage {
   showThis:boolean=false;
   name:string;
   wendor:any;
+  db:any;
+  dbb:any;
   emailsearch:string;
   loading: Loading;
   email:string;
@@ -315,6 +320,40 @@ export class WendorPage {
 
    }
 
+  setupdb(db){
+    this.db = new PouchDB(db);
+  }
+
+  setupdbb(db){
+    this.dbb = new PouchDB(db);
+  }
+
+
+  addlist(){
+    this.setupdbb("chatlistdb")
+  }
+
+
+
+
+
+
+  getdata(){
+    this.setupdb(this.wendor.email);
+    this.db.allDocs({include_docs:true},(err,result)=>{
+      if(!err){
+        let  rows=result.rows;
+        for(let i=0;i<rows.length;i++){
+        //  this.chats.push(rows[i].doc)
+        }
+
+        if(rows.length<1){
+
+        }
+        //console.log(this.chats);
+      }
+    })
+  }
 
 
 
