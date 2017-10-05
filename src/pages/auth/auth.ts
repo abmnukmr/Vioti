@@ -18,6 +18,7 @@ import firebase from 'firebase'
 import {HomePage} from "../home/home";
 import {AuthProvider} from "../../providers/auth-provider";
 import {RequestOptions, Headers, Http} from "@angular/http";
+import PouchDB from 'pouchdb';
 
 /*
  Generated class for the Auth page.
@@ -38,6 +39,7 @@ export class AuthPage {
   tabBarElement: any;
   update:any;
   email1:any;
+  db:any;
   name:any;
   photoUrl:any;
   verified:boolean;
@@ -56,6 +58,10 @@ export class AuthPage {
               private platform: Platform  ,   public authService: Auth, public navParams: NavParams, public formBuilder: FormBuilder,public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
 
 //    let EMAIL_REGEXP ='/^[a-z0-9!#$%&*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i';
+
+    this.db = new PouchDB('my_database');
+    this.savedata();
+
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
@@ -84,6 +90,29 @@ export class AuthPage {
     this.tabBarElement.style.display = 'flex';
     // this.navCtrl.pop();
   }
+
+
+
+
+
+  savedata(){
+    let doc = {
+      _id : '001',
+      _rev: '3-552920d1ca372986fad7b996ce365f5d',
+      lat:this.locationTracker.lat,
+      lng:this.locationTracker.lng,
+    }
+    this.db.put(doc, function(err, response) {
+      if (err) {
+        return console.log(err);
+      } else {
+        console.log("Document created Successfully");
+      }
+    });
+  }
+
+
+
 
 
   googlePlusLogin()

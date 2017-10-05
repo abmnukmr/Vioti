@@ -45,7 +45,7 @@
 
     <ion-item>
 
-      <ion-textarea #address formControlName="address" type="text" (change)="elementChanged(address)"
+      <ion-textarea #address formControlName="address" type="text" (change)="elementChanged(address)" style=" white-space:pre-wrap;word-break: break-all;"
                     placeholder="Address" rows="4"
                     [class.invalid]="!registerForm.controls.address.valid && (addressChanged || submitAttempt)"></ion-textarea>
     </ion-item>
@@ -57,7 +57,7 @@
 
 
     <ion-item>
-      <ion-textarea #fullname formControlName="discription" type="text" (change)="elementChanged(discription)"
+      <ion-textarea #fullname formControlName="discription" type="text" (change)="elementChanged(discription)" style=" white-space:pre-wrap;word-break: break-all;"
                     placeholder="Discription of your shop" rows="4"
                     [class.invalid]="!registerForm.controls.discription.valid && (discriptionChanged || submitAttempt)"></ion-textarea>
     </ion-item>

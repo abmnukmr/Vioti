@@ -10,6 +10,8 @@ import {Completeservice} from "../../providers/completeservice";
 import {SearchPage} from "../search/search";
 import {WendorPage} from "../wendor/wendor";
 import {FiterPage} from "../fiter/fiter";
+import { NativeStorage } from 'ionic-native';
+
 import {Geolocation, GoogleMapsAnimation, GoogleMapsMarkerOptions, GoogleMapsLatLng, Geocoder, AdMob} from 'ionic-native';
 import {ChooslocPage} from "../choosloc/choosloc";
 import {LocPage} from "../loc/loc";
@@ -28,6 +30,9 @@ import {MorelocalPage} from "../morelocal/morelocal";
 import {Adver} from "../../providers/adver";
 import {Http} from "@angular/http";
 import {Notification} from "../../providers/notification";
+import PouchDB from 'pouchdb';
+import * as pouchdbUpsert from 'pouchdb-upsert';
+
 //import { Storage } from '@ionic/storage';
 
 
@@ -46,10 +51,13 @@ import {Notification} from "../../providers/notification";
   transitionpage=TransitionPage;
   search=SearchPage;
   loc=LocPage;
+  db:any;
   moreloc=MorelocalPage;
   profile=ProfilePage;
   wendor=WendorPage;
   data:any;
+  loadlat:any;
+  loadlng:any;
   locadd:any;
   _fitadd:any;
   locdata:any;
@@ -88,10 +96,13 @@ import {Notification} from "../../providers/notification";
     }
 
 */
-   this.getpo();
-   this.load(locationTracker.lat,locationTracker.lng);
-  this.getalladd(locationTracker.lat,locationTracker.lng);
-  this.showadd();
+    this.getpo();
+
+    this.load(this.locationTracker.lat,this.locationTracker.lng);
+    this.getalladd(this.locationTracker.lat,this.locationTracker.lng);
+
+
+    this.showadd();
 
     this.push.register().then((t: PushToken) => {
       return this.push.saveToken(t);
@@ -147,6 +158,38 @@ import {Notification} from "../../providers/notification";
 
 
 
+
+savedata(){
+
+  this.db = new PouchDB('myLocationbb');
+
+  let doc = {
+    "_id" : '001',
+    "name":"Abhimanyu"
+    //"lat":this.locationTracker.lat,
+    //"lng":this.locationTracker.lng,
+     }
+
+//Inserting Document
+  this.db.put(doc, function(err, response) {
+    if (err) {
+      return console.log(err);
+    } else {
+      console.log("Document created Successfully");
+    }
+  });
+}
+
+getdata(){
+  NativeStorage.getItem('myitem')
+    .then(
+      data => console.log(data),
+      error => console.error(error)
+    );
+
+}
+
+
   private presentToast(text) {
     let toast = this.toastCtrl.create({
       message: text,
@@ -159,6 +202,7 @@ import {Notification} from "../../providers/notification";
 
 
   getpo(){
+
     this.zone.run(()=>{
 
     this.trio=  setInterval(()=>{
@@ -169,6 +213,13 @@ import {Notification} from "../../providers/notification";
     })
 
     setInterval(()=>{
+
+      NativeStorage.setItem('myitem', {lat:this.locationTracker.lat,lng : this.locationTracker.lng})
+        .then(
+          () => console.log('Stored item!'),
+          error => console.error('Error storing item', error)
+        );
+      //this.savedata();
       clearInterval(this.trio);
     },30000)
 
