@@ -35,6 +35,7 @@ export class ChatbotPagePage {
   chatbox:any;
   count:any=0;
   email1:any;
+  sockett:any;
  dbb:any;
   scrollAmount:any=0;
 
@@ -56,18 +57,19 @@ export class ChatbotPagePage {
     this.getchatdata();
 
 
-
     this.getdata();
 
     this.ScrollToBottom();
     //console.log(this.url)
     this.socket = io('https://vioti.herokuapp.com/');
 
+    this.socket.emit('socketjoined',this.email1)
+
 
     this.socket.emit('socketjoined',this.email2)
 
     this.socket.on('gettomessage', (msg) => {
-      if(msg!= null) {
+      if(msg!= null && msg.sender_mail==this.email2||msg.sender_mail==this.email1) {
 
         console.log("message", msg.email);
         console.log("check");
@@ -178,7 +180,7 @@ export class ChatbotPagePage {
       "user":this.name,
       "email":this.email2,
       "sender_mail":this.email1,
-      "message":this.message +" ",
+      "message":this.message,
       "image":this.image,
       "docimage":"",
       "docs":"",
@@ -250,6 +252,12 @@ export class ChatbotPagePage {
     this.message = '';
     // this.setfo();
   }
+
+  join(em){
+      this.socket.emit('socketjoined',em)
+
+    }
+
 
   ionViewDidLoad() {
     // this.scro();

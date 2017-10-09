@@ -221,7 +221,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-fab right bottom >
+  <ion-fab right bottom [hidden]="wendor.email==email1?true:false" >
     <button ion-fab   color="primary"(click)="gotochat()"><ion-icon name="chatbubbles" color="action"></ion-icon></button>
 
   </ion-fab>

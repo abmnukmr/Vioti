@@ -29,7 +29,6 @@ export class ChatlistPagePage {
   user=[];
     constructor(public navCtrl: NavController,public Mdl:ModalController) {
 
-      this.socket = io('https://vioti.herokuapp.com/');
 
 
    /*
@@ -52,12 +51,6 @@ export class ChatlistPagePage {
     });*/
 
 
-
-    this.socket.on('typingrec', (msg) => {
-      this.type=msg.type;
-      this.recmail=msg.email
-      console.log(this.type)
-    });
 
 
 
@@ -85,7 +78,7 @@ export class ChatlistPagePage {
 
         }
         this.refresh();
-        this.join();
+       // this.join();
         console.log(" check i  fetch")
 
         // console.log(this.chats);
@@ -111,7 +104,7 @@ export class ChatlistPagePage {
     this.Lastarray=[];
 
     this.refresh();
-    this.join();
+   // this.join();
 
     console.log("jjgsjhagjhags")
 

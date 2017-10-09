@@ -51,7 +51,11 @@ export class WendorPage {
   searching:boolean=false;
   constructor(public modalCtrl: ModalController, public navprms: NavParams,public locationTracker:LocationTracker,public http:Http, public navCtrl: NavController,public toastCtrl: ToastController, public abmnu:Abmnu,public loadingCtrl:LoadingController,public alertCtrl: AlertController,public connectivityService:ConnectivityService ) {
 
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      this.email1 = user.email;
 
+    }
 
     this.spinshow=false;
 
