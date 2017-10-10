@@ -3,7 +3,7 @@ import {Content,  NavController, NavParams, ViewController} from 'ionic-angular'
 import * as io from 'socket.io-client';
 import * as moment from 'moment'
 import * as firebase from "firebase/app";
-
+import { LocalNotifications } from 'ionic-native';
 import PouchDB from 'pouchdb';
 /*
   Generated class for the ChatbotPage page.
@@ -80,19 +80,88 @@ export class ChatbotPagePage {
 
         console.log(this.chats);
 
+      }
+      else {
+
+        this.setupdb(msg.sender_mail);
+
+
+
+        this.db.allDocs({include_docs:true},(err,result)=>{
+          if(!err){
+
+            let  rows=result.rows;
+            if(rows.length ==0){
+              console.log("fdr");
+              this.setupdbb();
+              var item=[msg]
+
+              this.dbb.bulkDocs( {"docs":item}, (err, result) => {
+                if (!err) {
+
+
+
+                  // this.ScrollToBottom();
+                  console.log("Successfully Added to chatlist");
+
+                  console.log(result);
+                  return null;
+                }
+                else {
+                  console.log(err)
+                }
+
+              })
+
+
+            }
+
+            //for(let i=0;i<rows.length;i++){
+            // this.chats.push(rows[i].doc)
+          }
+          //console.log(this.chats);
+
+        })
+
+
+
+        this.addata(msg);
+       this.triggernotification(msg);
+
 
       }
+
+
+
+
     });
 
 
     this.socket.on('typingrec', (msg) => {
-      this.type=msg.type;
-      console.log(this.type)
+      if(msg!= null && msg.email==this.email2) {
+
+        this.type = msg.type;
+        console.log(this.type)
+      }
     });
 
 
 
   }
+
+
+
+
+triggernotification(msg){
+  LocalNotifications.schedule({
+    id: 1,
+    text: msg.message,
+    title:msg.user,
+    icon: 'assets/icon/vaioti_32_pink.svg',
+    data: { mydata: 'My hidden message this is' },
+  });
+}
+
 
 
 
@@ -180,7 +249,7 @@ export class ChatbotPagePage {
       "user":this.name,
       "email":this.email2,
       "sender_mail":this.email1,
-      "message":this.message,
+      "message":this.message +" ",
       "image":this.image,
       "docimage":"",
       "docs":"",
