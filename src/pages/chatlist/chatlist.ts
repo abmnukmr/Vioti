@@ -3,6 +3,7 @@ import {ModalController, NavController} from 'ionic-angular';
 import PouchDB from 'pouchdb';
 import * as io from 'socket.io-client';
 import {ChatbotPagePage} from "../chatbot/chatbot";
+import * as firebase from "firebase/app";
 
 /*
   Generated class for the ChatlistPage page.
@@ -27,8 +28,14 @@ export class ChatlistPagePage {
   recmail:any="";
   type:any="";
   user=[];
+  email1:any;
     constructor(public navCtrl: NavController,public Mdl:ModalController) {
 
+      var user = firebase.auth().currentUser;
+      if (user != null) {
+        this.email1 = user.email;
+
+      }
 
 
    /*

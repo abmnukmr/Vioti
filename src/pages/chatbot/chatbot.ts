@@ -82,51 +82,60 @@ export class ChatbotPagePage {
 
       }
       else {
+        if(msg.email==this.email1) {
 
-        this.setupdb(msg.sender_mail);
-
-
-
-        this.db.allDocs({include_docs:true},(err,result)=>{
-          if(!err){
-
-            let  rows=result.rows;
-            if(rows.length ==0){
-              console.log("fdr");
-              this.setupdbb();
-              var item=[msg]
-
-              this.dbb.bulkDocs( {"docs":item}, (err, result) => {
-                if (!err) {
+          this.setupdb(msg.sender_mail);
 
 
+          this.db.allDocs({include_docs: true}, (err, result) => {
+            if (!err) {
 
-                  // this.ScrollToBottom();
-                  console.log("Successfully Added to chatlist");
+              let rows = result.rows;
+              if (rows.length == 0) {
+                console.log("fdr");
+                this.setupdbb();
+                var item=[ {"user":msg.sender_mail.substring(0,6),
+                  "email":msg.sender_mail,
+                  // "sender_mail":this.email1,
+                  // "message":this.message +" ",
+                  "image":this.image,
+                  "docimage":"",
+                  "docs":"",
+                  "notification_token":"",
+                  "time":moment().format('LT'),
+                  "tid":Date.now()}]
 
-                  console.log(result);
-                  return null;
-                }
-                else {
-                  console.log(err)
-                }
-
-              })
+                this.dbb.bulkDocs({"docs": item}, (err, result) => {
+                  if (!err) {
 
 
+
+                    // this.ScrollToBottom();
+                    console.log("Successfully Added  to chatlist by notification");
+
+                    console.log(result);
+                    return null;
+                  }
+                  else {
+                    console.log(err)
+                  }
+
+                })
+
+
+              }
+
+              //for(let i=0;i<rows.length;i++){
+              // this.chats.push(rows[i].doc)
             }
+            //console.log(this.chats);
 
-            //for(let i=0;i<rows.length;i++){
-            // this.chats.push(rows[i].doc)
-          }
-          //console.log(this.chats);
+          })
 
-        })
+          this.addata(msg);
+          this.triggernotification(msg);
 
-
-
-        this.addata(msg);
-       this.triggernotification(msg);
+        }
 
 
       }
@@ -138,7 +147,7 @@ export class ChatbotPagePage {
 
 
     this.socket.on('typingrec', (msg) => {
-      if(msg!= null && msg.email==this.email2) {
+      if(msg!= null && msg.email==this.email1) {
 
         this.type = msg.type;
         console.log(this.type)
@@ -156,7 +165,7 @@ triggernotification(msg){
   LocalNotifications.schedule({
     id: 1,
     text: msg.message,
-    title:msg.user,
+    title:msg.sender_mail.substring(0,6),
     icon: 'assets/icon/vaioti_32_pink.svg',
     data: { mydata: 'My hidden message this is' },
   });
@@ -210,7 +219,7 @@ triggernotification(msg){
     this.ScrollToBottom();
     this.msg={
       "type":"Typing...",
-      "email":this.email1
+      "email":this.email2
     }
     this.socket.emit('typing', this.msg);
 
@@ -220,7 +229,7 @@ triggernotification(msg){
     setTimeout(() => {
       this.msg={
         "type":"",
-        "email":this.email1
+        "email":this.email2
       }
       this.socket.emit('typing', this.msg);
 
@@ -246,11 +255,12 @@ triggernotification(msg){
 
     }
     this.msg={
-      "user":this.name,
+      "user":this.email2.substring(0,6),
       "email":this.email2,
       "sender_mail":this.email1,
       "message":this.message +" ",
       "image":this.image,
+      "sender_image":"",
       "docimage":"",
       "docs":"",
       "notification_token":"",
