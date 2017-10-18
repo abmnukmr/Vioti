@@ -6,9 +6,19 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Chat</ion-title>
-  </ion-navbar>
+
+  <ion-toolbar>
+
+      <p style="margin-left: 40%; color: #cb1b58;">{{userb}}</p>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="showCheckbox()">
+
+
+        <ion-icon name="create"  margin-right="6px" ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 
 </ion-header>
 
@@ -17,7 +27,7 @@
 
 
   <ion-list>
-    <ion-item *ngFor="let item of Lastarray |orderBy :['-tid'] let i=index " (click)="gotochatbot(item.email==email1?item.sender_mail.substring(0,6):item.email.substring(0,6),item.image,item.email==email1?item.sender_mail:item.email)">
+    <ion-item *ngFor="let item of Lastarray |orderBy :['-tid'] let i=index " (click)="gotochatbot(item.email==email1?item.user_sender:item.user_reciever,item.image,item.email==email1?item.sender_mail:item.email)">
 
      <ion-row>
        <ion-col width-10>
@@ -27,13 +37,14 @@
        </ion-col>
        <ion-col width-90>
 
-         <h2 style="overflow:hidden;text-overflow: ellipsis;margin-left: 15px;" [innerHTML]="item.email==email1?item.sender_mail.substring(0,6):item.email.substring(0,6)"></h2>
+         <h2 style="overflow:hidden;text-overflow: ellipsis;margin-left: 15px;" [innerHTML]="item.email==email1?item.user_sender:item.user_reciever"></h2>
 
          <ion-row>
       <ion-col width-85>
        <p *ngIf="type==''?true:false" style="overflow:hidden;margin-left: 15px;text-overflow: ellipsis;" [innerHTML]="item.message"></p> <p *ngIf="item.email==recmail?true:false" style="color: #cb1b58">{{type}}</p>
       </ion-col>
        <p item-end style="font-size:7px;">{{item.time}}</p>
+
      </ion-row>
        </ion-col>
      </ion-row>

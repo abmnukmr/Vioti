@@ -34,7 +34,7 @@
   </ion-refresher>
 
 
-  <img [src]="wendor.profileimage" style="z-index: -2; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))"/>
+  <img [src]="wendor.profileimage" style="z-index: -2; position:fixed;-webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))"  (click)="viewphoto(wendor.profileimage)"/>
 <!--
   <img style="width:70px;height:70px;border-radius:70px;position: absolute; margin-top:20%;left:40%;background-color:#862734;box-shadow: #862734; " [src]="wendor.profileimage" />
 -->
@@ -42,14 +42,22 @@
 
   <ion-toggle color="primary" color="energized" style="padding-top:20px;padding-left:20px;position: absolute;" [checked]="wendor.status" (ionChange)="togglechage()"></ion-toggle>
 
+
   <ion-buttons  style="padding-top:30px;" end>
 
       <button ion-button icon-right="" clear small  (click)=" profilepc()" >
         <ion-icon name="ios-camera-outline"  color="action"></ion-icon>
       </button>
   </ion-buttons>
-<div style="padding-right: 10px;padding-left:10px; ">
-<ion-card style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;opacity: 1;margin-top: 70px;margin-bottom: 1px !important;padding-left:10px;padding-right: 10px;">
+
+
+  <ion-searchbar   style="margin-top:20px;" #searchbar  [showCancelButton]="true"  [(ngModel)]="iname" (ionInput)="getItems(iname)" (ionFocus)="checkFocus()"  (ionBlur)="checkBlur()"  autofocus>
+  </ion-searchbar>
+
+  <div style="padding-right: 10px;padding-left:10px; ">
+
+
+    <ion-card style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;opacity: 1;margin-top: 70px;margin-bottom: 1px !important;padding-left:10px;padding-right: 10px;" [hidden]="grip">
   <ion-card-content>
 
     <ion-fab right >
@@ -73,7 +81,7 @@
     </ion-row>
 
 
-    <p class="card-subtitle" [innerHTML]="wendor.address"></p>
+    <p class="card-subtitle" [innerHTML]="wendor.address|linkify"></p>
 
     <ion-row>
       <ion-col width-90>
@@ -95,7 +103,7 @@
 </ion-card>
 
   <!---- ion card for url and  live tracking--->
- <ion-card no-padding>
+ <ion-card no-padding [hidden]="grip">
   <ion-card-content>
 
     <button ion-button icon-right clear small >
@@ -121,7 +129,7 @@
 
 
 
-            <ion-label style="color: #a59caa;font-size: 13px;margin-left: 10px;" [innerHTML]="location_alert"></ion-label>
+            <ion-label style="color: #a59caa;font-size: 13px;margin-left: 10px;" [innerHTML]="location_alert|linkify"></ion-label>
 
           </ion-row>
 
@@ -133,7 +141,7 @@
   <!--- contacts card -->
 
 
-  <ion-card  no-padding>
+  <ion-card  no-padding  [hidden]="grip">
 
 
 
@@ -151,14 +159,14 @@
 
           <button ion-button icon-left clear small>
             <ion-icon name="ios-mail-outline" color="primary"></ion-icon>
-            <p style="font-size:12px;" [innerHTML]="wendor.email"> </p>
+            <p style="font-size:12px;" [innerHTML]="wendor.email|linkify"> </p>
           </button>
       </ion-row>
         <ion-row style="padding-top: 0px;padding-bottom: 0px;">
           <ion-col width-75>
           <button ion-button icon-left clear small >
             <ion-icon name="call" color="primary"></ion-icon>
-            <div [innerHTML]="wendor.phone"></div>
+            <div [innerHTML]="wendor.phone|linkify"></div>
           </button>
           </ion-col>
 
@@ -185,7 +193,7 @@
   <!-- ion card contacts end -->
 
 
-  <ion-card  style="padding-top: 0px">
+  <ion-card  style="padding-top: 0px"  [hidden]="grip">
 
    <ion-card-header style=" padding-top: 0px" >
      <ion-row>
@@ -224,7 +232,7 @@
 
     <ion-card-content>
 
-    <p style="text-align:justify;padding-top: 10px;white-space:pre;display: block;" [innerHTML]="wendor.discription"></p>
+    <p style="text-align:justify;padding-top: 10px;white-space:pre;display: block;" [innerHTML]="wendor.discription|linkify"></p>
     </ion-card-content>
 
   </ion-card>
@@ -239,8 +247,8 @@
     <ion-card-header style="padding-top:3px">
       <ion-row no-padding>
         <ion-col width-50 no-padding>
-          <h2 style="color:#cb1b58;" ><b [innerHTML]="itemo.itemname"></b></h2>
-          <h6 style="color:rgba(68,48,66,0.53);font-size:10px;" [innerHTML]="itemo.itemno"></h6>
+          <h2 style="color:#cb1b58;" ><b [innerHTML]="itemo.itemname|linkify"></b></h2>
+          <h6 style="color:rgba(68,48,66,0.53);font-size:10px;" [innerHTML]="itemo.itemno|linkify"></h6>
         </ion-col>
           <ion-fab right>
             <button ion-button icon-right clear small (click)="openMenu(itemo.id,itemo.itemname,itemo.itemno,itemo.discription,itemo.price)">
@@ -254,7 +262,7 @@
     <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
     <ion-slides   style="width: 100%;height:300px;padding: 0px;"  loop="true" paginationType="fraction" pager="true" autoplay="2000" loop="true" zoom="true" >
       <ion-slide *ngFor="let imgi of itemo.image; let i=index">
-        <img [src]="imgi.location"/>
+        <img [src]="imgi.location" (click)="viewphoto(imgi.location)"/>
 
       </ion-slide>
 
@@ -277,12 +285,12 @@
             <p>Price:-</p>
           </button>
         </ion-col>
-        <div ><p style="text-align:justify;color: #a82158;font-size: large;" ><b [innerHTML]="itemo.price"></b></p></div>
+        <div ><p style="text-align:justify;color: #a82158;font-size: large;" ><b [innerHTML]="itemo.price|linkify"></b></p></div>
 
       </ion-row>
 
       <div style="width: 100%;height: 1px;background:rgba(203,27,88,0.53); "></div>
-      <p style="text-align:justify;padding-top: 10px;white-space:pre;display: block;" [innerHTML]="itemo.discription"></p>
+      <p style="text-align:justify;padding-top: 10px;white-space:pre;display: block;" [innerHTML]="itemo.discription|linkify"></p>
 
 
     </ion-card-content>

@@ -58,9 +58,11 @@ import {Notification} from "../providers/notification";
 import {AuthProvider} from "../providers/auth-provider";
 import {ChatbotPagePage} from "../pages/chatbot/chatbot";
 import {ChatlistPagePage} from "../pages/chatlist/chatlist";
-import { LinkifyPipe } from '../pipes/linkify/linkify';
-import { ElasticModule } from 'angular2-elastic';
-//import {IonicStorageModule } from '@ionic/storage/es2015/storage.d.ts';
+import {LinkifyPipe } from '../pipes/linkify/linkify';
+import {ElasticModule } from 'angular2-elastic';
+import {Storage } from '@ionic/storage';
+import { SearchPipe } from '../pipes/search/search';
+
 
 export const firebaseConfig = {
 
@@ -149,10 +151,8 @@ firebase.initializeApp(firebaseConfig);
     ShopdetPage,
     ChatlistPagePage,
     ChatbotPagePage,
-    LinkifyPipe
-
-
-
+    LinkifyPipe,
+    SearchPipe
   ],
   imports: [
     ElasticModule,
@@ -161,6 +161,7 @@ firebase.initializeApp(firebaseConfig);
     DynamicComponentModule.forRoot({
       imports: [CommonModule, IonicModule]}),
     CloudModule.forRoot(cloudSettings),
+
 //    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     IonicModule.forRoot(MyApp, {
@@ -239,7 +240,7 @@ firebase.initializeApp(firebaseConfig);
     ChatbotPagePage
 
   ],
-  providers:[Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth,Favourite,Otp,Notification,AuthProvider],
+  providers:[Storage,Shopdata,Abmnu,ConnectivityService,LocationTracker,Auth,Favourite,Otp,Notification,AuthProvider],
  // directives:[Focuser],
   schemas:     [CUSTOM_ELEMENTS_SCHEMA]
 })

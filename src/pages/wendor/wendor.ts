@@ -14,6 +14,7 @@ import {LocationTracker} from "../../providers/location-tracker";
 import {ChatbotPagePage} from "../chatbot/chatbot";
 
 import PouchDB from 'pouchdb';
+import { PhotoViewer } from 'ionic-native';
 
 /*
   Generated class for the Wendor page.
@@ -30,6 +31,10 @@ export class WendorPage {
   name:string;
   wendor:any;
   db:any;
+  grip:any=false;
+  filtter:any;
+  items:any;
+  iname:any="";
   dbb:any;
   emailsearch:string;
   loading: Loading;
@@ -84,7 +89,10 @@ export class WendorPage {
 
 
 
+  initializeItems(){
 
+    this.items=this.wendor;
+  }
 
 
 
@@ -199,6 +207,16 @@ export class WendorPage {
 
     }
   }
+
+
+
+
+
+  viewphoto(url){
+    PhotoViewer.show(url, '', {share: true});
+  }
+
+
 
   doRefresh(refresher) {
     this.load();
@@ -339,8 +357,41 @@ export class WendorPage {
 
 
 
+  getItems(ev) {
+    this.searching = true;
+    // Reset items back to all of the items
+    this.initializeItems();
+   // this.listshow=true;
+    // set val to the value of the ev target
+    var val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
 
 
+
+      if (val && val.trim() != '') {
+        this.items = this.items.filter((item) => {
+          console.log(this.filtter);
+          this.grip=true;
+
+          return (item.catagory.toLowerCase().indexOf(val.toLowerCase()) > -1);
+
+
+        })
+      }
+
+
+  }
+
+  checkFocus()
+    {
+      this.grip=true;
+
+    }
+
+  checkBlur(){
+    this.grip=false;
+  }
 
   getdata(){
     this.setupdb(this.wendor.email);

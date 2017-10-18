@@ -23,6 +23,7 @@ import {PhoneverPage} from "../phonever/phonever";
 import {ShopdetPage} from "../shopdet/shopdet";
 import {AphoneverPage} from "../aphonever/aphonever";
 import {LocationTracker} from "../../providers/location-tracker";
+import { PhotoViewer } from 'ionic-native';
 
 /*
   Generated class for the Wallet page.
@@ -41,6 +42,10 @@ export class WalletPage {
   finalstatus:string;
   finalstatuss:string;
   email1:any;
+  items:any;
+  grip:any;
+  iname:any="";
+  filtter:any;
   sttatus:any;
   update2:any;
   tog:boolean;
@@ -118,11 +123,17 @@ export class WalletPage {
 
 
 
+  initializeItems(){
+
+    this.items=this.wendor;
+  }
 
 
 
 
-
+ viewphoto(url){
+   PhotoViewer.show(url, '', {share: true});
+ }
 
 
 
@@ -590,6 +601,44 @@ export class WalletPage {
 
     this.getReviews();
 
+  }
+
+
+
+  getItems(ev) {
+   // this.searching = true;
+    // Reset items back to all of the items
+    this.initializeItems();
+    // this.listshow=true;
+    // set val to the value of the ev target
+    var val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+
+
+
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((item) => {
+        console.log(this.filtter);
+        this.grip=true;
+
+        return (item.catagory.toLowerCase().indexOf(val.toLowerCase()) > -1);
+
+
+      })
+    }
+
+
+  }
+
+  checkFocus()
+  {
+    this.grip=true;
+
+  }
+
+  checkBlur(){
+    this.grip=false;
   }
 
 

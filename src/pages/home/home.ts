@@ -32,6 +32,7 @@ import {Http} from "@angular/http";
 import {Notification} from "../../providers/notification";
 import PouchDB from 'pouchdb';
 import * as pouchdbUpsert from 'pouchdb-upsert';
+import { Storage } from '@ionic/storage';
 
 //import { Storage } from '@ionic/storage';
 
@@ -74,32 +75,30 @@ import * as pouchdbUpsert from 'pouchdb-upsert';
   saved_lng:any;
   @ViewChild('mySlider')mySlider:Slides;
 
-  constructor(public http:Http, public push: Push, public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController,public _shopdata:Shopdata) {
+  constructor(public storage:Storage,public http:Http, public push: Push, public authService: Auth,public alertCtrl:AlertController,public toastCtrl: ToastController,public navCtrl: NavController,public platform:Platform,public zone:NgZone, public _abmnu: Abmnu,public locationTracker: LocationTracker,public menuCtrl: MenuController,public modalCtrl: ModalController,public _shopdata:Shopdata) {
 
-// this.setgo();
-//this.setadd();
-/*
-    if(this.saved_lat=0){
-      while(locationTracker.lat ==0&& locationTracker.lng ==0)
-    {
 
-    }
-     this.storage.set(this.saved_lat,this.locationTracker.lat);
-     this.storage.set(this.saved_lng,this.locationTracker.lng);
-      this.load(this.storage.get(this.saved_lat),this.storage.get(this.saved_lng));
-      this.getalladd(this.storage.get(this.saved_lat),this.storage.get(this.saved_lng));
+    this.storage.get('mygeo').then((val) => {
+      if(val==null){
+      //  alert("null")
+        this.getpo();
 
-    }
-    else {
-      this.load(this.storage.get(this.saved_lat),this.storage.get(this.saved_lng));
-      this.getalladd(this.storage.get(this.saved_lat),this.storage.get(this.saved_lng));
-    }
+        this.load(this.locationTracker.lat,this.locationTracker.lng);
+        this.getalladd(this.locationTracker.lat,this.locationTracker.lng);
 
-*/
-    this.getpo();
+        // this.showCheckbox()
+      }
+      else {
+        this.load(val.lat,val.lng);
+        this.getalladd(val.lat,val.lng);
 
-    this.load(this.locationTracker.lat,this.locationTracker.lng);
-    this.getalladd(this.locationTracker.lat,this.locationTracker.lng);
+        // this.user=val;
+      }
+
+
+    });
+
+
 
 
     this.showadd();
@@ -214,7 +213,7 @@ getdata(){
 
     setInterval(()=>{
 
-      NativeStorage.setItem('myitem', {lat:this.locationTracker.lat,lng : this.locationTracker.lng})
+      this.storage.set('mygeo', {lat:this.locationTracker.lat,lng : this.locationTracker.lng})
         .then(
           () => console.log('Stored item!'),
           error => console.error('Error storing item', error)

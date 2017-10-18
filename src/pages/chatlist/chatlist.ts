@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import {ModalController, NavController} from 'ionic-angular';
+import {AlertController, ModalController, NavController} from 'ionic-angular';
 import PouchDB from 'pouchdb';
 import * as io from 'socket.io-client';
 import {ChatbotPagePage} from "../chatbot/chatbot";
 import * as firebase from "firebase/app";
+import { Storage } from '@ionic/storage';
 
+//import {storage} from 'ionic-native';
 /*
   Generated class for the ChatlistPage page.
 
@@ -28,8 +30,9 @@ export class ChatlistPagePage {
   recmail:any="";
   type:any="";
   user=[];
+  userb:any;
   email1:any;
-    constructor(public navCtrl: NavController,public Mdl:ModalController) {
+    constructor(public alertCtrl:AlertController,public navCtrl: NavController,public Mdl:ModalController,public storage:Storage) {
 
       var user = firebase.auth().currentUser;
       if (user != null) {
@@ -38,31 +41,78 @@ export class ChatlistPagePage {
       }
 
 
-   /*
-    this.socket.on('gettomessage', (msg) => {
-      if(msg!= null) {
+      this.storage.get('name').then((val) => {
+        if(val==null){
+          this.showCheckbox()
+        }
+        else {
+          this.userb=val;
+        }
 
-        this.index =this.user.findIndex((item, i)=>{
-          return item.email === msg.email
-        })
 
-        this.user[this.index].message
-        this.socket.emit('socketjoined',msg.email)
+      });
 
-        console.log("message", msg.email);
-        console.log("check");
+
+      /*
+       this.socket.on('gettomessage', (msg) => {
+         if(msg!= null) {
+
+           this.index =this.user.findIndex((item, i)=>{
+             return item.email === msg.email
+           })
+
+           this.user[this.index].message
+           this.socket.emit('socketjoined',msg.email)
+
+           console.log("message", msg.email);
+           console.log("check");
+
+
+
+         }
+       });*/
+
+
 
 
 
       }
-    });*/
 
 
 
 
+  showCheckbox() {
+    let prompt = this.alertCtrl.create({
+      title: 'Add your Name',
+      message: "Set your Store Name if you have store on VAIOTI",
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Name',
+        }
 
+
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+             this.userb=data.name;
+            this.storage.set('name', data.name);
+
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
-
 
   ionViewDidEnter(){
 

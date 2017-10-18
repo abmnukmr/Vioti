@@ -1,10 +1,13 @@
 import {Component, NgZone, ViewChild} from '@angular/core';
-import {Content,  NavController, NavParams, ViewController} from 'ionic-angular';
+import {AlertController, Content, NavController, NavParams, ViewController} from 'ionic-angular';
 import * as io from 'socket.io-client';
 import * as moment from 'moment'
 import * as firebase from "firebase/app";
 import { LocalNotifications } from 'ionic-native';
 import PouchDB from 'pouchdb';
+import { Storage } from '@ionic/storage';
+import {WendorPage} from "../wendor/wendor";
+
 /*
   Generated class for the ChatbotPage page.
 
@@ -21,6 +24,7 @@ export class ChatbotPagePage {
   image:any;
   email2:any;
   socket:any;
+  user:any;
   showif:boolean=true;
   chats=[];
   db:any;
@@ -46,13 +50,25 @@ export class ChatbotPagePage {
 
   @ViewChild('textarea')textarea;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public vctRl:ViewController,public zone:NgZone) {
+  constructor(public alertCtrl:AlertController,public navCtrl: NavController, public navParams: NavParams,public vctRl:ViewController,public zone:NgZone, public storage:Storage) {
     var user = firebase.auth().currentUser;
     if (user != null) {
       this.email1 = user.email;
 
     }
 
+
+
+    this.storage.get('name').then((val) => {
+     if(val==null || val==""){
+      this.showCheckbox()
+     }
+    else {
+       this.user=val;
+     }
+
+
+    });
 
     this.getchatdata();
 
@@ -94,11 +110,12 @@ export class ChatbotPagePage {
               if (rows.length == 0) {
                 console.log("fdr");
                 this.setupdbb();
-                var item=[ {"user":msg.sender_mail.substring(0,6),
+                var item=[ {
+                  "user_sender":msg.user_sender,
+                  "user_reciever":msg.user_reciever,
                   "email":msg.sender_mail,
-                  // "sender_mail":this.email1,
-                  // "message":this.message +" ",
-                  "image":this.image,
+                   "message":msg.message,
+                  "image":msg.image,
                   "docimage":"",
                   "docs":"",
                   "notification_token":"",
@@ -159,7 +176,37 @@ export class ChatbotPagePage {
   }
 
 
+  showCheckbox() {
+    let prompt = this.alertCtrl.create({
+      title: 'Add your Name',
+      message: "Set your Store Name if you have store on VAIOTI",
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Name',
+        }
 
+
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.storage.set('name', data.name);
+
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
 
 triggernotification(msg){
   LocalNotifications.schedule({
@@ -199,6 +246,14 @@ triggernotification(msg){
 
 
   }
+
+
+
+  goto(){
+    this.navCtrl.push(WendorPage,{"email":this.email2});
+  }
+
+
 
   ionViewWillLeave(){
 
@@ -255,11 +310,13 @@ triggernotification(msg){
 
     }
     this.msg={
-      "user":this.email2.substring(0,6),
+
+      "user_sender":this.user,
+      "user_reciever":this.name,
       "email":this.email2,
       "sender_mail":this.email1,
       "message":this.message +" ",
-      "image":this.image,
+      "image":"https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png",
       "sender_image":"",
       "docimage":"",
       "docs":"",
@@ -281,11 +338,10 @@ triggernotification(msg){
           this.setupdbb();
 
 
-          var item=[ {"user":this.name,
+          var item=[ {"user_sender":this.user,
+            "user_reciever":this.name,
             "email":this.email2,
-           // "sender_mail":this.email1,
-           // "message":this.message +" ",
-            "image":this.image,
+            "image":"https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png",
             "docimage":"",
             "docs":"",
             "notification_token":"",
@@ -342,7 +398,7 @@ triggernotification(msg){
     // this.scro();
   }
   getchatdata(){
-    this.name= this.navParams.get("name")
+    this.name=this.navParams.get("name")
     this.email2=this.navParams.get("email")
     this.image=this.navParams.get("profilimg")
     this.setupdb(this.email2);

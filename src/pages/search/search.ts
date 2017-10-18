@@ -29,6 +29,7 @@ export class SearchPage {
    title:string='catagory';
   testRadioOpen: boolean;
   testRadioResult;
+  iname:any="";
   searchTerm:string="";
   searchControl: FormControl;
   spinshow:boolean=false;
@@ -178,7 +179,6 @@ export class SearchPage {
 
     // if the value is an empty string don't filter the items
 
-    if(this.title=="catagory"){
 
 
     if (val && val.trim() != '') {
@@ -190,48 +190,8 @@ export class SearchPage {
 
       })
     }
-    }
-
-    if(this.title=="name"){
 
 
-      if (val && val.trim() != '') {
-        this.items = this.items.filter((item) => {
-          this.filtter=this.title;
-          console.log(this.filtter);
-          return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-
-
-        })
-      }
-    }
-    if(this.title=="email"){
-
-
-      if (val && val.trim() != '') {
-        this.items = this.items.filter((item) => {
-          this.filtter=this.title;
-          console.log(this.filtter);
-          return (item.email.toLowerCase().indexOf(val.toLowerCase()) > -1);
-
-
-        })
-      }
-    }
-
-    if(this.title=="phone"){
-
-
-      if (val && val.trim() != '') {
-        this.items = this.items.filter((item) => {
-          this.filtter=this.title;
-          console.log(this.filtter);
-          return (item.phone.toLowerCase().indexOf(val.toLowerCase()) > -1);
-
-
-        })
-      }
-    }
 
 
   }

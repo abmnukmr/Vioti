@@ -11,13 +11,14 @@
   <ion-navbar>
     <ion-toolbar>
 
-      <ion-searchbar  #searchbar [formControl]="searchControl" (ionInput)="getItems($event)" [showCancelButton]="true"  class="ser" (animated)="true" (ionCancel)="dismiss4()" autofocus>
+      <ion-searchbar    #searchbar [formControl]="searchControl"  [(ngModel)]="iname" (ionInput)="getItems(iname)" [showCancelButton]="true"  class="ser" (animated)="true" (ionCancel)="dismiss4()" autofocus>
       </ion-searchbar>
 
 
 
     </ion-toolbar>
 
+    <!--
     <ion-buttons end>
       <button ion-button icon-only (click)="showRadio()">
 
@@ -25,7 +26,7 @@
         <ion-icon name="md-more"  padding-right="8px" ></ion-icon>
       </button>
     </ion-buttons>
-
+  -->
   </ion-navbar>
 
 </ion-header>
@@ -39,7 +40,7 @@
 
 
   <ion-list  >
-    <ion-item *ngFor="let item of items"  tappable (click)="goto(item.email)" >
+    <ion-item *ngFor="let item of items |search:'name,catagory,phone,email':iname"  tappable (click)="goto(item.email)" >
 
       <ion-avatar item-left >
         <img  style="margin-top:0px;" [src]="item.profileimage">
@@ -65,7 +66,7 @@
 
 
   <ion-list [hidden]="listshow" no-lines>
-    <ion-item *ngFor="let item of _fitdata" tappable (click)="goto(item.email)" >
+    <ion-item *ngFor="let item of _fitdata |search:'name,catagory,phone,email':iname" tappable (click)="goto(item.email)"  >
 
       <ion-avatar item-left >
         <img  style="margin-top:0px;" [src]="item.profileimage">
