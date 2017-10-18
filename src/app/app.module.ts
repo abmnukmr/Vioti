@@ -110,7 +110,6 @@ firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
-    IonTextAvatar,
     MyApp,
     MorelocalPage,
     MorecurPage,
