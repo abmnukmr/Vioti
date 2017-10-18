@@ -32,7 +32,9 @@
      <ion-row>
        <ion-col width-10>
       <ion-avatar item-start>
-        <img [src]='item.image'>
+
+        <ion-text-avatar [innerHTML]="item.email==email1?item.user_sender.charAt(0):item.user_reciever.charAt(0)"></ion-text-avatar>
+        <img [src]='item.image' [hidden]="true">
       </ion-avatar>
        </ion-col>
        <ion-col width-90>

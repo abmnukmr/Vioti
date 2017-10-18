@@ -62,6 +62,8 @@ import {LinkifyPipe } from '../pipes/linkify/linkify';
 import {ElasticModule } from 'angular2-elastic';
 import {Storage } from '@ionic/storage';
 import { SearchPipe } from '../pipes/search/search';
+import { IonTextAvatar } from 'ionic-text-avatar';
+
 
 
 export const firebaseConfig = {
@@ -108,6 +110,7 @@ firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
+    IonTextAvatar,
     MyApp,
     MorelocalPage,
     MorecurPage,
